@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Django tecdoc" uuid="529cbc4e-9f8c-455f-ab46-ff158195f256">
+      <database-info product="PostgreSQL" version="11.7" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" dbms="POSTGRES" exact-version="11.7" exact-driver-version="42.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <user-name>torsion_prog</user-name>
+      <schema-mapping />
+    </data-source>
+    <data-source name="Django default" uuid="bfb101e5-448b-4a93-91f3-8354247333a2">
+      <database-info product="PostgreSQL" version="11.7" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.5" dbms="POSTGRES" exact-version="11.7" exact-driver-version="42.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <user-name>torsion_prog</user-name>
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

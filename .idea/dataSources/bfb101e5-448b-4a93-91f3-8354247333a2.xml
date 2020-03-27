@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Django default">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.17">
+    <root id="1">
+      <ServerVersion>11.7</ServerVersion>
+      <StartupTime>1585214958</StartupTime>
+    </root>
+    <database id="2" parent="1" name="postgres">
+      <ObjectId>13012</ObjectId>
+      <Comment>default administrative connection database</Comment>
+      <Owner>postgres</Owner>
+    </database>
+    <database id="3" parent="1" name="tecdoc_1q_2018">
+      <ObjectId>16394</ObjectId>
+      <Owner>torsion_prog</Owner>
+    </database>
+    <database id="4" parent="1" name="torsion_b2b">
+      <ObjectId>16393</ObjectId>
+      <Owner>torsion_prog</Owner>
+      <IntrospectionStateNumber>612</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Relations>sequence|table|16396|16398|1
+sequence|table|16407|16409|1
+sequence|table|16417|16419|1
+sequence|table|16425|16427|1
+sequence|table|16435|16437|1
+sequence|table|16443|16445|1
+sequence|table|16453|16455|1
+sequence|table|16461|16463|1
+sequence|table|16521|16523|1
+</Relations>
+    </database>
+    <role id="5" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
+    </role>
+    <role id="6" parent="1" name="pg_monitor">
+      <ObjectId>3373</ObjectId>
+    </role>
+    <role id="7" parent="1" name="pg_read_all_settings">
+      <ObjectId>3374</ObjectId>
+    </role>
+    <role id="8" parent="1" name="pg_read_all_stats">
+      <ObjectId>3375</ObjectId>
+    </role>
+    <role id="9" parent="1" name="pg_read_server_files">
+      <ObjectId>4569</ObjectId>
+    </role>
+    <role id="10" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+    </role>
+    <role id="11" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+    </role>
+    <role id="12" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
+    </role>
+    <role id="13" parent="1" name="postgres">
+      <ObjectId>10</ObjectId>
+      <SuperRole>1</SuperRole>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <Replication>1</Replication>
+      <BypassRls>1</BypassRls>
+    </role>
+    <role id="14" parent="1" name="torsion_prog">
+      <ObjectId>16395</ObjectId>
+      <SuperRole>1</SuperRole>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <Replication>1</Replication>
+    </role>
+  </database-model>
+</dataSource>
