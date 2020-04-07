@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bfb101e5-448b-4a93-91f3-8354247333a2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bfb101e5-448b-4a93-91f3-8354247333a2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_b2b/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_b2b/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +22,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -92,7 +99,13 @@
       <workItem from="1585282419445" duration="7647000" />
       <workItem from="1585374207451" duration="9450000" />
       <workItem from="1585631210837" duration="228000" />
-      <workItem from="1585725259697" duration="10292000" />
+      <workItem from="1585725259697" duration="13646000" />
+      <workItem from="1585798286407" duration="4000" />
+      <workItem from="1585809226472" duration="4548000" />
+      <workItem from="1585981477766" duration="658000" />
+      <workItem from="1586073715818" duration="1216000" />
+      <workItem from="1586147329538" duration="21223000" />
+      <workItem from="1586234727865" duration="3719000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -144,22 +157,22 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="847" y="472" width="657" height="167" key="Github.CreateGistDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1585303154827" />
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1585746430844">
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1586189733350">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1585746430844" />
-    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1585746430844">
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
+    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1586189733350">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1585746430844" />
-    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1585746430843">
+    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
+    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1586189733350">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1585746430843" />
-    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1585746430844">
+    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
+    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1586189733350">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1585746430844" />
+    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
     <state x="533" y="199" key="SettingsEditor" timestamp="1585379117854">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
