@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bfb101e5-448b-4a93-91f3-8354247333a2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bfb101e5-448b-4a93-91f3-8354247333a2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
     </list>
@@ -100,7 +101,9 @@
       <workItem from="1585981477766" duration="658000" />
       <workItem from="1586073715818" duration="1216000" />
       <workItem from="1586147329538" duration="21223000" />
-      <workItem from="1586234727865" duration="6568000" />
+      <workItem from="1586234727865" duration="12218000" />
+      <workItem from="1586254079087" duration="3012000" />
+      <workItem from="1586318873940" duration="31411000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -137,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586239068864</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="add Models Brand Migrate">
+      <created>1586242812929</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1586242812929</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,17 +158,18 @@
     <MESSAGE value="add first index" />
     <MESSAGE value="add first index1" />
     <MESSAGE value="add Models Brand" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Models Brand" />
+    <MESSAGE value="add Models Brand Migrate" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Models Brand Migrate" />
   </component>
   <component name="WindowStateProjectService">
     <state x="617" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585283017641">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="617" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1585283017641" />
-    <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2" timestamp="1586239068278">
+    <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2" timestamp="1586242812258">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586239068278" />
+    <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586242812258" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1585307799441">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -187,9 +198,9 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1586239091678">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1586242816524">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586239091678" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586242816524" />
   </component>
 </project>
