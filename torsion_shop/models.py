@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Brand(models.Model):
     name = models.CharField("Brand", max_length=300)
     enabled = models.IntegerField()
@@ -123,7 +124,7 @@ class CatalogCategoryLang(models.Model):
 
 
 class Category(models.Model):
-    comment = article = models.CharField(max_length=250)
+    comment = models.CharField(max_length=300)
 
     def __str__(self):
         return self.comment
@@ -855,7 +856,7 @@ class Stock(models.Model):
     product_id = models.IntegerField()
     stock_name = models.CharField(max_length=300)
     amount_total = models.IntegerField()
-    amount_account  = models.IntegerField()
+    amount_account = models.IntegerField()
 
     def __str__(self):
         return self.product_id
