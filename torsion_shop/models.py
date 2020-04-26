@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 
 class Brand(models.Model):
     name = models.CharField("Brand", max_length=300)
@@ -52,6 +50,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.article
+
+    class Meta:
+        verbose_name = "Product"
+        verbose_name_plural = "Products"
 
 
 class Action(models.Model):
@@ -943,4 +945,44 @@ class WaitList(models.Model):
 
     def __str__(self):
         return self.product_id
+
+
+class RatingStar(models.Model):
+    value = models.PositiveSmallIntegerField(default=0)
+
+    def __str__(self):
+        return self.value
+
+    class Meta:
+        verbose_name = "RatingStar"
+        verbose_name_plural = "RatingStars"
+
+
+class Rating(models.Model):
+    ip = models.CharField(max_length=50)
+    star = models.ForeignKey(RatingStar, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CharField)
+
+    def __str__(self):
+        return f"{self.star} - {self.product}"
+
+    class Meta:
+        verbose_name = "Rating"
+        verbose_name_plural = "Ratings"
+
+
+class Review(models.Model):
+    email = models.EmailField()
+    name = models.CharField(max_length=250)
+    text = models.TextField(max_length=5000)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} - {self.product}"
+
+    class Meta:
+        verbose_name = "Review"
+        verbose_name_plural = "Reviews"
+
 

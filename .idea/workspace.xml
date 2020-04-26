@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/bfb101e5-448b-4a93-91f3-8354247333a2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/bfb101e5-448b-4a93-91f3-8354247333a2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
     </list>
@@ -17,8 +16,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -111,7 +110,12 @@
       <workItem from="1586845881166" duration="599000" />
       <workItem from="1586868462237" duration="1809000" />
       <workItem from="1587008543893" duration="2997000" />
-      <workItem from="1587099114582" duration="3002000" />
+      <workItem from="1587099114582" duration="3043000" />
+      <workItem from="1587390729201" duration="77000" />
+      <workItem from="1587451076111" duration="1848000" />
+      <workItem from="1587539639359" duration="1679000" />
+      <workItem from="1587707272027" duration="1802000" />
+      <workItem from="1587873216729" duration="3205000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -162,7 +166,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586433121326</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add Models add DB">
+      <created>1587147784139</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1587147784139</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,7 +186,8 @@
     <MESSAGE value="add Models Brand" />
     <MESSAGE value="add Models Brand Migrate" />
     <MESSAGE value="add Models add DB (not full)" />
-    <option name="LAST_COMMIT_MESSAGE" value="add Models add DB (not full)" />
+    <MESSAGE value="add Models add DB" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Models add DB" />
   </component>
   <component name="WindowStateProjectService">
     <state x="617" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585283017641">
@@ -186,9 +198,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2" timestamp="1586433120314">
+    <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2" timestamp="1587147783162">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="649" y="151" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1587147783162" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1585307799441">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -218,9 +231,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1586433125389">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1587147786915">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1587147786915" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
   </component>
 </project>
