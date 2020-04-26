@@ -16,5 +16,4 @@ urlpatterns = [
     path('compare/', views.compare, name='compare'),
     path('cart/', views.cart, name='cart'),
     path('checkout/', views.checkout, name='checkout'),
-
 ]

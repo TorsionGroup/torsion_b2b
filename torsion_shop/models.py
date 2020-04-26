@@ -24,8 +24,22 @@ class Brand(models.Model):
         verbose_name_plural = "Brands"
 
 
+class PriceCategory(models.Model):
+    inner_name = models.CharField(max_length=250)
+    source_id = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.inner_name
+
+    class Meta:
+        verbose_name = "PriceCategory"
+        verbose_name_plural = "PriceCategories"
+
+
 class Product(models.Model):
     article = models.CharField(max_length=250)
+    name = models.CharField(max_length=250)
+    comment = models.TextField()
     specification = models.CharField(max_length=250)
     brand_id = models.ManyToManyField(Brand, related_name="product_brand")
     offer_id = models.IntegerField()
@@ -42,10 +56,11 @@ class Product(models.Model):
     is_exists = models.IntegerField()
     code = models.CharField(max_length=250)
     source_type = models.CharField(max_length=250)
-    price_category = models.CharField(max_length=250)
+    price_category = models.ManyToManyField(PriceCategory, related_name="product_pricecategory")
     product_type = models.IntegerField()
-    delete_flag = models.SmallIntegerField()
+    delete_flag = models.BooleanField(default=0)
     advanced_description = models.TextField("Advanced description")
+    keywords = models.CharField(max_length=500)
     url = models.SlugField(max_length=250, unique=True)
     product_id = models.IntegerField()
 
@@ -233,40 +248,16 @@ class CacheApi(models.Model):
 
 
 class Category(models.Model):
+    name = models.CharField(max_length=300)
     comment = models.CharField(max_length=300)
+    url = models.SlugField(max_length=250, unique=True)
 
     def __str__(self):
-        return self.comment
+        return self.name
 
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
-
-
-class CatalogCategoryLang(models.Model):
-    category_id = models.ManyToManyField(Category, related_name="catalogcategorylang_category")
-    lang_code = models.CharField(max_length=2)
-    name = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.category_id
-
-    class Meta:
-        verbose_name = "CatalogCategoryLang"
-        verbose_name_plural = "CatalogCategoryLangs"
-
-
-class CategoryLang(models.Model):
-    category_id = models.ManyToManyField(Category, related_name="categorylang_category")
-    lang_code = models.CharField(max_length=2)
-    name = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.category_id
-
-    class Meta:
-        verbose_name = "CategoryLang"
-        verbose_name_plural = "CategoryLangs"
 
 
 class CategoryMapping(models.Model):
@@ -295,13 +286,19 @@ class Constant(models.Model):
 
 
 class Content(models.Model):
-    alias = models.CharField(max_length=300)
+    alias = models.CharField(max_length=500)
     created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField()
     published = models.BooleanField(default=0)
     main_image = models.ImageField(upload_to="content/")
-    geo = models.CharField(max_length=250)
     category_id = models.ManyToManyField(Category, related_name="content_category")
+    title = models.CharField(max_length=300)
+    intro_text = models.CharField(max_length=300)
+    full_text = models.TextField()
+    meta_tag_title = models.CharField(max_length=300)
+    meta_tag_description = models.CharField(max_length=300)
+    meta_tag_keyword = models.CharField(max_length=300)
+    geo = models.CharField(max_length=250)
 
     def __str__(self):
         return self.alias
@@ -311,26 +308,9 @@ class Content(models.Model):
         verbose_name_plural = "Contents"
 
 
-class ContentLang(models.Model):
-    content_id = models.ManyToManyField(Content, related_name="contentlang_content")
-    lang_code = models.CharField(max_length=2)
-    title = models.CharField(max_length=300)
-    intro_text = models.CharField(max_length=300)
-    full_text = models.TextField()
-    meta_tag_title = models.CharField(max_length=300)
-    meta_tag_description = models.CharField(max_length=300)
-    meta_tag_keyword = models.CharField(max_length=300)
-
-    def __str__(self):
-        return self.content_id
-
-    class Meta:
-        verbose_name = "ContentLang"
-        verbose_name_plural = "ContentLangs"
-
-
 class CatalogCategory(models.Model):
     parent_id = models.IntegerField()
+    name = models.CharField(max_length=300)
     source_id = models.CharField(max_length=250)
     enabled = models.BooleanField(default=1)
     sort_index = models.IntegerField()
@@ -394,20 +374,13 @@ class DeliveryCity(models.Model):
 class DeliveryMethod(models.Model):
     code = models.CharField(max_length=250)
     region_available = models.TextField()
-
-    def __str__(self):
-        return self.code
-
-
-class DeliveryMethodLang(models.Model):
     method_code = models.CharField(max_length=250)
-    lang_code = models.CharField(max_length=2)
     name = models.CharField(max_length=250)
     comment = models.TextField()
     red = models.TextField()
 
     def __str__(self):
-        return self.method_code
+        return self.code
 
 
 class DeliveryPoint(models.Model):
@@ -470,6 +443,7 @@ class GalleryImage(models.Model):
 
 class Manager(models.Model):
     inner_name = models.CharField(max_length=250)
+    name = models.CharField(max_length=250)
     email = models.CharField(max_length=250)
     phone = models.CharField(max_length=250)
     skype = models.CharField(max_length=250)
@@ -477,15 +451,6 @@ class Manager(models.Model):
 
     def __str__(self):
         return self.inner_name
-
-
-class ManagerLang(models.Model):
-    manager_id = models.IntegerField()
-    lang_code = models.CharField(max_length=3)
-    name = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.manager_id
 
 
 class Offer(models.Model):
@@ -665,12 +630,7 @@ class PriceBuffer(models.Model):
         return self.code
 
 
-class PriceCategory(models.Model):
-    inner_name = models.CharField(max_length=250)
-    source_id = models.CharField(max_length=250)
 
-    def __str__(self):
-        return self.inner_name
 
 
 class PriceType(models.Model):
@@ -726,26 +686,6 @@ class ProductErrorStatistic(models.Model):
         return self.product_id
 
 
-class ProductLang(models.Model):
-    product_id = models.IntegerField()
-    lang_code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    comment = models.TextField()
-    source_type = models.CharField(max_length=250)
-    delete_flag = models.BooleanField()
-
-    def __str__(self):
-        return self.product_id
-
-
-class ProductPriceCategory(models.Model):
-    product_id = models.IntegerField()
-    price_category_id = models.IntegerField()
-
-    def __str__(self):
-        return self.product_id
-
-
 class Profile(models.Model):
     user_id = models.IntegerField()
     name = models.CharField(max_length=250)
@@ -781,19 +721,11 @@ class Region(models.Model):
 class RunString(models.Model):
     created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField()
+    full_text = models.CharField(max_length=1000)
     published = models.BooleanField(default=0)
 
     def __str__(self):
         return self.created_date
-
-
-class RunStringLang(models.Model):
-    runstring_id = models.IntegerField()
-    lang_code = models.CharField(max_length=250)
-    full_text = models.CharField(max_length=1000)
-
-    def __str__(self):
-        return self.runstring_id
 
 
 class Sale(models.Model):
@@ -956,18 +888,10 @@ class UserRequest(models.Model):
 
 class UserRequestType(models.Model):
     manager_id = models.IntegerField()
-
-    def __str__(self):
-        return self.manager_id
-
-
-class UserRequestTypeLang(models.Model):
-    request_type_id = models.IntegerField()
-    lang_code = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
 
     def __str__(self):
-        return self.request_type_id
+        return self.manager_id
 
 
 class WaitList(models.Model):
