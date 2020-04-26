@@ -85,136 +85,6 @@ class ActionProduct(models.Model):
         return self.action_id
 
 
-class Balance(models.Model):
-    customer_id = models.IntegerField()
-    currency_id = models.CharField(max_length=250)
-    balance = models.DecimalField(max_digits=15, decimal_places=2)
-    past_due = models.DecimalField(max_digits=15, decimal_places=2)
-    agreement_id = models.IntegerField()
-
-    def __str__(self):
-        return self.customer_id
-
-
-class CacheApi(models.Model):
-    partner_code = models.CharField(max_length=250)
-    search_number = models.CharField(max_length=250)
-    response_api = models.TextField()
-    response_date = models.DateTimeField()
-
-    def __str__(self):
-        return self.partner_code
-
-
-class CatalogCategory(models.Model):
-    parent_id = models.IntegerField()
-    source_id = models.CharField(max_length=250)
-    enabled = models.BooleanField(default=1)
-    sort_index = models.IntegerField()
-    content_id = models.IntegerField()
-
-    def __str__(self):
-        return self.parent_id
-
-
-class CatalogCategoryLang(models.Model):
-    category_id = models.IntegerField()
-    lang_code = models.CharField(max_length=2)
-    name = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.category_id
-
-
-class Category(models.Model):
-    comment = models.CharField(max_length=300)
-
-    def __str__(self):
-        return self.comment
-
-
-class CategoryLang(models.Model):
-    category_id = models.IntegerField()
-    lang_code = models.CharField(max_length=2)
-    name = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.category_id
-
-
-class CategoryMapping(models.Model):
-    partner_code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    category_id = models.IntegerField()
-
-    def __str__(self):
-        return self.partner_code
-
-
-class Constant(models.Model):
-    code = models.CharField(max_length=250)
-    value = models.TextField()
-
-    def __str__(self):
-        return self.code
-
-
-class Content(models.Model):
-    alias = models.CharField(max_length=300)
-    created_date = models.DateTimeField()
-    updated_date = models.DateTimeField()
-    published = models.BooleanField(default=0)
-    main_image = models.IntegerField()
-    geo = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.alias
-
-
-class ContentCategory(models.Model):
-    content_id = models.IntegerField()
-    category_id = models.IntegerField()
-
-    def __str__(self):
-        return self.content_id
-
-
-class ContentLang(models.Model):
-    content_id = models.IntegerField()
-    lang_code = models.CharField(max_length=2)
-    title = models.CharField(max_length=300)
-    intro_text = models.CharField(max_length=300)
-    full_text = models.TextField()
-    meta_tag_title = models.CharField(max_length=300)
-    meta_tag_description = models.CharField(max_length=300)
-    meta_tag_keyword = models.CharField(max_length=300)
-
-    def __str__(self):
-        return self.content_id
-
-
-class Cross(models.Model):
-    product_id = models.IntegerField()
-    brand_name = models.CharField(max_length=300)
-    article_nr = models.CharField(max_length=300)
-    search_nr = models.CharField(max_length=300)
-
-    def __str__(self):
-        return self.product_id
-
-
-class CrossErrorStatistic(models.Model):
-    user_id = models.IntegerField()
-    product_id = models.IntegerField()
-    search_number = models.CharField(max_length=1000)
-    comment = models.CharField(max_length=1000)
-    customer_id = models.IntegerField()
-    date = models.DateTimeField()
-
-    def __str__(self):
-        return self.user_id
-
-
 class Currency(models.Model):
     code = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
@@ -226,6 +96,10 @@ class Currency(models.Model):
 
     def __str__(self):
         return self.code
+
+    class Meta:
+        verbose_name = "Currency"
+        verbose_name_plural = "Currencies"
 
 
 class Customer(models.Model):
@@ -335,6 +209,165 @@ class CustomerPoint(models.Model):
 
     def __str__(self):
         return self.customer_id
+
+
+class Balance(models.Model):
+    customer_id = models.IntegerField()
+    currency_id = models.CharField(max_length=250)
+    balance = models.DecimalField(max_digits=15, decimal_places=2)
+    past_due = models.DecimalField(max_digits=15, decimal_places=2)
+    agreement_id = models.IntegerField()
+
+    def __str__(self):
+        return self.customer_id
+
+
+class CacheApi(models.Model):
+    partner_code = models.CharField(max_length=250)
+    search_number = models.CharField(max_length=250)
+    response_api = models.TextField()
+    response_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.partner_code
+
+
+class Category(models.Model):
+    comment = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.comment
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
+
+
+class CatalogCategoryLang(models.Model):
+    category_id = models.ManyToManyField(Category, related_name="catalogcategorylang_category")
+    lang_code = models.CharField(max_length=2)
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.category_id
+
+    class Meta:
+        verbose_name = "CatalogCategoryLang"
+        verbose_name_plural = "CatalogCategoryLangs"
+
+
+class CategoryLang(models.Model):
+    category_id = models.ManyToManyField(Category, related_name="categorylang_category")
+    lang_code = models.CharField(max_length=2)
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.category_id
+
+    class Meta:
+        verbose_name = "CategoryLang"
+        verbose_name_plural = "CategoryLangs"
+
+
+class CategoryMapping(models.Model):
+    partner_code = models.CharField(max_length=250)
+    name = models.CharField(max_length=250)
+    category_id = models.ManyToManyField(Category, related_name="categorymapping_category")
+
+    def __str__(self):
+        return self.partner_code
+
+    class Meta:
+        verbose_name = "CategoryMapping"
+        verbose_name_plural = "CategoryMappings"
+
+
+class Constant(models.Model):
+    code = models.CharField(max_length=250)
+    value = models.TextField()
+
+    def __str__(self):
+        return self.code
+
+    class Meta:
+        verbose_name = "Constant"
+        verbose_name_plural = "Constant"
+
+
+class Content(models.Model):
+    alias = models.CharField(max_length=300)
+    created_date = models.DateTimeField(default=datetime.today)
+    updated_date = models.DateTimeField()
+    published = models.BooleanField(default=0)
+    main_image = models.ImageField(upload_to="content/")
+    geo = models.CharField(max_length=250)
+    category_id = models.ManyToManyField(Category, related_name="content_category")
+
+    def __str__(self):
+        return self.alias
+
+    class Meta:
+        verbose_name = "Content"
+        verbose_name_plural = "Contents"
+
+
+class ContentLang(models.Model):
+    content_id = models.ManyToManyField(Content, related_name="contentlang_content")
+    lang_code = models.CharField(max_length=2)
+    title = models.CharField(max_length=300)
+    intro_text = models.CharField(max_length=300)
+    full_text = models.TextField()
+    meta_tag_title = models.CharField(max_length=300)
+    meta_tag_description = models.CharField(max_length=300)
+    meta_tag_keyword = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.content_id
+
+    class Meta:
+        verbose_name = "ContentLang"
+        verbose_name_plural = "ContentLangs"
+
+
+class CatalogCategory(models.Model):
+    parent_id = models.IntegerField()
+    source_id = models.CharField(max_length=250)
+    enabled = models.BooleanField(default=1)
+    sort_index = models.IntegerField()
+    content_id = models.ManyToManyField(Content, related_name="catalogcategory_content")
+
+    def __str__(self):
+        return self.parent_id
+
+    class Meta:
+        verbose_name = "CatalogCategory"
+        verbose_name_plural = "CatalogCategories"
+
+
+class Cross(models.Model):
+    product_id = models.ManyToManyField(Product, related_name="cross_product")
+    brand_name = models.CharField(max_length=300)
+    article_nr = models.CharField(max_length=300)
+    search_nr = models.CharField(max_length=300)
+
+    def __str__(self):
+        return self.product_id
+
+    class Meta:
+        verbose_name = "Cross"
+        verbose_name_plural = "Crosses"
+
+
+class CrossErrorStatistic(models.Model):
+    user_id = models.IntegerField()
+    product_id = models.IntegerField()
+    search_number = models.CharField(max_length=1000)
+    comment = models.CharField(max_length=1000)
+    customer_id = models.IntegerField()
+    date = models.DateTimeField()
+
+    def __str__(self):
+        return self.user_id
 
 
 class DeficitReserve(models.Model):
@@ -685,7 +718,7 @@ class ProductErrorStatistic(models.Model):
     user_id = models.IntegerField()
     error_comment = models.CharField(max_length=1000)
     status = models.CharField(max_length=250)
-    created_date = models.DateTimeField()
+    created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField()
     admin_comment = models.CharField(max_length=1000)
 
@@ -746,7 +779,7 @@ class Region(models.Model):
 
 
 class RunString(models.Model):
-    created_date = models.DateTimeField()
+    created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField()
     published = models.BooleanField(default=0)
 
@@ -847,7 +880,7 @@ class SocialAccount(models.Model):
     client_id = models.CharField(max_length=300)
     data = models.TextField()
     code = models.CharField(max_length=300)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(default=datetime.today)
     email = models.CharField(max_length=300)
     username = models.CharField(max_length=300)
 
@@ -868,7 +901,7 @@ class Stock(models.Model):
 class Token(models.Model):
     user_id = models.IntegerField()
     code = models.CharField(max_length=300)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(default=datetime.today)
     type = models.IntegerField()
 
     def __str__(self):
@@ -985,5 +1018,3 @@ class Review(models.Model):
     class Meta:
         verbose_name = "Review"
         verbose_name_plural = "Reviews"
-
-
