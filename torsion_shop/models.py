@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 
 class Brand(models.Model):
@@ -26,10 +27,10 @@ class Brand(models.Model):
 class Product(models.Model):
     article = models.CharField(max_length=250)
     specification = models.CharField(max_length=250)
-    brand_id = models.IntegerField()
+    brand_id = models.ManyToManyField(Brand, related_name="product_brand")
     offer_id = models.IntegerField()
     category_id = models.IntegerField()
-    create_date = models.DateTimeField()
+    create_date = models.DateTimeField(default=datetime.today)
     income_date = models.DateTimeField()
     source_id = models.CharField(max_length=250)
     search_key = models.CharField(max_length=250)
@@ -350,7 +351,7 @@ class DeliveryCity(models.Model):
     region = models.CharField(max_length=250)
     ref = models.CharField(max_length=250)
     name = models.CharField(max_length=250)
-    create_date = models.DateTimeField()
+    create_date = models.DateTimeField(default=datetime.today)
     update_date = models.DateTimeField()
 
     def __str__(self):
@@ -469,7 +470,7 @@ class Order(models.Model):
     agreement_id = models.IntegerField()
     status = models.IntegerField()
     delivery_method = models.CharField(max_length=250)
-    create_date = models.DateTimeField()
+    create_date = models.DateTimeField(default=datetime.today)
     update_date = models.DateTimeField()
     comment = models.TextField()
     point_id = models.IntegerField()
@@ -525,7 +526,7 @@ class OrderItem(models.Model):
 class OrderPayment(models.Model):
     order_id = models.IntegerField()
     sum = models.DecimalField(max_digits=15, decimal_places=2)
-    date_payment = models.DateTimeField()
+    date_payment = models.DateTimeField(default=datetime.today)
     currency_id = models.IntegerField()
     payment_sum = models.DecimalField(max_digits=15, decimal_places=2)
     data = models.TextField()
@@ -625,7 +626,7 @@ class PriceBuffer(models.Model):
     agreement_id = models.IntegerField()
     sort_indexcurrency = models.CharField(max_length=300)
     pack_qty = models.IntegerField()
-    create_date = models.DateTimeField()
+    create_date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
         return self.code
@@ -961,7 +962,7 @@ class RatingStar(models.Model):
 class Rating(models.Model):
     ip = models.CharField(max_length=50)
     star = models.ForeignKey(RatingStar, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CharField)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.star} - {self.product}"
