@@ -14,3 +14,32 @@ def aboutus(request):
 
 def contact(request):
     return render(request, 'torsion_shop/contact.html')
+
+def login(request):
+    return render(request, 'torsion_shop/login.html')
+
+def singleproduct(request):
+    return render(request, 'torsion_shop/single-product.html')
+
+def newsdetail(request):
+    return render(request, 'torsion_shop/news-detail.html')
+
+def account(request):
+    return render(request, 'torsion_shop/account.html')
+
+def wishlist(request):
+    return render(request, 'torsion_shop/wishlist.html')
+
+def faq(request):
+    return render(request, 'torsion_shop/faq.html')
+
+def cart(request):
+    return render(request, 'torsion_shop/cart.html')
+
+def compare(request):
+    return render(request, 'torsion_shop/compare.html')
+
+def checkout(request):
+    return render(request, 'torsion_shop/checkout.html')
+
+
