@@ -311,6 +311,7 @@ class Content(models.Model):
 class CatalogCategory(models.Model):
     parent_id = models.IntegerField()
     name = models.CharField(max_length=300)
+    comment = models.CharField(max_length=500)
     source_id = models.CharField(max_length=250)
     enabled = models.BooleanField(default=1)
     sort_index = models.IntegerField()
@@ -447,6 +448,7 @@ class Manager(models.Model):
     email = models.CharField(max_length=250)
     phone = models.CharField(max_length=250)
     skype = models.CharField(max_length=250)
+    comment = models.CharField(max_length=250)
     source_id = models.CharField(max_length=250)
 
     def __str__(self):
@@ -722,6 +724,7 @@ class RunString(models.Model):
     created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField()
     full_text = models.CharField(max_length=1000)
+    comment = models.CharField(max_length=300)
     published = models.BooleanField(default=0)
 
     def __str__(self):
@@ -888,7 +891,9 @@ class UserRequest(models.Model):
 
 class UserRequestType(models.Model):
     manager_id = models.IntegerField()
-    name = models.CharField(max_length=250)
+    name = models.CharField(max_length=300)
+    comment = models.CharField(max_length=300)
+
 
     def __str__(self):
         return self.manager_id

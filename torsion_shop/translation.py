@@ -8,6 +8,30 @@ class CategoryTranslationOptions(TranslationOptions):
 
 
 @register(Product)
-class CategoryTranslationOptions(TranslationOptions):
+class ProductTranslationOptions(TranslationOptions):
     fields = ('name', 'keywords')
 
+
+@register(CatalogCategory)
+class CatalogCategoryTranslationOptions(TranslationOptions):
+    fields = ('name', 'comment')
+
+
+@register(DeliveryMethod)
+class DeliveryMethodTranslationOptions(TranslationOptions):
+    fields = ('method_code', 'comment', 'name', 'red')
+
+
+@register(Manager)
+class ManagerMethodTranslationOptions(TranslationOptions):
+    fields = ('name', 'comment')
+
+
+@register(RunString)
+class RunStringMethodTranslationOptions(TranslationOptions):
+    fields = ('full_text', 'comment')
+
+
+@register(UserRequestType)
+class UserRequestTypeMethodTranslationOptions(TranslationOptions):
+    fields = ('name', 'comment')
