@@ -38,8 +38,8 @@ class PriceCategory(models.Model):
 
 class Product(models.Model):
     article = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    comment = models.TextField()
+    name = models.CharField(max_length=500)
+    comment = models.CharField(max_length=500, null=True)
     specification = models.CharField(max_length=250)
     brand_id = models.ManyToManyField(Brand, related_name="product_brand")
     offer_id = models.IntegerField()
@@ -60,7 +60,7 @@ class Product(models.Model):
     product_type = models.IntegerField()
     delete_flag = models.BooleanField(default=0)
     advanced_description = models.TextField("Advanced description")
-    keywords = models.CharField(max_length=500)
+    keywords = models.CharField(max_length=500, null=True)
     url = models.SlugField(max_length=250, unique=True)
     product_id = models.IntegerField()
 
@@ -70,34 +70,6 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
-
-
-class Action(models.Model):
-    content_id = models.IntegerField()
-    comment = models.TextField()
-    start_at = models.DateTimeField()
-    finish_at = models.DateTimeField()
-
-    def __str__(self):
-        return self.content_id
-
-
-class ActionCustomer(models.Model):
-    action_id = models.IntegerField()
-    customer_id = models.IntegerField()
-    win = models.BooleanField(default=0)
-    close_action = models.CharField(max_length=1000)
-
-    def __str__(self):
-        return self.action_id
-
-
-class ActionProduct(models.Model):
-    action_id = models.IntegerField()
-    product_id = models.IntegerField()
-
-    def __str__(self):
-        return self.action_id
 
 
 class Currency(models.Model):
@@ -249,7 +221,7 @@ class CacheApi(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=300)
-    comment = models.CharField(max_length=300)
+    comment = models.CharField(max_length=300, null=True)
     url = models.SlugField(max_length=250, unique=True)
 
     def __str__(self):
@@ -286,19 +258,19 @@ class Constant(models.Model):
 
 
 class Content(models.Model):
-    alias = models.CharField(max_length=500)
+    alias = models.CharField(max_length=300)
     created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField()
     published = models.BooleanField(default=0)
     main_image = models.ImageField(upload_to="content/")
     category_id = models.ManyToManyField(Category, related_name="content_category")
     title = models.CharField(max_length=300)
-    intro_text = models.CharField(max_length=300)
+    intro_text = models.CharField(max_length=500)
     full_text = models.TextField()
-    meta_tag_title = models.CharField(max_length=300)
-    meta_tag_description = models.CharField(max_length=300)
-    meta_tag_keyword = models.CharField(max_length=300)
-    geo = models.CharField(max_length=250)
+    meta_tag_title = models.CharField(max_length=500, null=True)
+    meta_tag_description = models.CharField(max_length=500, null=True)
+    meta_tag_keyword = models.CharField(max_length=500, null=True)
+    geo = models.CharField(max_length=250, null=True)
 
     def __str__(self):
         return self.alias
@@ -311,7 +283,7 @@ class Content(models.Model):
 class CatalogCategory(models.Model):
     parent_id = models.IntegerField()
     name = models.CharField(max_length=300)
-    comment = models.CharField(max_length=500)
+    comment = models.CharField(max_length=500, null=True)
     source_id = models.CharField(max_length=250)
     enabled = models.BooleanField(default=1)
     sort_index = models.IntegerField()
@@ -343,7 +315,7 @@ class CrossErrorStatistic(models.Model):
     user_id = models.IntegerField()
     product_id = models.IntegerField()
     search_number = models.CharField(max_length=1000)
-    comment = models.CharField(max_length=1000)
+    comment = models.CharField(max_length=1000, null=True)
     customer_id = models.IntegerField()
     date = models.DateTimeField()
 
@@ -358,6 +330,34 @@ class DeficitReserve(models.Model):
 
     def __str__(self):
         return self.product_id
+
+
+class Action(models.Model):
+    content_id = models.IntegerField()
+    comment = models.TextField()
+    start_at = models.DateTimeField()
+    finish_at = models.DateTimeField()
+
+    def __str__(self):
+        return self.content_id
+
+
+class ActionCustomer(models.Model):
+    action_id = models.IntegerField()
+    customer_id = models.IntegerField()
+    win = models.BooleanField(default=0)
+    close_action = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.action_id
+
+
+class ActionProduct(models.Model):
+    action_id = models.IntegerField()
+    product_id = models.IntegerField()
+
+    def __str__(self):
+        return self.action_id
 
 
 class DeliveryCity(models.Model):
@@ -448,7 +448,7 @@ class Manager(models.Model):
     email = models.CharField(max_length=250)
     phone = models.CharField(max_length=250)
     skype = models.CharField(max_length=250)
-    comment = models.CharField(max_length=250)
+    comment = models.CharField(max_length=250, null=True)
     source_id = models.CharField(max_length=250)
 
     def __str__(self):
@@ -632,9 +632,6 @@ class PriceBuffer(models.Model):
         return self.code
 
 
-
-
-
 class PriceType(models.Model):
     name = models.CharField(max_length=250)
     source_id = models.CharField(max_length=250)
@@ -724,7 +721,7 @@ class RunString(models.Model):
     created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField()
     full_text = models.CharField(max_length=1000)
-    comment = models.CharField(max_length=300)
+    comment = models.CharField(max_length=300, null=True)
     published = models.BooleanField(default=0)
 
     def __str__(self):
@@ -892,8 +889,7 @@ class UserRequest(models.Model):
 class UserRequestType(models.Model):
     manager_id = models.IntegerField()
     name = models.CharField(max_length=300)
-    comment = models.CharField(max_length=300)
-
+    comment = models.CharField(max_length=300, null=True)
 
     def __str__(self):
         return self.manager_id
@@ -938,7 +934,7 @@ class Review(models.Model):
     email = models.EmailField()
     name = models.CharField(max_length=250)
     text = models.TextField(max_length=5000)
-    parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):

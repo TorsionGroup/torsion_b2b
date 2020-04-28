@@ -7,9 +7,15 @@ from .models import Brand, Product, Action, ActionCustomer, ActionProduct, Balan
 
 admin.site.register(Brand)
 admin.site.register(Product)
-admin.site.register(Content)
+
 
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
     list_display = ('name', 'comment', 'url')
     list_display_links = ('name',)
+
+
+@admin.register(Content)
+class ContentAdmin(TranslationAdmin):
+    list_display = ('title', 'alias')
+    list_display_links = ('title',)
