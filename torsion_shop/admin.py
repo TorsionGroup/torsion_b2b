@@ -17,5 +17,5 @@ class CategoryAdmin(TranslationAdmin):
 
 @admin.register(Content)
 class ContentAdmin(TranslationAdmin):
-    list_display = ('title', 'alias')
+    list_display = ('title', 'alias', 'published')
     list_display_links = ('title',)
