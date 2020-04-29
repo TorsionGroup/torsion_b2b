@@ -3,18 +3,17 @@ from datetime import datetime
 
 
 class Brand(models.Model):
-    name = models.CharField("Brand", max_length=300)
-    enabled = models.IntegerField()
-    source_id = models.CharField(max_length=250)
-    wait_list = models.IntegerField()
-    is_recommended = models.IntegerField()
-    sort_index = models.IntegerField()
-    source_type = models.CharField(max_length=250)
-    gallery_attribute = models.CharField(max_length=250)
-    gallery_name = models.CharField(max_length=250)
-    kind = models.CharField(max_length=250)
-    description = models.TextField("Description")
-    url = models.SlugField(max_length=250, unique=True)
+    name = models.CharField("Brand", max_length=300, null=True)
+    enabled = models.BooleanField(default=1)
+    source_id = models.CharField(max_length=250, null=True)
+    wait_list = models.BooleanField(default=0)
+    is_recommended = models.BooleanField(default=0)
+    sort_index = models.IntegerField(default=999)
+    source_type = models.CharField(max_length=250, null=True)
+    gallery_attribute = models.CharField(max_length=250, default='article')
+    gallery_name = models.CharField(max_length=250, null=True)
+    kind = models.CharField(max_length=250, default='secondary')
+    description = models.TextField("Description", null=True)
 
     def __str__(self):
         return self.name
@@ -25,8 +24,8 @@ class Brand(models.Model):
 
 
 class PriceCategory(models.Model):
-    inner_name = models.CharField(max_length=250)
-    source_id = models.CharField(max_length=250)
+    inner_name = models.CharField(max_length=250, null=True)
+    source_id = models.CharField(max_length=250, null=True)
 
     def __str__(self):
         return self.inner_name
@@ -37,32 +36,30 @@ class PriceCategory(models.Model):
 
 
 class Product(models.Model):
-    article = models.CharField(max_length=250)
-    name = models.CharField(max_length=500)
+    article = models.CharField(max_length=250, null=True)
+    name = models.CharField(max_length=500, null=True)
     comment = models.CharField(max_length=500, null=True)
-    specification = models.CharField(max_length=250)
+    specification = models.CharField(max_length=250, null=True)
     brand_id = models.ManyToManyField(Brand, related_name="product_brand")
-    offer_id = models.IntegerField()
-    category_id = models.IntegerField()
-    create_date = models.DateTimeField(default=datetime.today)
-    income_date = models.DateTimeField()
-    source_id = models.CharField(max_length=250)
-    search_key = models.CharField(max_length=250)
-    sort_price = models.DecimalField(max_digits=15, decimal_places=2)
+    offer_id = models.IntegerField(null=True)
+    category_id = models.IntegerField(null=True)
+    create_date = models.DateTimeField(default=datetime.today, null=True)
+    income_date = models.DateTimeField(default=datetime.today, null=True)
+    source_id = models.CharField(max_length=250, null=True)
+    search_key = models.CharField(max_length=250, null=True)
+    sort_price = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     is_active = models.BooleanField(default=1)
-    weight = models.DecimalField(max_digits=15, decimal_places=3)
-    pack_qty = models.IntegerField()
-    ABC = models.CharField(max_length=1)
-    is_exists = models.IntegerField()
-    code = models.CharField(max_length=250)
-    source_type = models.CharField(max_length=250)
+    weight = models.DecimalField(max_digits=15, decimal_places=3, null=True)
+    pack_qty = models.IntegerField(null=True)
+    ABC = models.CharField(max_length=1, null=True)
+    is_exists = models.BooleanField(default=0)
+    code = models.CharField(max_length=250, null=True)
+    source_type = models.CharField(max_length=250, null=True)
     price_category = models.ManyToManyField(PriceCategory, related_name="product_pricecategory")
-    product_type = models.IntegerField()
+    product_type = models.IntegerField(null=True)
     delete_flag = models.BooleanField(default=0)
-    advanced_description = models.TextField("Advanced description")
+    advanced_description = models.TextField("Advanced description", null=True)
     keywords = models.CharField(max_length=500, null=True)
-    url = models.SlugField(max_length=250, unique=True)
-    product_id = models.IntegerField()
 
     def __str__(self):
         return self.article
@@ -73,13 +70,13 @@ class Product(models.Model):
 
 
 class Currency(models.Model):
-    code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    title = models.CharField(max_length=250)
-    source_id = models.CharField(max_length=250)
-    rate = models.DecimalField(max_digits=15, decimal_places=5)
-    mult = models.IntegerField()
-    name_eng = models.CharField(max_length=250)
+    code = models.CharField(max_length=250, null=True)
+    name = models.CharField(max_length=250, null=True)
+    title = models.CharField(max_length=250, null=True)
+    source_id = models.CharField(max_length=250, null=True)
+    rate = models.DecimalField(max_digits=15, decimal_places=5, null=True)
+    mult = models.IntegerField(null=True)
+    name_eng = models.CharField(max_length=250, null=True)
 
     def __str__(self):
         return self.code
@@ -87,6 +84,19 @@ class Currency(models.Model):
     class Meta:
         verbose_name = "Currency"
         verbose_name_plural = "Currencies"
+
+
+class Manager(models.Model):
+    inner_name = models.CharField(max_length=250)
+    name = models.CharField(max_length=250)
+    email = models.CharField(max_length=250)
+    phone = models.CharField(max_length=250)
+    skype = models.CharField(max_length=250)
+    comment = models.CharField(max_length=250, null=True)
+    source_id = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.inner_name
 
 
 class Customer(models.Model):
@@ -258,7 +268,7 @@ class Constant(models.Model):
 
 
 class Content(models.Model):
-    alias = models.CharField(max_length=300)
+    alias = models.SlugField(max_length=300, unique=True)
     created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField(default=datetime.today)
     published = models.BooleanField(default=0)
@@ -440,19 +450,6 @@ class GalleryImage(models.Model):
 
     def __str__(self):
         return self.type
-
-
-class Manager(models.Model):
-    inner_name = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    email = models.CharField(max_length=250)
-    phone = models.CharField(max_length=250)
-    skype = models.CharField(max_length=250)
-    comment = models.CharField(max_length=250, null=True)
-    source_id = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.inner_name
 
 
 class Offer(models.Model):
