@@ -86,7 +86,7 @@ class Product(models.Model):
     is_exists = models.BooleanField(default=0)
     code = models.CharField(max_length=250, null=True)
     source_type = models.CharField(max_length=250, null=True)
-    price_category = models.ManyToManyField(PriceCategory, related_name="product_pricecategory")
+    price_category = models.ManyToManyField(PriceCategory, related_name="product_price_category")
     product_type = models.IntegerField(null=True)
     delete_flag = models.BooleanField(default=0)
     advanced_description = models.TextField("Advanced description", null=True)
@@ -187,7 +187,7 @@ class CustomerAgreement(models.Model):
     currency_id = models.ForeignKey(
         Currency, on_delete=models.CASCADE, related_name="agreement_currency", null=True, blank=True)
     price_type_id = models.ForeignKey(
-        PriceType, on_delete=models.CASCADE, related_name="agreement_pricetype", null=True, blank=True)
+        PriceType, on_delete=models.CASCADE, related_name="agreement_price_type", null=True, blank=True)
     discount = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     is_status = models.BooleanField()
     source_id = models.CharField(max_length=300, null=True, blank=True)
@@ -241,14 +241,14 @@ class CustomerContact(models.Model):
 
 class CustomerDiscount(models.Model):
     customer_id = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="discount_customer", null=True, blank=True)
+        Customer, on_delete=models.CASCADE, related_name="discount_customer_customer", null=True, blank=True)
     agreement_id = models.ForeignKey(
-        CustomerAgreement, on_delete=models.CASCADE, related_name="discount_agreement", null=True, blank=True)
+        CustomerAgreement, on_delete=models.CASCADE, related_name="discount_customer_agreement", null=True, blank=True)
     criteria_id = models.IntegerField(null=True, blank=True)
     criteria_type = models.CharField(max_length=250, null=True, blank=True)
     discount = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     price_type_id = models.ForeignKey(
-        PriceType, on_delete=models.CASCADE, related_name="discount_pricetype", null=True, blank=True)
+        PriceType, on_delete=models.CASCADE, related_name="discount_customer_price_type", null=True, blank=True)
 
     def __str__(self):
         return self.customer_id
@@ -294,7 +294,7 @@ class Price(models.Model):
     product_id = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="price_product", null=True, blank=True)
     price_type_id = models.ForeignKey(
-        PriceType, on_delete=models.CASCADE, related_name="price_pricetype", null=True, blank=True)
+        PriceType, on_delete=models.CASCADE, related_name="price_price_type", null=True, blank=True)
     currency_id = models.ForeignKey(
         Currency, on_delete=models.CASCADE, related_name="price_currency", null=True, blank=True)
     price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
@@ -310,10 +310,10 @@ class Price(models.Model):
 class PriceBuffer(models.Model):
     code = models.CharField(max_length=250, null=True, blank=True)
     brand = models.ForeignKey(
-        Brand, on_delete=models.CASCADE, related_name="pricebuffer_brand", null=True, blank=True)
+        Brand, on_delete=models.CASCADE, related_name="price_buffer_brand", null=True, blank=True)
     category = models.CharField(max_length=250, null=True, blank=True)
     price_category = models.ForeignKey(
-        PriceCategory, on_delete=models.CASCADE, related_name="pricebuffer_pricecategory", null=True, blank=True)
+        PriceCategory, on_delete=models.CASCADE, related_name="price_buffer_price_category", null=True, blank=True)
     specification = models.CharField(max_length=250, null=True, blank=True)
     article = models.CharField(max_length=250, null=True, blank=True)
     name = models.CharField(max_length=250, null=True, blank=True)
@@ -321,7 +321,7 @@ class PriceBuffer(models.Model):
     currency = models.CharField(max_length=250, null=True, blank=True)
     rest = models.IntegerField(null=True, blank=True)
     agreement_id = models.ForeignKey(
-        CustomerAgreement, on_delete=models.CASCADE, related_name="discount_agreement", null=True, blank=True)
+        CustomerAgreement, on_delete=models.CASCADE, related_name="price_buffer_agreement", null=True, blank=True)
     sort_index = models.CharField(max_length=300, null=True, blank=True)
     pack_qty = models.IntegerField(null=True, blank=True)
     create_date = models.DateTimeField(default=datetime.today)
@@ -430,11 +430,11 @@ class Cross(models.Model):
 class CrossErrorStatistic(models.Model):
     user_id = models.IntegerField(null=True, blank=True)
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="crosserror_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="cross_error_product", null=True, blank=True)
     search_number = models.CharField(max_length=1000)
     comment = models.CharField(max_length=500, null=True, blank=True)
     customer_id = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="crosserror_customer", null=True, blank=True)
+        Customer, on_delete=models.CASCADE, related_name="cross_error_customer", null=True, blank=True)
     date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
@@ -447,7 +447,7 @@ class CrossErrorStatistic(models.Model):
 
 class ProductApplicability(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="applicabilty_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="applicability_product", null=True, blank=True)
     vehicle = models.CharField(max_length=250, null=True, blank=True)
     modification = models.CharField(max_length=250, null=True, blank=True)
     engine = models.CharField(max_length=250, null=True, blank=True)
@@ -458,7 +458,7 @@ class ProductApplicability(models.Model):
 
     class Meta:
         verbose_name = "ProductApplicability"
-        verbose_name_plural = "ProductApplicabilities"
+        verbose_name_plural = "ProductApplicabilitys"
 
 
 class ProductDescription(models.Model):
@@ -477,7 +477,7 @@ class ProductDescription(models.Model):
 
 class ProductErrorStatistic(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="cross_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="product_error_product", null=True, blank=True)
     user_id = models.IntegerField(null=True, blank=True)
     error_comment = models.CharField(max_length=1000, null=True, blank=True)
     status = models.CharField(max_length=250)
@@ -597,12 +597,12 @@ class PartnerApi(models.Model):
 
     class Meta:
         verbose_name = "PartnerApi"
-        verbose_name_plural = "PartnerApies"
+        verbose_name_plural = "PartnerApis"
 
 
 class CacheApi(models.Model):
     partner_code = models.ForeignKey(
-        PartnerApi, on_delete=models.CASCADE, related_name="cache_parnter", null=True, blank=True)
+        PartnerApi, on_delete=models.CASCADE, related_name="cache_partner", null=True, blank=True)
     search_number = models.CharField(max_length=250)
     response_api = models.TextField(null=True, blank=True)
     response_date = models.DateTimeField(default=datetime.today)
@@ -617,7 +617,7 @@ class CacheApi(models.Model):
 
 class PartnerApiCache(models.Model):
     partner_code = models.ForeignKey(
-        PartnerApi, on_delete=models.CASCADE, related_name="apicache_parnter", null=True, blank=True)
+        PartnerApi, on_delete=models.CASCADE, related_name="apicache_partner", null=True, blank=True)
     search_number = models.CharField(max_length=250, null=True, blank=True)
     response_date = models.DateTimeField(default=datetime.today)
     product_json = models.TextField(null=True, blank=True)
@@ -632,7 +632,7 @@ class PartnerApiCache(models.Model):
 
 class PartnerCategory(models.Model):
     partner_code = models.ForeignKey(
-        PartnerApi, on_delete=models.CASCADE, related_name="category_parnter", null=True, blank=True)
+        PartnerApi, on_delete=models.CASCADE, related_name="category_partner", null=True, blank=True)
     name = models.CharField(max_length=250, null=True, blank=True)
     parent_id = models.ForeignKey('self', on_delete=models.SET_NULL, default=0, null=True)
     response_date = models.DateTimeField(default=datetime.today)
@@ -647,7 +647,7 @@ class PartnerCategory(models.Model):
 
 class CategoryMapping(models.Model):
     partner_code = models.ForeignKey(
-        PartnerApi, on_delete=models.CASCADE, related_name="mapping_parnter", null=True, blank=True)
+        PartnerApi, on_delete=models.CASCADE, related_name="mapping_partner", null=True, blank=True)
     name = models.CharField(max_length=250, null=True, blank=True)
     category_id = models.ForeignKey(
         PartnerCategory, on_delete=models.CASCADE, related_name="mapping_category", null=True, blank=True)
@@ -662,9 +662,9 @@ class CategoryMapping(models.Model):
 
 class PartnerCategoryCache(models.Model):
     partner_code = models.ForeignKey(
-        PartnerApi, on_delete=models.CASCADE, related_name="categorycache_parther", null=True, blank=True)
+        PartnerApi, on_delete=models.CASCADE, related_name="category_cache_partner", null=True, blank=True)
     category_id = models.ForeignKey(
-        PartnerCategory, on_delete=models.CASCADE, related_name="categorycache_category", null=True, blank=True)
+        PartnerCategory, on_delete=models.CASCADE, related_name="category_cache_category", null=True, blank=True)
     response_date = models.DateTimeField(default=datetime.today)
     product_json = models.TextField(null=True, blank=True)
 
@@ -678,9 +678,9 @@ class PartnerCategoryCache(models.Model):
 
 class PartnerStock(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="product_parther", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="product_partner", null=True, blank=True)
     partner_code = models.ForeignKey(
-        PartnerApi, on_delete=models.CASCADE, related_name="stock_parther", null=True, blank=True)
+        PartnerApi, on_delete=models.CASCADE, related_name="stock_partner", null=True, blank=True)
     branch = models.CharField(max_length=250, null=True, blank=True)
     qty = models.IntegerField(default=0, null=True)
     supply_date = models.DateField(null=True, blank=True)
@@ -696,9 +696,9 @@ class PartnerStock(models.Model):
 
 class ProductApiMap(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="product_apimap", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="product_api_map", null=True, blank=True)
     partner_code = models.ForeignKey(
-        PartnerApi, on_delete=models.CASCADE, related_name="parther_apimap", null=True, blank=True)
+        PartnerApi, on_delete=models.CASCADE, related_name="partner_api_map", null=True, blank=True)
     api_key = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
@@ -720,13 +720,13 @@ class Order(models.Model):
     update_date = models.DateTimeField(default=datetime.today)
     comment = models.TextField(null=True, blank=True)
     point_id = models.ForeignKey(
-        CustomerPoint, on_delete=models.CASCADE, related_name="order_customerpoint", null=True, blank=True)
+        CustomerPoint, on_delete=models.CASCADE, related_name="order_customer_point", null=True, blank=True)
     delivery_service_id = models.ForeignKey(
-        DeliveryService, on_delete=models.CASCADE, related_name="order_delpoint", null=True, blank=True)
+        DeliveryService, on_delete=models.CASCADE, related_name="order_del_point", null=True, blank=True)
     delivery_city_id = models.ForeignKey(
-        DeliveryCity, on_delete=models.CASCADE, related_name="order_delcity", null=True, blank=True)
+        DeliveryCity, on_delete=models.CASCADE, related_name="order_del_city", null=True, blank=True)
     delivery_point_id = models.ForeignKey(
-        DeliveryPoint, on_delete=models.CASCADE, related_name="order_delpoint", null=True, blank=True)
+        DeliveryPoint, on_delete=models.CASCADE, related_name="order_del_point", null=True, blank=True)
     delivery_contact = models.CharField(max_length=250, null=True)
     delivery_contact_phone = models.CharField(max_length=250, null=True)
     order_number = models.CharField(max_length=250, null=True, blank=True)
@@ -756,11 +756,11 @@ class Order(models.Model):
 
 class OrderItem(models.Model):
     order_id = models.ForeignKey(
-        Order, on_delete=models.CASCADE, related_name="order_item", null=True, blank=True)
+        Order, on_delete=models.CASCADE, related_name="order_item_order", null=True, blank=True)
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="order_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="order_item_product", null=True, blank=True)
     currency_id = models.ForeignKey(
-        Currency, on_delete=models.CASCADE, related_name="order_currency", null=True, blank=True)
+        Currency, on_delete=models.CASCADE, related_name="order_item_currency", null=True, blank=True)
     qty = models.IntegerField(null=True, blank=True)
     price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     source = models.CharField(max_length=250, null=True, blank=True)
@@ -786,11 +786,11 @@ class OrderItem(models.Model):
 
 class OrderPayment(models.Model):
     order_id = models.ForeignKey(
-        Order, on_delete=models.CASCADE, related_name="order_payment", null=True, blank=True)
+        Order, on_delete=models.CASCADE, related_name="order_payment_order", null=True, blank=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2)
     date_payment = models.DateTimeField(default=datetime.today)
     currency_id = models.ForeignKey(
-        Currency, on_delete=models.CASCADE, related_name="order_currency", null=True, blank=True)
+        Currency, on_delete=models.CASCADE, related_name="order_payment_currency", null=True, blank=True)
     payment_sum = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     data = models.TextField(null=True, blank=True)
     receiver_commission = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
@@ -806,9 +806,9 @@ class OrderPayment(models.Model):
 
 class OrderSourceStatistic(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="orderstatistik_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="order_statistic_product", null=True, blank=True)
     customer_id = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="orderstatistik_customer", null=True, blank=True)
+        Customer, on_delete=models.CASCADE, related_name="order_statistic_customer", null=True, blank=True)
     source_type = models.CharField(max_length=250, null=True, blank=True)
     add_date = models.DateTimeField(default=datetime.today)
 
@@ -822,11 +822,11 @@ class OrderSourceStatistic(models.Model):
 
 class DropshippingWallet(models.Model):
     order_id = models.ForeignKey(
-        Order, on_delete=models.CASCADE, related_name="dwallet_order", null=True, blank=True)
+        Order, on_delete=models.CASCADE, related_name="d_wallet_order", null=True, blank=True)
     agreement_id = models.ForeignKey(
-        CustomerAgreement, on_delete=models.CASCADE, related_name="dwallet_agreement", null=True, blank=True)
+        CustomerAgreement, on_delete=models.CASCADE, related_name="d_wallet_agreement", null=True, blank=True)
     currency_id = models.ForeignKey(
-        Currency, on_delete=models.CASCADE, related_name="dwallet_currency", null=True, blank=True)
+        Currency, on_delete=models.CASCADE, related_name="d_wallet_currency", null=True, blank=True)
     debit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     credit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     balance = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
@@ -841,12 +841,12 @@ class DropshippingWallet(models.Model):
 
 class DropshippingWalletTransfer(models.Model):
     order_id = models.ForeignKey(
-        Order, on_delete=models.CASCADE, related_name="dtransfer_order", null=True, blank=True)
+        Order, on_delete=models.CASCADE, related_name="d_transfer_order", null=True, blank=True)
     agreement_id = models.ForeignKey(
-        CustomerAgreement, on_delete=models.CASCADE, related_name="dtransfer_agreement", null=True, blank=True)
+        CustomerAgreement, on_delete=models.CASCADE, related_name="d_transfer_agreement", null=True, blank=True)
     sum = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     currency_id = models.ForeignKey(
-        Currency, on_delete=models.CASCADE, related_name="dtransfer_currency", null=True, blank=True)
+        Currency, on_delete=models.CASCADE, related_name="d_transfer_currency", null=True, blank=True)
     date = models.DateTimeField(default=datetime.today)
     card = CardNumberField(null=True, blank=True)
 
@@ -878,9 +878,9 @@ class Profile(models.Model):
 
 class PromoSale(models.Model):
     customer_id = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="promosale_customer", null=True, blank=True)
+        Customer, on_delete=models.CASCADE, related_name="promo_sale_customer", null=True, blank=True)
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="promosale_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="promo_sale_product", null=True, blank=True)
     type = models.CharField(max_length=300, null=True, blank=True)
     is_visible = models.BooleanField(default=0)
     comment = models.CharField(max_length=500, null=True, blank=True)
@@ -926,9 +926,9 @@ class Sale(models.Model):
 
 class SaleHistory(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="saleh_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="sale_history_product", null=True, blank=True)
     customer_id = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="saleh_customer", null=True, blank=True)
+        Customer, on_delete=models.CASCADE, related_name="sale_history_customer", null=True, blank=True)
     qty = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -941,7 +941,7 @@ class SaleHistory(models.Model):
 
 class SaleProductRelated(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="srelated_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="sale_related_product", null=True, blank=True)
     related_product_id = models.IntegerField(null=True, blank=True)
     qty_index = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     calculation_type = models.CharField(max_length=250, null=True, blank=True)
@@ -956,9 +956,9 @@ class SaleProductRelated(models.Model):
 
 class SaleTask(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="stask_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="sale_task_product", null=True, blank=True)
     customer_id = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="stask_customer", null=True, blank=True)
+        Customer, on_delete=models.CASCADE, related_name="sale_task_customer", null=True, blank=True)
     qty = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
@@ -1014,10 +1014,10 @@ class SearchRequestBufferIgnore(models.Model):
 
 class SendPriceBuffer(models.Model):
     agreement_id = models.ForeignKey(
-        CustomerAgreement, on_delete=models.CASCADE, related_name="sendprice_agreement", null=True, blank=True)
+        CustomerAgreement, on_delete=models.CASCADE, related_name="send_price_buffer_agreement", null=True, blank=True)
     price_email = models.CharField(max_length=250, null=True, blank=True)
     customer_id = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="sendprice_customer", null=True, blank=True)
+        Customer, on_delete=models.CASCADE, related_name="send_price_buffer_customer", null=True, blank=True)
 
     def __str__(self):
         return self.agreement_id
@@ -1065,7 +1065,7 @@ class UploadProduct(models.Model):
 
 class UploadSetting(models.Model):
     partner_code = models.ForeignKey(
-        PartnerApi, on_delete=models.CASCADE, related_name="uploadsetting_parther", null=True, blank=True)
+        PartnerApi, on_delete=models.CASCADE, related_name="upload_setting_partner", null=True, blank=True)
     file_name = models.CharField(max_length=250, null=True, blank=True)
     first_row = models.IntegerField(null=True, blank=True)
     mapping = models.TextField(null=True, blank=True)
@@ -1102,7 +1102,7 @@ class UserRequest(models.Model):
 
 class UserRequestType(models.Model):
     manager_id = models.ForeignKey(
-        Manager, on_delete=models.CASCADE, related_name="userrequest_manager", null=True, blank=True)
+        Manager, on_delete=models.CASCADE, related_name="user_request_manager", null=True, blank=True)
     name = models.CharField(max_length=300, null=True, blank=True)
     comment = models.CharField(max_length=500, null=True, blank=True)
 
@@ -1116,7 +1116,7 @@ class UserRequestType(models.Model):
 
 class WaitList(models.Model):
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="waitlist_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="wait_list_product", null=True, blank=True)
     user_id = models.IntegerField(null=True, blank=True)
     date_add = models.DateTimeField(default=datetime.today)
     send_message = models.BooleanField(default=0)
@@ -1132,7 +1132,7 @@ class WaitList(models.Model):
 
 class Action(models.Model):
     content_id = models.ForeignKey(
-        Content, on_delete=models.CASCADE, related_name="action_customer", null=True, blank=True)
+        Content, on_delete=models.CASCADE, related_name="action_content", null=True, blank=True)
     comment = models.TextField(null=True, blank=True)
     start_at = models.DateTimeField(default=datetime.today)
     finish_at = models.DateTimeField(default=datetime.today)
@@ -1147,9 +1147,9 @@ class Action(models.Model):
 
 class ActionCustomer(models.Model):
     action_id = models.ForeignKey(
-        Action, on_delete=models.CASCADE, related_name="action_customer", null=True, blank=True)
+        Action, on_delete=models.CASCADE, related_name="action_customer_action", null=True, blank=True)
     customer_id = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="discount_customer", null=True, blank=True)
+        Customer, on_delete=models.CASCADE, related_name="action_customer_customer", null=True, blank=True)
     win = models.BooleanField(default=0)
     close_action = models.CharField(max_length=1000, null=True, blank=True)
 
@@ -1163,9 +1163,9 @@ class ActionCustomer(models.Model):
 
 class ActionProduct(models.Model):
     action_id = models.ForeignKey(
-        Action, on_delete=models.CASCADE, related_name="product_action", null=True, blank=True)
+        Action, on_delete=models.CASCADE, related_name="action_product_action", null=True, blank=True)
     product_id = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="action_product", null=True, blank=True)
+        Product, on_delete=models.CASCADE, related_name="action_product_product", null=True, blank=True)
 
     def __str__(self):
         return self.action_id

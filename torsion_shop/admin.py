@@ -3,7 +3,7 @@ from django import forms
 from modeltranslation.admin import TranslationAdmin
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import Brand, Product, Action, ActionCustomer, ActionProduct, Balance, CacheApi, CatalogCategory, Category, CategoryMapping, Constant, Content, Cross, CrossErrorStatistic, Currency, Customer, CustomerAgreement, CustomerAgreementBak, CustomerCard, CustomerContact, CustomerDiscount, CustomerPoint, DeficitReserve, DeliveryCity, DeliveryMethod, DeliveryPoint, DeliveryService, DropshippingWallet, DropshippingWalletTransfer, GalleryImage, Manager, Offer, Order, OrderItem, OrderPayment, OrderSourceStatistic, PartnerApi, PartnerApiCache, PartnerCategory, PartnerCategoryCache, PartnerStock, Price, PriceBuffer, PriceCategory, PriceType, ProductApiMap, ProductApplicability, ProductDescription, ProductErrorStatistic, Profile, PromoSale, Region, RunString, Sale, SaleHistory, SaleProductRelated, SaleTask, ScenarioPolicy, SearchRequest, SearchRequestBufferIgnore, SendPriceBuffer, SocialAccount, Stock, Token, UploadProduct, UploadSetting, UserRequest, UserRequestType, WaitList, RatingStar, Rating, Review
+from .models import Brand, Product, Category, Content, PriceCategory, ReviewContent, ReviewProduct
 
 
 @admin.register(Category)
@@ -37,10 +37,6 @@ class BrandAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
-class ReviewInLine(admin.StackedInline):
-    model = Review
-
-
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'article', 'specification', 'sort_price', 'is_active')
@@ -49,16 +45,27 @@ class ProductAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-@admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'text', 'email', 'product')
-    list_display_links = ('name',)
-    search_fields = ('name', 'product',)
-
-
 @admin.register(PriceCategory)
 class PriceCategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'inner_name', 'source_id')
     list_display_links = ('inner_name',)
+
+
+class ReviewInLine(admin.StackedInline):
+    model = ReviewContent, ReviewProduct
+
+
+@admin.register(ReviewContent)
+class ReviewContentAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'text', 'email', 'content')
+    list_display_links = ('name',)
+    search_fields = ('name', 'content',)
+
+
+@admin.register(ReviewProduct)
+class ReviewProductAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'text', 'email', 'product')
+    list_display_links = ('name',)
+    search_fields = ('name', 'product',)
 
 
