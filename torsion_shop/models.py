@@ -1,19 +1,19 @@
 from django.db import models
 from datetime import datetime
+from creditcards.models import CardNumberField
 
 
 class Brand(models.Model):
     name = models.CharField("Brand", max_length=300, null=True)
     enabled = models.BooleanField(default=1)
-    source_id = models.CharField(max_length=250, null=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
     wait_list = models.BooleanField(default=0)
     is_recommended = models.BooleanField(default=0)
     sort_index = models.IntegerField(default=999)
-    source_type = models.CharField(max_length=250, null=True)
+    source_type = models.CharField(max_length=250, default='1C')
     gallery_attribute = models.CharField(max_length=250, default='article')
     gallery_name = models.CharField(max_length=250, null=True)
     kind = models.CharField(max_length=250, default='secondary')
-    description = models.TextField("Description", null=True)
 
     def __str__(self):
         return self.name
@@ -25,7 +25,7 @@ class Brand(models.Model):
 
 class PriceCategory(models.Model):
     inner_name = models.CharField(max_length=250, null=True)
-    source_id = models.CharField(max_length=250, null=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.inner_name
@@ -35,17 +35,48 @@ class PriceCategory(models.Model):
         verbose_name_plural = "PriceCategories"
 
 
+class CatalogCategory(models.Model):
+    parent_id = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
+    enabled = models.BooleanField(default=1)
+    sort_index = models.IntegerField(default=999, null=True)
+    content_id = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=500, null=True, blank=True)
+    comment = models.CharField(max_length=500, null=True, blank=True)
+
+    def __str__(self):
+        return self.parent_id
+
+    class Meta:
+        verbose_name = "CatalogCategory"
+        verbose_name_plural = "CatalogCategories"
+
+
+class Offer(models.Model):
+    name = models.CharField(max_length=300, null=True, blank=True)
+    group = models.CharField(max_length=300, null=True, blank=True)
+    title = models.CharField(max_length=300, null=True, blank=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Offer"
+        verbose_name_plural = "Offers"
+
+
 class Product(models.Model):
-    article = models.CharField(max_length=250, null=True)
-    name = models.CharField(max_length=500, null=True)
-    comment = models.CharField(max_length=500, null=True)
     specification = models.CharField(max_length=250, null=True)
-    brand_id = models.ManyToManyField(Brand, related_name="product_brand")
-    offer_id = models.IntegerField(null=True)
-    category_id = models.IntegerField(null=True)
+    article = models.CharField(max_length=250, null=True)
+    brand_id = models.ForeignKey(Brand, on_delete=models.SET_NULL, related_name="product_brand", blank=True, null=True)
+    offer_id = models.ForeignKey(
+        Offer, on_delete=models.SET_NULL, related_name="product_offer", blank=True, null=True)
+    category_id = models.ForeignKey(
+        CatalogCategory, on_delete=models.SET_NULL, related_name="product_catalog", blank=True, null=True)
     create_date = models.DateTimeField(default=datetime.today, null=True)
     income_date = models.DateTimeField(default=datetime.today, null=True)
-    source_id = models.CharField(max_length=250, null=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
     search_key = models.CharField(max_length=250, null=True)
     sort_price = models.DecimalField(max_digits=15, decimal_places=2, null=True)
     is_active = models.BooleanField(default=1)
@@ -59,10 +90,12 @@ class Product(models.Model):
     product_type = models.IntegerField(null=True)
     delete_flag = models.BooleanField(default=0)
     advanced_description = models.TextField("Advanced description", null=True)
-    keywords = models.CharField(max_length=500, null=True)
+    name = models.CharField(max_length=500, null=True, blank=True)
+    comment = models.CharField(max_length=500, null=True, blank=True)
+    keywords = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.article
+        return self.specification
 
     class Meta:
         verbose_name = "Product"
@@ -73,7 +106,7 @@ class Currency(models.Model):
     code = models.CharField(max_length=250, null=True)
     name = models.CharField(max_length=250, null=True)
     title = models.CharField(max_length=250, null=True)
-    source_id = models.CharField(max_length=250, null=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
     rate = models.DecimalField(max_digits=15, decimal_places=5, null=True)
     mult = models.IntegerField(null=True)
     name_eng = models.CharField(max_length=250, null=True)
@@ -87,151 +120,238 @@ class Currency(models.Model):
 
 
 class Manager(models.Model):
-    inner_name = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    email = models.CharField(max_length=250)
-    phone = models.CharField(max_length=250)
-    skype = models.CharField(max_length=250)
-    comment = models.CharField(max_length=250, null=True)
-    source_id = models.CharField(max_length=250)
+    inner_name = models.CharField(max_length=250, null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    email = models.EmailField(null=True, blank=True)
+    phone = models.CharField(max_length=250, null=True, blank=True)
+    skype = models.CharField(max_length=250, default='skype', blank=True)
+    comment = models.CharField(max_length=500, null=True, blank=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.inner_name
 
+    class Meta:
+        verbose_name = "Manager"
+        verbose_name_plural = "Managers"
+
 
 class Customer(models.Model):
-    code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    main_customer_id = models.IntegerField()
-    manager_id = models.IntegerField()
-    sale_policy = models.CharField(max_length=250)
-    city = models.CharField(max_length=250)
-    region_id = models.IntegerField()
-    source_id = models.CharField(max_length=250)
-    no_show_balance = models.IntegerField()
-    deficit_available = models.IntegerField()
-    online_reserve = models.IntegerField()
-    online_order = models.IntegerField()
+    code = models.CharField(max_length=250, null=True)
+    name = models.CharField(max_length=300, null=True)
+    main_customer_id = models.IntegerField(null=True, blank=True)
+    manager_id = models.ForeignKey(
+        Manager, on_delete=models.SET_NULL, related_name="customer_manager", null=True, blank=True)
+    sale_policy = models.CharField(max_length=250, null=True)
+    city = models.CharField(max_length=250, null=True)
+    region_id = models.IntegerField(null=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
+    no_show_balance = models.BooleanField(default=0)
+    deficit_available = models.BooleanField(default=0)
+    online_reserve = models.BooleanField(default=0)
+    online_order = models.BooleanField(default=0)
     send_price = models.BooleanField(default=0)
-    price_language = models.CharField(max_length=3)
-    price_email = models.TextField()
-    price_schedule = models.CharField(max_length=500)
+    price_language = models.CharField(max_length=2, default='ru', null=True)
+    price_email = models.TextField(null=True, blank=True)
+    price_schedule = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.code
+
+    class Meta:
+        verbose_name = "Customer"
+        verbose_name_plural = "Customers"
+
+
+class PriceType(models.Model):
+    name = models.CharField(max_length=300, null=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
+    enabled = models.BooleanField(default=1)
+    sort_index = models.IntegerField(default=999, null=True)
+    access_policy_data = models.CharField(max_length=250, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "PriceType"
+        verbose_name_plural = "PriceTypes"
 
 
 class CustomerAgreement(models.Model):
-    code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    number = models.CharField(max_length=250)
-    customer_id = models.IntegerField()
-    currency_id = models.IntegerField()
-    price_type_id = models.IntegerField()
-    discount = models.DecimalField(max_digits=15, decimal_places=2)
+    code = models.CharField(max_length=250, null=True)
+    name = models.CharField(max_length=250, null=True)
+    number = models.CharField(max_length=250, null=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="agreement_customer", null=True, blank=True)
+    currency_id = models.ForeignKey(
+        Currency, on_delete=models.CASCADE, related_name="agreement_currency", null=True, blank=True)
+    price_type_id = models.ForeignKey(
+        PriceType, on_delete=models.CASCADE, related_name="agreement_pricetype", null=True, blank=True)
+    discount = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     is_status = models.BooleanField()
-    source_id = models.CharField(max_length=250)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
     price_available = models.BooleanField(default=0)
     api_available = models.BooleanField(default=0)
-    api_token = models.CharField(max_length=250)
-    api_user_id = models.IntegerField()
-    price_language = models.CharField(max_length=3)
-    is_active = models.BooleanField()
-    price_schedule = models.CharField(max_length=500)
-    price_email = models.TextField()
+    api_token = models.CharField(max_length=250, null=True, blank=True)
+    api_user_id = models.IntegerField(null=True, blank=True)
+    price_language = models.CharField(max_length=2, default='ru', null=True)
+    is_active = models.BooleanField(default=1)
+    price_schedule = models.CharField(max_length=500, null=True, blank=True)
+    price_email = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return self.code
 
-
-class CustomerAgreementBak(models.Model):
-    code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    number = models.CharField(max_length=250)
-    customer_id = models.IntegerField()
-    currency_id = models.IntegerField()
-    price_type_id = models.IntegerField()
-    discount = models.DecimalField(max_digits=15, decimal_places=2)
-    is_status = models.BooleanField()
-    source_id = models.CharField(max_length=250)
-    price_available = models.BooleanField(default=0)
-    api_available = models.BooleanField(default=0)
-    api_token = models.CharField(max_length=250)
-    api_user_id = models.IntegerField()
-    price_language = models.CharField(max_length=3)
-    is_active = models.BooleanField()
-    price_email = models.TextField()
-
-    def __str__(self):
-        return self.code
+    class Meta:
+        verbose_name = "CustomerAgreement"
+        verbose_name_plural = "CustomerAgreements"
 
 
 class CustomerCard(models.Model):
-    customer_id = models.IntegerField()
-    name = models.CharField(max_length=250)
-    card = models.CharField(max_length=250)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="card_customer", null=True, blank=True)
+    name = models.CharField(max_length=250, null=True)
+    card = CardNumberField(null=True, blank=True)
 
     def __str__(self):
         return self.customer_id
+
+    class Meta:
+        verbose_name = "CustomerCard"
+        verbose_name_plural = "CustomerCard"
 
 
 class CustomerContact(models.Model):
-    customer_id = models.IntegerField()
-    user_id = models.IntegerField()
-    name = models.CharField(max_length=250)
-    email = models.CharField(max_length=250)
-    is_user = models.BooleanField()
-    source_id = models.CharField(max_length=250)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="contact_customer", null=True, blank=True)
+    user_id = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=250, null=True)
+    email = models.EmailField(null=True, blank=True)
+    is_user = models.BooleanField(default=0)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.customer_id
+
+    class Meta:
+        verbose_name = "CustomerContact"
+        verbose_name_plural = "CustomerContacts"
 
 
 class CustomerDiscount(models.Model):
-    customer_id = models.IntegerField()
-    agreement_id = models.IntegerField()
-    criteria_id = models.IntegerField()
-    criteria_type = models.CharField(max_length=250)
-    discount = models.DecimalField(max_digits=15, decimal_places=2)
-    price_type_id = models.IntegerField()
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="discount_customer", null=True, blank=True)
+    agreement_id = models.ForeignKey(
+        CustomerAgreement, on_delete=models.CASCADE, related_name="discount_agreement", null=True, blank=True)
+    criteria_id = models.IntegerField(null=True, blank=True)
+    criteria_type = models.CharField(max_length=250, null=True, blank=True)
+    discount = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    price_type_id = models.ForeignKey(
+        PriceType, on_delete=models.CASCADE, related_name="discount_pricetype", null=True, blank=True)
 
     def __str__(self):
         return self.customer_id
+
+    class Meta:
+        verbose_name = "CustomerDiscount"
+        verbose_name_plural = "CustomerDiscounts"
 
 
 class CustomerPoint(models.Model):
-    customer_id = models.IntegerField()
-    name = models.CharField(max_length=500)
-    source_id = models.CharField(max_length=250)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="point_customer", null=True, blank=True)
+    name = models.CharField(max_length=500, null=True, blank=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.customer_id
+    
+    class Meta:
+        verbose_name = "CustomerPoint"
+        verbose_name_plural = "CustomerPoints"
 
 
 class Balance(models.Model):
-    customer_id = models.IntegerField()
-    currency_id = models.CharField(max_length=250)
-    balance = models.DecimalField(max_digits=15, decimal_places=2)
-    past_due = models.DecimalField(max_digits=15, decimal_places=2)
-    agreement_id = models.IntegerField()
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="balance_customer", null=True, blank=True)
+    currency_id = models.ForeignKey(
+        Currency, on_delete=models.CASCADE, related_name="balance_currency", null=True, blank=True)
+    balance = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    past_due = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    agreement_id = models.ForeignKey(
+        CustomerAgreement, on_delete=models.CASCADE, related_name="balance_agreement", null=True, blank=True)
 
     def __str__(self):
         return self.customer_id
 
+    class Meta:
+        verbose_name = "Balance"
+        verbose_name_plural = "Balances"
 
-class CacheApi(models.Model):
-    partner_code = models.CharField(max_length=250)
-    search_number = models.CharField(max_length=250)
-    response_api = models.TextField()
-    response_date = models.DateTimeField()
+
+class Price(models.Model):
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="price_product", null=True, blank=True)
+    price_type_id = models.ForeignKey(
+        PriceType, on_delete=models.CASCADE, related_name="price_pricetype", null=True, blank=True)
+    currency_id = models.ForeignKey(
+        Currency, on_delete=models.CASCADE, related_name="price_currency", null=True, blank=True)
+    price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.partner_code
+        return self.product_id
+
+    class Meta:
+        verbose_name = "Price"
+        verbose_name_plural = "Prices"
+
+
+class PriceBuffer(models.Model):
+    code = models.CharField(max_length=250, null=True, blank=True)
+    brand = models.ForeignKey(
+        Brand, on_delete=models.CASCADE, related_name="pricebuffer_brand", null=True, blank=True)
+    category = models.CharField(max_length=250, null=True, blank=True)
+    price_category = models.ForeignKey(
+        PriceCategory, on_delete=models.CASCADE, related_name="pricebuffer_pricecategory", null=True, blank=True)
+    specification = models.CharField(max_length=250, null=True, blank=True)
+    article = models.CharField(max_length=250, null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    currency = models.CharField(max_length=250, null=True, blank=True)
+    rest = models.IntegerField(null=True, blank=True)
+    agreement_id = models.ForeignKey(
+        CustomerAgreement, on_delete=models.CASCADE, related_name="discount_agreement", null=True, blank=True)
+    sort_index = models.CharField(max_length=300, null=True, blank=True)
+    pack_qty = models.IntegerField(null=True, blank=True)
+    create_date = models.DateTimeField(default=datetime.today)
+
+    def __str__(self):
+        return self.code
+
+    class Meta:
+        verbose_name = "PriceBuffer"
+        verbose_name_plural = "PriceBuffers"
+
+
+class Stock(models.Model):
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="stock_product", null=True, blank=True)
+    stock_name = models.CharField(max_length=300, null=True, blank=True)
+    amount_total = models.IntegerField(default=0, null=True)
+    amount_account = models.IntegerField(default=0, null=True)
+
+    def __str__(self):
+        return self.product_id
+
+    class Meta:
+        verbose_name = "Stock"
+        verbose_name_plural = "Stocks"
 
 
 class Category(models.Model):
     name = models.CharField(max_length=300)
-    comment = models.CharField(max_length=300, null=True)
+    comment = models.CharField(max_length=500, null=True, blank=True)
     url = models.SlugField(max_length=250, unique=True)
 
     def __str__(self):
@@ -242,22 +362,9 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
 
-class CategoryMapping(models.Model):
-    partner_code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    category_id = models.ManyToManyField(Category, related_name="categorymapping_category")
-
-    def __str__(self):
-        return self.partner_code
-
-    class Meta:
-        verbose_name = "CategoryMapping"
-        verbose_name_plural = "CategoryMappings"
-
-
 class Constant(models.Model):
-    code = models.CharField(max_length=250)
-    value = models.TextField()
+    code = models.CharField(max_length=250, null=True, blank=True)
+    value = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.code
@@ -272,15 +379,16 @@ class Content(models.Model):
     created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField(default=datetime.today)
     published = models.BooleanField(default=0)
-    main_image = models.ImageField(upload_to="content/main_image/")
-    category_id = models.ManyToManyField(Category, related_name="content_category")
+    main_image = models.ImageField(upload_to="content/main_image/", blank=True)
+    category_id = models.ForeignKey(
+        Category, on_delete=models.SET_NULL, related_name="content_category", null=True, blank=True)
     title = models.CharField(max_length=300)
     intro_text = models.CharField(max_length=500)
     full_text = models.TextField()
-    meta_tag_title = models.CharField(max_length=500, null=True)
-    meta_tag_description = models.CharField(max_length=500, null=True)
-    meta_tag_keyword = models.CharField(max_length=500, null=True)
-    geo = models.CharField(max_length=250, null=True)
+    meta_tag_title = models.CharField(max_length=500, null=True, blank=True)
+    meta_tag_description = models.CharField(max_length=500, null=True, blank=True)
+    meta_tag_keyword = models.CharField(max_length=500, null=True, blank=True)
+    geo = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.alias
@@ -290,28 +398,26 @@ class Content(models.Model):
         verbose_name_plural = "Contents"
 
 
-class CatalogCategory(models.Model):
-    parent_id = models.IntegerField()
-    name = models.CharField(max_length=300)
-    comment = models.CharField(max_length=500, null=True)
-    source_id = models.CharField(max_length=250)
-    enabled = models.BooleanField(default=1)
-    sort_index = models.IntegerField()
-    content_id = models.ManyToManyField(Content, related_name="catalogcategory_content")
+class ContentImage(models.Model):
+    name = models.CharField(max_length=250, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    content_id = models.ForeignKey(Content, on_delete=models.CASCADE, null=True, blank=True)
+    image = models.ImageField(upload_to="content/content_image/", blank=True)
 
     def __str__(self):
-        return self.parent_id
+        return self.name
 
     class Meta:
-        verbose_name = "CatalogCategory"
-        verbose_name_plural = "CatalogCategories"
+        verbose_name = "ContentImage"
+        verbose_name_plural = "ContentImages"
 
 
 class Cross(models.Model):
-    product_id = models.ManyToManyField(Product, related_name="cross_product")
-    brand_name = models.CharField(max_length=300)
-    article_nr = models.CharField(max_length=300)
-    search_nr = models.CharField(max_length=300)
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="cross_product", null=True, blank=True)
+    brand_name = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name="cross_brand", null=True, blank=True)
+    article_nr = models.CharField(max_length=500, null=True, blank=True)
+    search_nr = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.product_id
@@ -322,585 +428,751 @@ class Cross(models.Model):
 
 
 class CrossErrorStatistic(models.Model):
-    user_id = models.IntegerField()
-    product_id = models.IntegerField()
+    user_id = models.IntegerField(null=True, blank=True)
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="crosserror_product", null=True, blank=True)
     search_number = models.CharField(max_length=1000)
-    comment = models.CharField(max_length=1000, null=True)
-    customer_id = models.IntegerField()
-    date = models.DateTimeField()
+    comment = models.CharField(max_length=500, null=True, blank=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="crosserror_customer", null=True, blank=True)
+    date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
         return self.user_id
 
+    class Meta:
+        verbose_name = "CrossErrorStatistic"
+        verbose_name_plural = "CrossErrorStatistics"
 
-class DeficitReserve(models.Model):
-    product_id = models.IntegerField()
-    sale_policy = models.CharField(max_length=250)
-    amount = models.IntegerField()
+
+class ProductApplicability(models.Model):
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="applicabilty_product", null=True, blank=True)
+    vehicle = models.CharField(max_length=250, null=True, blank=True)
+    modification = models.CharField(max_length=250, null=True, blank=True)
+    engine = models.CharField(max_length=250, null=True, blank=True)
+    year = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.product_id
 
-
-class Action(models.Model):
-    content_id = models.IntegerField()
-    comment = models.TextField()
-    start_at = models.DateTimeField()
-    finish_at = models.DateTimeField()
-
-    def __str__(self):
-        return self.content_id
+    class Meta:
+        verbose_name = "ProductApplicability"
+        verbose_name_plural = "ProductApplicabilities"
 
 
-class ActionCustomer(models.Model):
-    action_id = models.IntegerField()
-    customer_id = models.IntegerField()
-    win = models.BooleanField(default=0)
-    close_action = models.CharField(max_length=1000)
+class ProductDescription(models.Model):
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="description_product", null=True, blank=True)
+    property = models.CharField(max_length=500, null=True, blank=True)
+    value = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.action_id
+        return self.product_id
+
+    class Meta:
+        verbose_name = "ProductDescription"
+        verbose_name_plural = "ProductDescriptions"
 
 
-class ActionProduct(models.Model):
-    action_id = models.IntegerField()
-    product_id = models.IntegerField()
-
-    def __str__(self):
-        return self.action_id
-
-
-class DeliveryCity(models.Model):
-    service_id = models.IntegerField()
-    region = models.CharField(max_length=250)
-    ref = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    create_date = models.DateTimeField(default=datetime.today)
-    update_date = models.DateTimeField()
+class ProductErrorStatistic(models.Model):
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="cross_product", null=True, blank=True)
+    user_id = models.IntegerField(null=True, blank=True)
+    error_comment = models.CharField(max_length=1000, null=True, blank=True)
+    status = models.CharField(max_length=250)
+    created_date = models.DateTimeField(default=datetime.today)
+    updated_date = models.DateTimeField(default=datetime.today)
+    admin_comment = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
-        return self.service_id
+        return self.product_id
+
+    class Meta:
+        verbose_name = "ProductErrorStatistic"
+        verbose_name_plural = "ProductErrorStatistics"
+
+
+class DeficitReserve(models.Model):
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="deficit_product", null=True, blank=True)
+    sale_policy = models.CharField(max_length=250, null=True, blank=True)
+    amount = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.product_id
+
+    class Meta:
+        verbose_name = "DeficitReserve"
+        verbose_name_plural = "DeficitReserves"
+
+
+class Region(models.Model):
+    name = models.CharField(max_length=300, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Region"
+        verbose_name_plural = "Regions"
 
 
 class DeliveryMethod(models.Model):
-    code = models.CharField(max_length=250)
-    region_available = models.TextField()
-    method_code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    comment = models.TextField()
-    red = models.TextField()
+    code = models.CharField(max_length=250, null=True, blank=True)
+    region_available = models.TextField(null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
+    red = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.code
 
+    class Meta:
+        verbose_name = "DeliveryMethod"
+        verbose_name_plural = "DeliveryMethods"
 
-class DeliveryPoint(models.Model):
-    service_id = models.IntegerField()
-    city_id = models.IntegerField()
-    street = models.CharField(max_length=250)
-    ref = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    longitude = models.CharField(max_length=250)
-    latitude = models.CharField(max_length=250)
-    max_weight = models.DecimalField(max_digits=15, decimal_places=3)
+
+class DeliveryService(models.Model):
+    name = models.CharField(max_length=250, null=True, blank=True)
+    has_to_door = models.BooleanField(default=0)
+    parameters = models.CharField(max_length=250, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "DeliveryService"
+        verbose_name_plural = "DeliveryService"
+
+
+class DeliveryCity(models.Model):
+    service_id = models.ForeignKey(
+        DeliveryService, on_delete=models.CASCADE, related_name="city_service", null=True, blank=True)
+    region = models.CharField(max_length=250, null=True, blank=True)
+    ref = models.CharField(max_length=250, null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    create_date = models.DateTimeField(default=datetime.today)
+    update_date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
         return self.service_id
 
-
-class DeliveryService(models.Model):
-    name = models.CharField(max_length=250)
-    has_to_door = models.BooleanField()
-    parameters = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.name
+    class Meta:
+        verbose_name = "DeliveryCity"
+        verbose_name_plural = "DeliveryCities"
 
 
-class DropshippingWallet(models.Model):
-    order_id = models.IntegerField()
-    agreement_id = models.IntegerField()
-    currency_id = models.IntegerField()
-    debit = models.DecimalField(max_digits=15, decimal_places=2)
-    credit = models.DecimalField(max_digits=15, decimal_places=2)
-    balance = models.DecimalField(max_digits=15, decimal_places=2)
-
-    def __str__(self):
-        return self.order_id
-
-
-class DropshippingWalletTransfer(models.Model):
-    order_id = models.IntegerField()
-    agreement_id = models.IntegerField()
-    sum = models.DecimalField(max_digits=15, decimal_places=2)
-    currency_id = models.IntegerField()
-    date = models.DateTimeField()
-    card = models.IntegerField()
+class DeliveryPoint(models.Model):
+    service_id = models.ForeignKey(
+        DeliveryService, on_delete=models.CASCADE, related_name="point_service", null=True, blank=True)
+    city_id = models.ForeignKey(
+        DeliveryCity, on_delete=models.CASCADE, related_name="point_city", null=True, blank=True)
+    street = models.CharField(max_length=250, null=True, blank=True)
+    ref = models.CharField(max_length=250, null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    longitude = models.CharField(max_length=250, null=True, blank=True)
+    latitude = models.CharField(max_length=250, null=True, blank=True)
+    max_weight = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.order_id
+        return self.service_id
 
-
-class GalleryImage(models.Model):
-    type = models.CharField(max_length=250)
-    ownerId = models.CharField(max_length=250)
-    rank = models.IntegerField()
-    name = models.CharField(max_length=250)
-    description = models.TextField()
-
-    def __str__(self):
-        return self.type
-
-
-class Offer(models.Model):
-    name = models.CharField(max_length=250)
-    group = models.CharField(max_length=250)
-    title = models.CharField(max_length=250)
-    source_id = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.name
-
-
-class Order(models.Model):
-    user_id = models.IntegerField()
-    agreement_id = models.IntegerField()
-    status = models.IntegerField()
-    delivery_method = models.CharField(max_length=250)
-    create_date = models.DateTimeField(default=datetime.today)
-    update_date = models.DateTimeField()
-    comment = models.TextField()
-    point_id = models.IntegerField()
-    delivery_service_id = models.IntegerField()
-    delivery_city_id = models.IntegerField()
-    delivery_point_id = models.IntegerField()
-    delivery_contact = models.CharField(max_length=250)
-    delivery_contact_phone = models.CharField(max_length=250)
-    order_number = models.CharField(max_length=250)
-    waybill_number = models.CharField(max_length=250)
-    invoice_number = models.CharField(max_length=250)
-    source = models.CharField(max_length=250)
-    is_pay_on_delivery = models.BooleanField()
-    pay_on_delivery_sum = models.DecimalField(max_digits=15, decimal_places=2)
-    import_reason = models.TextField()
-    import_status = models.CharField(max_length=250)
-    partner_code = models.CharField(max_length=250)
-    declared_sum = models.DecimalField(max_digits=15, decimal_places=2)
-    declared_currency = models.IntegerField()
-    source_type = models.CharField(max_length=250)
-    delivery_contact_surname = models.CharField(max_length=250)
-    declaration_number = models.CharField(max_length=250)
-    delivery_contact_middlename = models.CharField(max_length=250)
-    delivery_is_invoice_off = models.IntegerField()
-
-    def __str__(self):
-        return self.user_id
-
-
-class OrderItem(models.Model):
-    order_id = models.IntegerField()
-    product_id = models.IntegerField()
-    currency_id = models.IntegerField()
-    qty = models.IntegerField()
-    price = models.DecimalField(max_digits=15, decimal_places=2)
-    source = models.CharField(max_length=250)
-    reserved = models.IntegerField()
-    executed = models.IntegerField()
-    old_qty = models.IntegerField()
-    old_price = models.DecimalField(max_digits=15, decimal_places=2)
-    update_date = models.DateTimeField()
-    purchase_qty = models.IntegerField()
-    purchase_price = models.DecimalField(max_digits=15, decimal_places=2)
-    purchase_currency_id = models.IntegerField()
-    purchase_order_id = models.IntegerField()
-    purchase_item_id = models.IntegerField()
-    partner_branch = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.order_id
-
-
-class OrderPayment(models.Model):
-    order_id = models.IntegerField()
-    sum = models.DecimalField(max_digits=15, decimal_places=2)
-    date_payment = models.DateTimeField(default=datetime.today)
-    currency_id = models.IntegerField()
-    payment_sum = models.DecimalField(max_digits=15, decimal_places=2)
-    data = models.TextField()
-    receiver_commission = models.DecimalField(max_digits=15, decimal_places=2)
-    sender_commission = models.DecimalField(max_digits=15, decimal_places=2)
-
-    def __str__(self):
-        return self.order_id
-
-
-class OrderSourceStatistic(models.Model):
-    product_id = models.IntegerField()
-    customer_id = models.IntegerField()
-    source_type = models.CharField(max_length=250)
-    add_date = models.DateTimeField()
-
-    def __str__(self):
-        return self.product_id
+    class Meta:
+        verbose_name = "DeliveryPoint"
+        verbose_name_plural = "DeliveryPoints"
 
 
 class PartnerApi(models.Model):
-    code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    token = models.CharField(max_length=250)
-    margin = models.DecimalField(max_digits=15, decimal_places=2)
-    percent_prepayment = models.DecimalField(max_digits=15, decimal_places=2)
+    code = models.CharField(max_length=50, null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    token = models.CharField(max_length=250, null=True, blank=True)
+    margin = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    percent_prepayment = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     show_branch = models.BooleanField(default=1)
     enabled = models.BooleanField(default=0)
 
     def __str__(self):
         return self.code
 
+    class Meta:
+        verbose_name = "PartnerApi"
+        verbose_name_plural = "PartnerApies"
 
-class PartnerApiCache(models.Model):
-    partner_code = models.CharField(max_length=250)
+
+class CacheApi(models.Model):
+    partner_code = models.ForeignKey(
+        PartnerApi, on_delete=models.CASCADE, related_name="cache_parnter", null=True, blank=True)
     search_number = models.CharField(max_length=250)
-    response_date = models.DateTimeField()
-    product_json = models.TextField()
+    response_api = models.TextField(null=True, blank=True)
+    response_date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
         return self.partner_code
+
+    class Meta:
+        verbose_name = "CacheApi"
+        verbose_name_plural = "CacheApis"
+
+
+class PartnerApiCache(models.Model):
+    partner_code = models.ForeignKey(
+        PartnerApi, on_delete=models.CASCADE, related_name="apicache_parnter", null=True, blank=True)
+    search_number = models.CharField(max_length=250, null=True, blank=True)
+    response_date = models.DateTimeField(default=datetime.today)
+    product_json = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.partner_code
+
+    class Meta:
+        verbose_name = "PartnerApiCache"
+        verbose_name_plural = "PartnerApiCaches"
 
 
 class PartnerCategory(models.Model):
-    partner_code = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    parent_id = models.IntegerField()
-    response_date = models.DateTimeField()
+    partner_code = models.ForeignKey(
+        PartnerApi, on_delete=models.CASCADE, related_name="category_parnter", null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    parent_id = models.ForeignKey('self', on_delete=models.SET_NULL, default=0, null=True)
+    response_date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
         return self.partner_code
+
+    class Meta:
+        verbose_name = "PartnerCategory"
+        verbose_name_plural = "PartnerCategories"
+
+
+class CategoryMapping(models.Model):
+    partner_code = models.ForeignKey(
+        PartnerApi, on_delete=models.CASCADE, related_name="mapping_parnter", null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    category_id = models.ForeignKey(
+        PartnerCategory, on_delete=models.CASCADE, related_name="mapping_category", null=True, blank=True)
+
+    def __str__(self):
+        return self.partner_code
+
+    class Meta:
+        verbose_name = "CategoryMapping"
+        verbose_name_plural = "CategoryMappings"
 
 
 class PartnerCategoryCache(models.Model):
-    partner_code = models.CharField(max_length=250)
-    category_id = models.IntegerField()
-    response_date = models.DateTimeField()
-    product_json = models.TextField()
+    partner_code = models.ForeignKey(
+        PartnerApi, on_delete=models.CASCADE, related_name="categorycache_parther", null=True, blank=True)
+    category_id = models.ForeignKey(
+        PartnerCategory, on_delete=models.CASCADE, related_name="categorycache_category", null=True, blank=True)
+    response_date = models.DateTimeField(default=datetime.today)
+    product_json = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.partner_code
 
+    class Meta:
+        verbose_name = "PartnerCategoryCache"
+        verbose_name_plural = "PartnerCategoryCaches"
+
 
 class PartnerStock(models.Model):
-    product_id = models.IntegerField()
-    partner_code = models.CharField(max_length=250)
-    branch = models.CharField(max_length=250)
-    qty = models.IntegerField()
-    supply_date = models.DateField()
-    price = models.DecimalField(max_digits=15, decimal_places=2)
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="product_parther", null=True, blank=True)
+    partner_code = models.ForeignKey(
+        PartnerApi, on_delete=models.CASCADE, related_name="stock_parther", null=True, blank=True)
+    branch = models.CharField(max_length=250, null=True, blank=True)
+    qty = models.IntegerField(default=0, null=True)
+    supply_date = models.DateField(null=True, blank=True)
+    price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
         return self.product_id
 
-
-class Price(models.Model):
-    product_id = models.IntegerField()
-    price_type_id = models.IntegerField()
-    currency_id = models.IntegerField()
-    price = models.DecimalField(max_digits=15, decimal_places=2)
-
-    def __str__(self):
-        return self.product_id
-
-
-class PriceBuffer(models.Model):
-    code = models.CharField(max_length=250)
-    brand = models.CharField(max_length=250)
-    category = models.CharField(max_length=250)
-    price_category = models.CharField(max_length=250)
-    specification = models.CharField(max_length=250)
-    article = models.CharField(max_length=250)
-    name = models.CharField(max_length=250)
-    price = models.DecimalField(max_digits=15, decimal_places=2)
-    currency = models.CharField(max_length=250)
-    rest = models.IntegerField()
-    agreement_id = models.IntegerField()
-    sort_indexcurrency = models.CharField(max_length=300)
-    pack_qty = models.IntegerField()
-    create_date = models.DateTimeField(default=datetime.today)
-
-    def __str__(self):
-        return self.code
-
-
-class PriceType(models.Model):
-    name = models.CharField(max_length=250)
-    source_id = models.CharField(max_length=250)
-    enabled = models.IntegerField()
-    sort_index = models.IntegerField()
-    access_policy_data = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.name
+    class Meta:
+        verbose_name = "PartnerStock"
+        verbose_name_plural = "PartnerStocks"
 
 
 class ProductApiMap(models.Model):
-    product_id = models.IntegerField()
-    partner_code = models.CharField(max_length=250)
-    api_key = models.CharField(max_length=250)
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="product_apimap", null=True, blank=True)
+    partner_code = models.ForeignKey(
+        PartnerApi, on_delete=models.CASCADE, related_name="parther_apimap", null=True, blank=True)
+    api_key = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.product_id
 
-
-class ProductApplicability(models.Model):
-    product_id = models.IntegerField()
-    vehicle = models.CharField(max_length=250)
-    modification = models.CharField(max_length=250)
-    engine = models.CharField(max_length=250)
-    year = models.CharField(max_length=250)
-
-    def __str__(self):
-        return self.product_id
+    class Meta:
+        verbose_name = "ProductApiMap"
+        verbose_name_plural = "ProductApiMaps"
 
 
-class ProductDescription(models.Model):
-    product_id = models.IntegerField()
-    property = models.CharField(max_length=250)
-    value = models.TextField()
-
-    def __str__(self):
-        return self.product_id
-
-
-class ProductErrorStatistic(models.Model):
-    product_id = models.IntegerField()
-    user_id = models.IntegerField()
-    error_comment = models.CharField(max_length=1000)
-    status = models.CharField(max_length=250)
-    created_date = models.DateTimeField(default=datetime.today)
-    updated_date = models.DateTimeField()
-    admin_comment = models.CharField(max_length=1000)
-
-    def __str__(self):
-        return self.product_id
-
-
-class Profile(models.Model):
-    user_id = models.IntegerField()
-    name = models.CharField(max_length=250)
-    public_email = models.CharField(max_length=250)
-    gravatar_email = models.CharField(max_length=250)
-    gravatar_id = models.CharField(max_length=250)
-    location = models.CharField(max_length=250)
-    website = models.CharField(max_length=250)
-    bio = models.TextField()
+class Order(models.Model):
+    user_id = models.IntegerField(null=True, blank=True)
+    agreement_id = models.ForeignKey(
+        CustomerAgreement, on_delete=models.CASCADE, related_name="order_agreement", null=True, blank=True)
+    status = models.SmallIntegerField(default=0)
+    delivery_method = models.ForeignKey(
+        DeliveryMethod, on_delete=models.CASCADE, related_name="order_delivery", null=True, blank=True)
+    create_date = models.DateTimeField(default=datetime.today)
+    update_date = models.DateTimeField(default=datetime.today)
+    comment = models.TextField(null=True, blank=True)
+    point_id = models.ForeignKey(
+        CustomerPoint, on_delete=models.CASCADE, related_name="order_customerpoint", null=True, blank=True)
+    delivery_service_id = models.ForeignKey(
+        DeliveryService, on_delete=models.CASCADE, related_name="order_delpoint", null=True, blank=True)
+    delivery_city_id = models.ForeignKey(
+        DeliveryCity, on_delete=models.CASCADE, related_name="order_delcity", null=True, blank=True)
+    delivery_point_id = models.ForeignKey(
+        DeliveryPoint, on_delete=models.CASCADE, related_name="order_delpoint", null=True, blank=True)
+    delivery_contact = models.CharField(max_length=250, null=True)
+    delivery_contact_phone = models.CharField(max_length=250, null=True)
+    order_number = models.CharField(max_length=250, null=True, blank=True)
+    waybill_number = models.CharField(max_length=250, null=True, blank=True)
+    invoice_number = models.CharField(max_length=250, null=True, blank=True)
+    source = models.CharField(max_length=250, default='site', null=True)
+    is_pay_on_delivery = models.BooleanField(default=0)
+    pay_on_delivery_sum = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    import_reason = models.TextField(null=True, blank=True)
+    import_status = models.CharField(max_length=250, null=True, blank=True)
+    partner_code = models.CharField(max_length=250, null=True, blank=True)
+    declared_sum = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    declared_currency = models.BooleanField(default=1)
+    source_type = models.CharField(max_length=250, default='B2B', null=True)
+    delivery_contact_surname = models.CharField(max_length=250, null=True)
+    declaration_number = models.CharField(max_length=250, null=True, blank=True)
+    delivery_contact_middlename = models.CharField(max_length=250, null=True)
+    delivery_is_invoice_off = models.BooleanField(default=1)
 
     def __str__(self):
         return self.user_id
 
+    class Meta:
+        verbose_name = "Order"
+        verbose_name_plural = "Orders"
+
+
+class OrderItem(models.Model):
+    order_id = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="order_item", null=True, blank=True)
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="order_product", null=True, blank=True)
+    currency_id = models.ForeignKey(
+        Currency, on_delete=models.CASCADE, related_name="order_currency", null=True, blank=True)
+    qty = models.IntegerField(null=True, blank=True)
+    price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    source = models.CharField(max_length=250, null=True, blank=True)
+    reserved = models.IntegerField(null=True, blank=True)
+    executed = models.IntegerField(null=True, blank=True)
+    old_qty = models.IntegerField(null=True, blank=True)
+    old_price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    update_date = models.DateTimeField(null=True, blank=True)
+    purchase_qty = models.IntegerField(null=True, blank=True)
+    purchase_price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    purchase_currency_id = models.IntegerField(null=True, blank=True)
+    purchase_order_id = models.IntegerField(null=True, blank=True)
+    purchase_item_id = models.IntegerField(null=True, blank=True)
+    partner_branch = models.CharField(max_length=250, null=True, blank=True)
+
+    def __str__(self):
+        return self.order_id
+
+    class Meta:
+        verbose_name = "OrderItem"
+        verbose_name_plural = "OrderItems"
+
+
+class OrderPayment(models.Model):
+    order_id = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="order_payment", null=True, blank=True)
+    sum = models.DecimalField(max_digits=15, decimal_places=2)
+    date_payment = models.DateTimeField(default=datetime.today)
+    currency_id = models.ForeignKey(
+        Currency, on_delete=models.CASCADE, related_name="order_currency", null=True, blank=True)
+    payment_sum = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    data = models.TextField(null=True, blank=True)
+    receiver_commission = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    sender_commission = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return self.order_id
+
+    class Meta:
+        verbose_name = "OrderPayment"
+        verbose_name_plural = "OrderPayments"
+
+
+class OrderSourceStatistic(models.Model):
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="orderstatistik_product", null=True, blank=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="orderstatistik_customer", null=True, blank=True)
+    source_type = models.CharField(max_length=250, null=True, blank=True)
+    add_date = models.DateTimeField(default=datetime.today)
+
+    def __str__(self):
+        return self.product_id
+
+    class Meta:
+        verbose_name = "OrderSourceStatistic"
+        verbose_name_plural = "OrderSourceStatistics"
+
+
+class DropshippingWallet(models.Model):
+    order_id = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="dwallet_order", null=True, blank=True)
+    agreement_id = models.ForeignKey(
+        CustomerAgreement, on_delete=models.CASCADE, related_name="dwallet_agreement", null=True, blank=True)
+    currency_id = models.ForeignKey(
+        Currency, on_delete=models.CASCADE, related_name="dwallet_currency", null=True, blank=True)
+    debit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    credit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    balance = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return self.order_id
+
+    class Meta:
+        verbose_name = "DropshippingWallet"
+        verbose_name_plural = "DropshippingWallets"
+
+
+class DropshippingWalletTransfer(models.Model):
+    order_id = models.ForeignKey(
+        Order, on_delete=models.CASCADE, related_name="dtransfer_order", null=True, blank=True)
+    agreement_id = models.ForeignKey(
+        CustomerAgreement, on_delete=models.CASCADE, related_name="dtransfer_agreement", null=True, blank=True)
+    sum = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    currency_id = models.ForeignKey(
+        Currency, on_delete=models.CASCADE, related_name="dtransfer_currency", null=True, blank=True)
+    date = models.DateTimeField(default=datetime.today)
+    card = CardNumberField(null=True, blank=True)
+
+    def __str__(self):
+        return self.order_id
+
+    class Meta:
+        verbose_name = "DropshippingWalletTransfer"
+        verbose_name_plural = "DropshippingWalletTransfers"
+
+
+class Profile(models.Model):
+    user_id = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=250, null=True, blank=True)
+    public_email = models.EmailField(null=True, blank=True)
+    gravatar_email = models.EmailField(null=True, blank=True)
+    gravatar_id = models.CharField(max_length=250, null=True, blank=True)
+    location = models.CharField(max_length=250, null=True, blank=True)
+    website = models.CharField(max_length=250, null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.user_id
+
+    class Meta:
+        verbose_name = "Profile"
+        verbose_name_plural = "Profiles"
+
 
 class PromoSale(models.Model):
-    customer_id = models.IntegerField()
-    product_id = models.IntegerField()
-    type = models.CharField(max_length=300)
-    is_visible = models.BooleanField()
-    comment = models.CharField(max_length=1000)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="promosale_customer", null=True, blank=True)
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="promosale_product", null=True, blank=True)
+    type = models.CharField(max_length=300, null=True, blank=True)
+    is_visible = models.BooleanField(default=0)
+    comment = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.customer_id
 
-
-class Region(models.Model):
-    name = models.CharField(max_length=300)
-
-    def __str__(self):
-        return self.name
+    class Meta:
+        verbose_name = "PromoSale"
+        verbose_name_plural = "PromoSales"
 
 
 class RunString(models.Model):
     created_date = models.DateTimeField(default=datetime.today)
-    updated_date = models.DateTimeField()
-    full_text = models.CharField(max_length=1000)
-    comment = models.CharField(max_length=300, null=True)
+    updated_date = models.DateTimeField(default=datetime.today)
+    full_text = models.CharField(max_length=1000, null=True, blank=True)
+    comment = models.CharField(max_length=500, null=True, blank=True)
     published = models.BooleanField(default=0)
 
     def __str__(self):
         return self.created_date
 
+    class Meta:
+        verbose_name = "RunString"
+        verbose_name_plural = "RunStrings"
+
 
 class Sale(models.Model):
-    product_id = models.IntegerField()
-    customer_id = models.IntegerField()
-    qty = models.IntegerField()
-    date = models.DateTimeField()
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="sale_product", null=True, blank=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="sale_customer", null=True, blank=True)
+    qty = models.IntegerField(null=True, blank=True)
+    date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
         return self.product_id
+
+    class Meta:
+        verbose_name = "Sale"
+        verbose_name_plural = "Sales"
 
 
 class SaleHistory(models.Model):
-    product_id = models.IntegerField()
-    customer_id = models.IntegerField()
-    qty = models.IntegerField()
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="saleh_product", null=True, blank=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="saleh_customer", null=True, blank=True)
+    qty = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.product_id
+
+    class Meta:
+        verbose_name = "SaleHistory"
+        verbose_name_plural = "SaleHistories"
 
 
 class SaleProductRelated(models.Model):
-    product_id = models.IntegerField()
-    related_product_id = models.IntegerField()
-    qty_index = models.DecimalField(max_digits=15, decimal_places=2)
-    calculation_type = models.CharField(max_length=250)
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="srelated_product", null=True, blank=True)
+    related_product_id = models.IntegerField(null=True, blank=True)
+    qty_index = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    calculation_type = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.product_id
+
+    class Meta:
+        verbose_name = "SaleProductRelated"
+        verbose_name_plural = "SaleProductRelateds"
 
 
 class SaleTask(models.Model):
-    product_id = models.IntegerField()
-    customer_id = models.IntegerField()
-    qty = models.IntegerField()
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="stask_product", null=True, blank=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="stask_customer", null=True, blank=True)
+    qty = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.product_id
 
+    class Meta:
+        verbose_name = "SaleTask"
+        verbose_name_plural = "SaleTasks"
+
 
 class ScenarioPolicy(models.Model):
-    sale_policy = models.CharField(max_length=250)
-    deficit_available = models.BooleanField(default=0)
-    online_reserve = models.BooleanField(default=0)
-    online_order = models.BooleanField(default=0)
+    sale_policy = models.CharField(max_length=250, null=True, blank=True)
+    deficit_available = models.BooleanField(default=0, null=True)
+    online_reserve = models.BooleanField(default=0, null=True)
+    online_order = models.BooleanField(default=0, null=True)
 
     def __str__(self):
         return self.sale_policy
 
+    class Meta:
+        verbose_name = "ScenarioPolicy"
+        verbose_name_plural = "ScenarioPolicies"
+
 
 class SearchRequest(models.Model):
-    user_id = models.IntegerField()
-    search_keyword = models.CharField(max_length=250)
-    search_keyword_clean = models.CharField(max_length=250)
-    is_result = models.BooleanField()
-    product_list = models.TextField()
-    is_added_in_cart = models.BooleanField()
-    product_add_in_cart = models.TextField()
-    date = models.DateTimeField()
+    user_id = models.IntegerField(null=True, blank=True)
+    search_keyword = models.CharField(max_length=250, null=True, blank=True)
+    search_keyword_clean = models.CharField(max_length=250, null=True, blank=True)
+    is_result = models.BooleanField(default=0, null=True)
+    product_list = models.TextField(null=True, blank=True)
+    is_added_in_cart = models.BooleanField(default=0, null=True)
+    product_add_in_cart = models.TextField(null=True, blank=True)
+    date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
         return self.user_id
 
+    class Meta:
+        verbose_name = "ScenarioPolicy"
+        verbose_name_plural = "ScenarioPolicies"
+
 
 class SearchRequestBufferIgnore(models.Model):
-    search_keyword_clean = models.CharField(max_length=250)
+    search_keyword_clean = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.search_keyword_clean
 
+    class Meta:
+        verbose_name = "SearchRequestBufferIgnore"
+        verbose_name_plural = "SearchRequestBufferIgnores"
+
 
 class SendPriceBuffer(models.Model):
-    agreement_id = models.IntegerField()
-    price_email = models.CharField(max_length=250)
-    customer_id = models.IntegerField()
+    agreement_id = models.ForeignKey(
+        CustomerAgreement, on_delete=models.CASCADE, related_name="sendprice_agreement", null=True, blank=True)
+    price_email = models.CharField(max_length=250, null=True, blank=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="sendprice_customer", null=True, blank=True)
 
     def __str__(self):
         return self.agreement_id
 
-
-class SocialAccount(models.Model):
-    user_id = models.IntegerField()
-    provider = models.CharField(max_length=300)
-    client_id = models.CharField(max_length=300)
-    data = models.TextField()
-    code = models.CharField(max_length=300)
-    created_at = models.DateTimeField(default=datetime.today)
-    email = models.CharField(max_length=300)
-    username = models.CharField(max_length=300)
-
-    def __str__(self):
-        return self.user_id
-
-
-class Stock(models.Model):
-    product_id = models.IntegerField()
-    stock_name = models.CharField(max_length=300)
-    amount_total = models.IntegerField()
-    amount_account = models.IntegerField()
-
-    def __str__(self):
-        return self.product_id
+    class Meta:
+        verbose_name = "SendPriceBuffer"
+        verbose_name_plural = "SendPriceBuffers"
 
 
 class Token(models.Model):
-    user_id = models.IntegerField()
-    code = models.CharField(max_length=300)
+    user_id = models.IntegerField(null=True, blank=True)
+    code = models.CharField(max_length=300, null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.today)
-    type = models.IntegerField()
+    type = models.SmallIntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.user_id
 
+    class Meta:
+        verbose_name = "Token"
+        verbose_name_plural = "Tokens"
+
 
 class UploadProduct(models.Model):
-    upload_id = models.IntegerField()
-    created = models.DateTimeField()
-    name = models.CharField(max_length=300)
-    article = models.CharField(max_length=300)
-    search_key = models.CharField(max_length=300)
-    category = models.CharField(max_length=300)
-    brand = models.CharField(max_length=300)
-    comment = models.CharField(max_length=1000)
-    branch = models.CharField(max_length=300)
-    price = models.DecimalField(max_digits=15, decimal_places=2)
-    qty = models.IntegerField()
-    supply = models.CharField(max_length=300)
+    upload_id = models.IntegerField(null=True, blank=True)
+    created = models.DateTimeField(default=datetime.today)
+    name = models.CharField(max_length=300, null=True, blank=True)
+    article = models.CharField(max_length=300, null=True, blank=True)
+    search_key = models.CharField(max_length=300, null=True, blank=True)
+    category = models.CharField(max_length=300, null=True, blank=True)
+    brand = models.CharField(max_length=300, null=True, blank=True)
+    comment = models.CharField(max_length=1000, null=True, blank=True)
+    branch = models.CharField(max_length=300, null=True, blank=True)
+    price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    qty = models.IntegerField(null=True, blank=True)
+    supply = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
         return self.upload_id
 
+    class Meta:
+        verbose_name = "UploadProduct"
+        verbose_name_plural = "UploadProducts"
+
 
 class UploadSetting(models.Model):
-    partner_code = models.CharField(max_length=250)
-    file_name = models.CharField(max_length=250)
-    first_row = models.IntegerField()
-    mapping = models.TextField()
-    created = models.DateTimeField()
-    updated = models.DateTimeField()
-    rate = models.DecimalField(max_digits=15, decimal_places=5)
-    encoding = models.CharField(max_length=250)
-    compare_name = models.IntegerField()
+    partner_code = models.ForeignKey(
+        PartnerApi, on_delete=models.CASCADE, related_name="uploadsetting_parther", null=True, blank=True)
+    file_name = models.CharField(max_length=250, null=True, blank=True)
+    first_row = models.IntegerField(null=True, blank=True)
+    mapping = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(null=True, blank=True)
+    updated = models.DateTimeField(null=True, blank=True)
+    rate = models.DecimalField(max_digits=15, decimal_places=5, null=True, blank=True)
+    encoding = models.CharField(max_length=250, null=True, blank=True)
+    compare_name = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.partner_code
 
+    class Meta:
+        verbose_name = "UploadSetting"
+        verbose_name_plural = "UploadSettings"
+
 
 class UserRequest(models.Model):
-    user_id = models.IntegerField()
-    subject = models.CharField(max_length=250)
-    body = models.TextField()
-    request_type_id = models.IntegerField()
-    source_id = models.CharField(max_length=250)
-    checked = models.BooleanField()
-    date_request = models.DateTimeField()
+    user_id = models.IntegerField(null=True, blank=True)
+    subject = models.CharField(max_length=250, null=True, blank=True)
+    body = models.TextField(null=True, blank=True)
+    request_type_id = models.IntegerField(null=True, blank=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
+    checked = models.BooleanField(default=0)
+    date_request = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
         return self.user_id
 
+    class Meta:
+        verbose_name = "UserRequest"
+        verbose_name_plural = "UserRequests"
+
 
 class UserRequestType(models.Model):
-    manager_id = models.IntegerField()
-    name = models.CharField(max_length=300)
-    comment = models.CharField(max_length=300, null=True)
+    manager_id = models.ForeignKey(
+        Manager, on_delete=models.CASCADE, related_name="userrequest_manager", null=True, blank=True)
+    name = models.CharField(max_length=300, null=True, blank=True)
+    comment = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.manager_id
 
+    class Meta:
+        verbose_name = "UserRequestType"
+        verbose_name_plural = "UserRequestTypes"
+
 
 class WaitList(models.Model):
-    product_id = models.IntegerField()
-    user_id = models.IntegerField()
-    date_add = models.DateTimeField()
-    send_message = models.BooleanField()
-    is_active = models.BooleanField()
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="waitlist_product", null=True, blank=True)
+    user_id = models.IntegerField(null=True, blank=True)
+    date_add = models.DateTimeField(default=datetime.today)
+    send_message = models.BooleanField(default=0)
+    is_active = models.BooleanField(default=0)
 
     def __str__(self):
         return self.product_id
+
+    class Meta:
+        verbose_name = "WaitList"
+        verbose_name_plural = "WaitLists"
+
+
+class Action(models.Model):
+    content_id = models.ForeignKey(
+        Content, on_delete=models.CASCADE, related_name="action_customer", null=True, blank=True)
+    comment = models.TextField(null=True, blank=True)
+    start_at = models.DateTimeField(default=datetime.today)
+    finish_at = models.DateTimeField(default=datetime.today)
+
+    def __str__(self):
+        return self.content_id
+
+    class Meta:
+        verbose_name = "Action"
+        verbose_name_plural = "Actions"
+
+
+class ActionCustomer(models.Model):
+    action_id = models.ForeignKey(
+        Action, on_delete=models.CASCADE, related_name="action_customer", null=True, blank=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.CASCADE, related_name="discount_customer", null=True, blank=True)
+    win = models.BooleanField(default=0)
+    close_action = models.CharField(max_length=1000, null=True, blank=True)
+
+    def __str__(self):
+        return self.action_id
+
+    class Meta:
+        verbose_name = "ActionCustomer"
+        verbose_name_plural = "ActionCustomers"
+
+
+class ActionProduct(models.Model):
+    action_id = models.ForeignKey(
+        Action, on_delete=models.CASCADE, related_name="product_action", null=True, blank=True)
+    product_id = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name="action_product", null=True, blank=True)
+
+    def __str__(self):
+        return self.action_id
+
+    class Meta:
+        verbose_name = "ActionProduct"
+        verbose_name_plural = "ActionProducts"
 
 
 class RatingStar(models.Model):
@@ -914,7 +1186,7 @@ class RatingStar(models.Model):
         verbose_name_plural = "RatingStars"
 
 
-class Rating(models.Model):
+class RatingProduct(models.Model):
     ip = models.CharField(max_length=50)
     star = models.ForeignKey(RatingStar, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -923,20 +1195,48 @@ class Rating(models.Model):
         return f"{self.star} - {self.product}"
 
     class Meta:
-        verbose_name = "Rating"
-        verbose_name_plural = "Ratings"
+        verbose_name = "RatingProduct"
+        verbose_name_plural = "RatingProducts"
 
 
-class Review(models.Model):
+class ReviewProduct(models.Model):
     email = models.EmailField()
     name = models.CharField(max_length=250)
     text = models.TextField(max_length=5000)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.name} - {self.product}"
 
     class Meta:
-        verbose_name = "Review"
-        verbose_name_plural = "Reviews"
+        verbose_name = "ReviewProduct"
+        verbose_name_plural = "ReviewProducts"
+
+
+class RatingContent(models.Model):
+    ip = models.CharField(max_length=50)
+    star = models.ForeignKey(RatingStar, on_delete=models.CASCADE)
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.star} - {self.content}"
+
+    class Meta:
+        verbose_name = "RatingContent"
+        verbose_name_plural = "RatingContents"
+
+
+class ReviewContent(models.Model):
+    email = models.EmailField()
+    name = models.CharField(max_length=250)
+    text = models.TextField(max_length=5000)
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.name} - {self.content}"
+
+    class Meta:
+        verbose_name = "ReviewContent"
+        verbose_name_plural = "ReviewContents"

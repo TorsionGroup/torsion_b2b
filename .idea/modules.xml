@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/torsion_b2b.iml" filepath="$PROJECT_DIR$/.idea/torsion_b2b.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../torsion_oscar/.idea/torsion_oscar.iml" filepath="$PROJECT_DIR$/../torsion_oscar/.idea/torsion_oscar.iml" />
     </modules>
   </component>
 </project>

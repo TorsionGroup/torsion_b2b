@@ -37,9 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'ckeditor',
     'ckeditor_uploader',
-    'torsion_shop.apps.TorsionShopConfig',
+    'torsion_shop',
+    'allauth',
+    'allauth.account',
+    'creditcards',
 ]
 
 MIDDLEWARE = [
@@ -96,6 +101,13 @@ DATABASES = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -150,3 +162,5 @@ WEB_URL = '/web/'
 WEB_ROOT = os.path.join(BASE_DIR, 'web')
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+SITE_ID= 1

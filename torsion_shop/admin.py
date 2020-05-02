@@ -26,7 +26,7 @@ class ContentAdmin(TranslationAdmin):
     list_filter = ('category_id',)
     list_display_links = ('title',)
     save_on_top = True
-    form = ContentAdminForm
+    #form = ContentAdminForm
 
 
 @admin.register(Brand)
@@ -46,7 +46,6 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'article', 'specification', 'sort_price', 'is_active')
     list_display_links = ('name',)
     search_fields = ('name', 'article',)
-    inlines = [ReviewInLine]
     save_on_top = True
 
 
@@ -55,5 +54,11 @@ class ReviewAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'text', 'email', 'product')
     list_display_links = ('name',)
     search_fields = ('name', 'product',)
+
+
+@admin.register(PriceCategory)
+class PriceCategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'inner_name', 'source_id')
+    list_display_links = ('inner_name',)
 
 
