@@ -25,7 +25,7 @@ SECRET_KEY = 'p3k%*3bm5&vo&nf9_f_4$&&j59za73pag+)vaa=dvky13z5!q1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'creditcards',
+    'treebeard',
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'torsion_shop.Account'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

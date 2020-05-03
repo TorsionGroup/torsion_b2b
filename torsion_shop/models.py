@@ -1,6 +1,10 @@
 from django.db import models
 from datetime import datetime
 from creditcards.models import CardNumberField
+from treebeard.mp_tree import MP_Node
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 
 class Brand(models.Model):
@@ -139,7 +143,7 @@ class Manager(models.Model):
 class Customer(models.Model):
     code = models.CharField(max_length=250, null=True)
     name = models.CharField(max_length=300, null=True)
-    main_customer_id = models.IntegerField(null=True, blank=True)
+    main_customer_id = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     manager_id = models.ForeignKey(
         Manager, on_delete=models.SET_NULL, related_name="customer_manager", null=True, blank=True)
     sale_policy = models.CharField(max_length=250, null=True)
@@ -161,6 +165,68 @@ class Customer(models.Model):
     class Meta:
         verbose_name = "Customer"
         verbose_name_plural = "Customers"
+
+
+class AccountManager(BaseUserManager):
+
+    def _create_user(self, email, name, phone, password, **extra_fields):
+        values = [email, name, phone]
+        field_value_map = dict(zip(self.model.REQUIRED_FIELDS, values))
+        for field_name, value in field_value_map.items():
+            if not value:
+                raise ValueError('The {} value must be set'.format(field_name))
+
+        email = self.normalize_email(email)
+        user = self.model(
+            email=email,
+            name=name,
+            phone=phone,
+            **extra_fields
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_user(self, email, name, phone, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, name, phone, password, **extra_fields)
+
+    def create_superuser(self, email, name, phone, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self._create_user(email, name, phone, password, **extra_fields)
+
+
+class Account(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    name = models.CharField(max_length=250)
+    phone = models.CharField(max_length=50)
+    date_of_birth = models.DateField(blank=True, null=True)
+    picture = models.ImageField(upload_to="content/account_image/", blank=True, null=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    last_login = models.DateTimeField(null=True)
+    customer_id = models.ForeignKey(
+        Customer, on_delete=models.SET_NULL, related_name="account_customer", null=True, blank=True)
+
+    objects = AccountManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['name', 'phone']
+
+    def get_full_name(self):
+        return self.name
+
+    def get_short_name(self):
+        return self.name.split()[0]
 
 
 class PriceType(models.Model):
@@ -856,24 +922,6 @@ class DropshippingWalletTransfer(models.Model):
     class Meta:
         verbose_name = "DropshippingWalletTransfer"
         verbose_name_plural = "DropshippingWalletTransfers"
-
-
-class Profile(models.Model):
-    user_id = models.IntegerField(null=True, blank=True)
-    name = models.CharField(max_length=250, null=True, blank=True)
-    public_email = models.EmailField(null=True, blank=True)
-    gravatar_email = models.EmailField(null=True, blank=True)
-    gravatar_id = models.CharField(max_length=250, null=True, blank=True)
-    location = models.CharField(max_length=250, null=True, blank=True)
-    website = models.CharField(max_length=250, null=True, blank=True)
-    bio = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return self.user_id
-
-    class Meta:
-        verbose_name = "Profile"
-        verbose_name_plural = "Profiles"
 
 
 class PromoSale(models.Model):
