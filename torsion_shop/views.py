@@ -100,7 +100,7 @@ class RegistrationView(CreateView):
 
 class ProfileView(UpdateView):
     model = Account
-    fields = ['name', 'phone', 'date_of_birth', 'picture']
+    fields = ['username', 'phone', 'date_of_birth', 'picture']
     template_name = 'torsion_shop/account/account.html'
 
     def get_success_url(self):

@@ -171,17 +171,17 @@ class Customer(models.Model):
 class AccountManager(BaseUserManager):
     use_in_migrations = True
 
-    def _create_user(self, email, name, phone, password, **extra_fields):
-        values = [email, name, phone]
+    def _create_user(self, email, username, phone, password, **extra_fields):
+        values = [email, username, phone]
         field_value_map = dict(zip(self.model.REQUIRED_FIELDS, values))
-        for field_name, value in field_value_map.items():
+        for field_username, value in field_value_map.items():
             if not value:
-                raise ValueError('The {} value must be set'.format(field_name))
+                raise ValueError('The {} value must be set'.format(field_username))
 
         email = self.normalize_email(email)
         user = self.model(
             email=email,
-            name=name,
+            username=username,
             phone=phone,
             **extra_fields
         )
@@ -189,12 +189,12 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email, name, phone, password=None, **extra_fields):
+    def create_user(self, email, username, phone, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, name, phone, password, **extra_fields)
+        return self._create_user(email, username, phone, password, **extra_fields)
 
-    def create_superuser(self, email, name, phone, password=None, **extra_fields):
+    def create_superuser(self, email, username, phone, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -203,12 +203,12 @@ class AccountManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self._create_user(email, name, phone, password, **extra_fields)
+        return self._create_user(email, username, phone, password, **extra_fields)
 
 
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    name = models.CharField(max_length=250)
+    username = models.CharField(max_length=250)
     phone = models.CharField(max_length=50)
     date_of_birth = models.DateField(blank=True, null=True)
     picture = models.ImageField(upload_to="content/account_image/", blank=True, null=True)
@@ -222,13 +222,16 @@ class Account(AbstractBaseUser, PermissionsMixin):
     objects = AccountManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'phone']
+    REQUIRED_FIELDS = ['username', 'phone']
+
+    def __str__(self):
+        return self.username
 
     def get_full_name(self):
-        return self.name
+        return self.username
 
     def get_short_name(self):
-        return self.name.split()[0]
+        return self.username.split()[0]
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
@@ -266,7 +269,7 @@ class CustomerAgreement(models.Model):
     api_available = models.BooleanField(default=0)
     api_token = models.CharField(max_length=250, null=True, blank=True)
     api_user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="customer_agreement_api_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     price_language = models.CharField(max_length=2, default='ru', null=True)
     is_active = models.BooleanField(default=1)
     price_schedule = models.CharField(max_length=500, null=True, blank=True)
@@ -298,7 +301,7 @@ class CustomerContact(models.Model):
     customer_id = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name="contact_customer", null=True, blank=True)
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="customer_contact_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=250, null=True)
     email = models.EmailField(null=True, blank=True)
     is_user = models.BooleanField(default=0)
@@ -502,7 +505,7 @@ class Cross(models.Model):
 
 class CrossErrorStatistic(models.Model):
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="cross_error_statistic_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     product_id = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="cross_error_product", null=True, blank=True)
     search_number = models.CharField(max_length=1000)
@@ -553,7 +556,7 @@ class ProductErrorStatistic(models.Model):
     product_id = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="product_error_product", null=True, blank=True)
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="product_error_statistic_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     error_comment = models.CharField(max_length=1000, null=True, blank=True)
     status = models.CharField(max_length=250)
     created_date = models.DateTimeField(default=datetime.today)
@@ -786,7 +789,7 @@ class ProductApiMap(models.Model):
 
 class Order(models.Model):
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="order_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     agreement_id = models.ForeignKey(
         CustomerAgreement, on_delete=models.SET_NULL, related_name="order_agreement", null=True, blank=True)
     status = models.SmallIntegerField(default=0, null=True)
@@ -1048,7 +1051,7 @@ class ScenarioPolicy(models.Model):
 
 class SearchRequest(models.Model):
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="search_reauest_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     search_keyword = models.CharField(max_length=250, null=True, blank=True)
     search_keyword_clean = models.CharField(max_length=250, null=True, blank=True)
     is_result = models.BooleanField(default=0, null=True)
@@ -1093,7 +1096,7 @@ class SendPriceBuffer(models.Model):
 
 class Token(models.Model):
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="token_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     code = models.CharField(max_length=300, null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.today)
     type = models.SmallIntegerField(null=True, blank=True)
@@ -1150,7 +1153,7 @@ class UploadSetting(models.Model):
 
 class UserRequest(models.Model):
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="user_request_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     subject = models.CharField(max_length=250, null=True, blank=True)
     body = models.TextField(null=True, blank=True)
     request_type_id = models.IntegerField(null=True, blank=True)
@@ -1184,7 +1187,7 @@ class WaitList(models.Model):
     product_id = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="wait_list_product", null=True, blank=True)
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="wait_list_user", null=True, blank=True)
+        Account, on_delete=models.SET_NULL, null=True, blank=True)
     date_add = models.DateTimeField(default=datetime.today)
     send_message = models.BooleanField(default=0)
     is_active = models.BooleanField(default=0)
