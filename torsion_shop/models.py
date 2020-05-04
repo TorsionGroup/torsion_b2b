@@ -260,7 +260,8 @@ class CustomerAgreement(models.Model):
     price_available = models.BooleanField(default=0)
     api_available = models.BooleanField(default=0)
     api_token = models.CharField(max_length=250, null=True, blank=True)
-    api_user_id = models.IntegerField(null=True, blank=True)
+    api_user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="customer_agreement_api_user", null=True, blank=True)
     price_language = models.CharField(max_length=2, default='ru', null=True)
     is_active = models.BooleanField(default=1)
     price_schedule = models.CharField(max_length=500, null=True, blank=True)
@@ -291,7 +292,8 @@ class CustomerCard(models.Model):
 class CustomerContact(models.Model):
     customer_id = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name="contact_customer", null=True, blank=True)
-    user_id = models.IntegerField(null=True, blank=True)
+    user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="customer_contact_user", null=True, blank=True)
     name = models.CharField(max_length=250, null=True)
     email = models.EmailField(null=True, blank=True)
     is_user = models.BooleanField(default=0)
@@ -494,7 +496,8 @@ class Cross(models.Model):
 
 
 class CrossErrorStatistic(models.Model):
-    user_id = models.IntegerField(null=True, blank=True)
+    user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="cross_error_statistic_user", null=True, blank=True)
     product_id = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="cross_error_product", null=True, blank=True)
     search_number = models.CharField(max_length=1000)
@@ -544,7 +547,8 @@ class ProductDescription(models.Model):
 class ProductErrorStatistic(models.Model):
     product_id = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="product_error_product", null=True, blank=True)
-    user_id = models.IntegerField(null=True, blank=True)
+    user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="product_error_statistic_user", null=True, blank=True)
     error_comment = models.CharField(max_length=1000, null=True, blank=True)
     status = models.CharField(max_length=250)
     created_date = models.DateTimeField(default=datetime.today)
@@ -776,7 +780,8 @@ class ProductApiMap(models.Model):
 
 
 class Order(models.Model):
-    user_id = models.IntegerField(null=True, blank=True)
+    user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="order_user", null=True, blank=True)
     agreement_id = models.ForeignKey(
         CustomerAgreement, on_delete=models.CASCADE, related_name="order_agreement", null=True, blank=True)
     status = models.SmallIntegerField(default=0)
@@ -1032,7 +1037,8 @@ class ScenarioPolicy(models.Model):
 
 
 class SearchRequest(models.Model):
-    user_id = models.IntegerField(null=True, blank=True)
+    user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="search_reauest_user", null=True, blank=True)
     search_keyword = models.CharField(max_length=250, null=True, blank=True)
     search_keyword_clean = models.CharField(max_length=250, null=True, blank=True)
     is_result = models.BooleanField(default=0, null=True)
@@ -1076,7 +1082,8 @@ class SendPriceBuffer(models.Model):
 
 
 class Token(models.Model):
-    user_id = models.IntegerField(null=True, blank=True)
+    user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="token_user", null=True, blank=True)
     code = models.CharField(max_length=300, null=True, blank=True)
     created_at = models.DateTimeField(default=datetime.today)
     type = models.SmallIntegerField(null=True, blank=True)
@@ -1132,7 +1139,8 @@ class UploadSetting(models.Model):
 
 
 class UserRequest(models.Model):
-    user_id = models.IntegerField(null=True, blank=True)
+    user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="user_request_user", null=True, blank=True)
     subject = models.CharField(max_length=250, null=True, blank=True)
     body = models.TextField(null=True, blank=True)
     request_type_id = models.IntegerField(null=True, blank=True)
@@ -1165,7 +1173,8 @@ class UserRequestType(models.Model):
 class WaitList(models.Model):
     product_id = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="wait_list_product", null=True, blank=True)
-    user_id = models.IntegerField(null=True, blank=True)
+    user_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="wait_list_user", null=True, blank=True)
     date_add = models.DateTimeField(default=datetime.today)
     send_message = models.BooleanField(default=0)
     is_active = models.BooleanField(default=0)
