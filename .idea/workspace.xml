@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -132,6 +135,7 @@
       <workItem from="1588322296707" duration="2552000" />
       <workItem from="1588391086691" duration="36166000" />
       <workItem from="1588515166340" duration="7286000" />
+      <workItem from="1588565986422" duration="14823000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -287,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588521099647</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="save User Account">
+      <created>1588566260042</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1588566260042</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,10 +339,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1588521098412">
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1588566258309">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588521098412" />
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588566258309" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1588235269074">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -367,10 +378,10 @@
     </state>
     <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588429232252" />
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1588521101490">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1588566262295">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588521101490" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588566262295" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
   </component>
 </project>

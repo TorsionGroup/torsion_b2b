@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse
 
-from .models import Product, Content, Account
+from .models import *
 from .forms import RegistrationForm
 
 
@@ -81,7 +81,7 @@ def checkout(request):
 
 
 class RegistrationView(CreateView):
-    template_name = 'registration/register.html'
+    template_name = 'torsion_shop/account/login.html'
     form_class = RegistrationForm
 
     def get_context_data(self, *args, **kwargs):
@@ -101,7 +101,7 @@ class RegistrationView(CreateView):
 class ProfileView(UpdateView):
     model = Account
     fields = ['name', 'phone', 'date_of_birth', 'picture']
-    template_name = 'registration/profile.html'
+    template_name = 'torsion_shop/account/account.html'
 
     def get_success_url(self):
         return reverse('index')

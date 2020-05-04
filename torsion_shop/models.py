@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from django.core.mail import send_mail
 from creditcards.models import CardNumberField
 from treebeard.mp_tree import MP_Node
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
@@ -49,7 +50,7 @@ class CatalogCategory(models.Model):
     comment = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.parent_id
+        return self.name
 
     class Meta:
         verbose_name = "CatalogCategory"
@@ -81,25 +82,25 @@ class Product(models.Model):
     create_date = models.DateTimeField(default=datetime.today, null=True)
     income_date = models.DateTimeField(default=datetime.today, null=True)
     source_id = models.CharField(max_length=300, null=True, blank=True)
-    search_key = models.CharField(max_length=250, null=True)
-    sort_price = models.DecimalField(max_digits=15, decimal_places=2, null=True)
+    search_key = models.CharField(max_length=250, null=True, blank=True)
+    sort_price = models.DecimalField(max_digits=15, decimal_places=2, default=0, null=True, blank=True)
     is_active = models.BooleanField(default=1)
-    weight = models.DecimalField(max_digits=15, decimal_places=3, null=True)
-    pack_qty = models.IntegerField(null=True)
-    ABC = models.CharField(max_length=1, null=True)
-    is_exists = models.BooleanField(default=0)
+    weight = models.DecimalField(max_digits=15, decimal_places=3, default=0, null=True, blank=True)
+    pack_qty = models.IntegerField(default=0, null=True, blank=True)
+    ABC = models.CharField(max_length=1, null=True, blank=True)
+    is_exists = models.BooleanField(default=0, null=True)
     code = models.CharField(max_length=250, null=True)
     source_type = models.CharField(max_length=250, null=True)
-    price_category = models.ManyToManyField(PriceCategory, related_name="product_price_category")
-    product_type = models.IntegerField(null=True)
-    delete_flag = models.BooleanField(default=0)
-    advanced_description = models.TextField("Advanced description", null=True)
+    price_category = models.ManyToManyField(PriceCategory, related_name="product_price_category", blank=True)
+    product_type = models.IntegerField(null=True, blank=True)
+    delete_flag = models.BooleanField(default=0, null=True)
+    advanced_description = models.TextField("Advanced description", null=True, blank=True)
     name = models.CharField(max_length=500, null=True, blank=True)
     comment = models.CharField(max_length=500, null=True, blank=True)
     keywords = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.specification
+        return self.name
 
     class Meta:
         verbose_name = "Product"
@@ -116,7 +117,7 @@ class Currency(models.Model):
     name_eng = models.CharField(max_length=250, null=True)
 
     def __str__(self):
-        return self.code
+        return self.title
 
     class Meta:
         verbose_name = "Currency"
@@ -160,7 +161,7 @@ class Customer(models.Model):
     price_schedule = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.code
+        return self.name
 
     class Meta:
         verbose_name = "Customer"
@@ -168,6 +169,7 @@ class Customer(models.Model):
 
 
 class AccountManager(BaseUserManager):
+    use_in_migrations = True
 
     def _create_user(self, email, name, phone, password, **extra_fields):
         values = [email, name, phone]
@@ -228,6 +230,9 @@ class Account(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.name.split()[0]
 
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        send_mail(subject, message, from_email, [self.email], **kwargs)
+
 
 class PriceType(models.Model):
     name = models.CharField(max_length=300, null=True)
@@ -268,7 +273,7 @@ class CustomerAgreement(models.Model):
     price_email = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
-        return self.code
+        return self.name
 
     class Meta:
         verbose_name = "CustomerAgreement"
@@ -282,7 +287,7 @@ class CustomerCard(models.Model):
     card = CardNumberField(null=True, blank=True)
 
     def __str__(self):
-        return self.customer_id
+        return self.card
 
     class Meta:
         verbose_name = "CustomerCard"
@@ -300,7 +305,7 @@ class CustomerContact(models.Model):
     source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return self.customer_id
+        return self.name
 
     class Meta:
         verbose_name = "CustomerContact"
@@ -319,7 +324,7 @@ class CustomerDiscount(models.Model):
         PriceType, on_delete=models.CASCADE, related_name="discount_customer_price_type", null=True, blank=True)
 
     def __str__(self):
-        return self.customer_id
+        return str(self.id)
 
     class Meta:
         verbose_name = "CustomerDiscount"
@@ -333,7 +338,7 @@ class CustomerPoint(models.Model):
     source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return self.customer_id
+        return self.name
     
     class Meta:
         verbose_name = "CustomerPoint"
@@ -351,7 +356,7 @@ class Balance(models.Model):
         CustomerAgreement, on_delete=models.CASCADE, related_name="balance_agreement", null=True, blank=True)
 
     def __str__(self):
-        return self.customer_id
+        return self.balance
 
     class Meta:
         verbose_name = "Balance"
@@ -368,7 +373,7 @@ class Price(models.Model):
     price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.product_id
+        return self.price
 
     class Meta:
         verbose_name = "Price"
@@ -410,7 +415,7 @@ class Stock(models.Model):
     amount_account = models.IntegerField(default=0, null=True)
 
     def __str__(self):
-        return self.product_id
+        return self.amount_account
 
     class Meta:
         verbose_name = "Stock"
@@ -435,7 +440,7 @@ class Constant(models.Model):
     value = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.code
+        return self.value
 
     class Meta:
         verbose_name = "Constant"
@@ -488,7 +493,7 @@ class Cross(models.Model):
     search_nr = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.product_id
+        return self.article_nr
 
     class Meta:
         verbose_name = "Cross"
@@ -507,7 +512,7 @@ class CrossErrorStatistic(models.Model):
     date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
-        return self.user_id
+        return self.search_number
 
     class Meta:
         verbose_name = "CrossErrorStatistic"
@@ -567,10 +572,10 @@ class DeficitReserve(models.Model):
     product_id = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="deficit_product", null=True, blank=True)
     sale_policy = models.CharField(max_length=250, null=True, blank=True)
-    amount = models.IntegerField(null=True, blank=True)
+    amount = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
-        return self.product_id
+        return self.amount
 
     class Meta:
         verbose_name = "DeficitReserve"
@@ -596,7 +601,7 @@ class DeliveryMethod(models.Model):
     red = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.code
+        return self.name
 
     class Meta:
         verbose_name = "DeliveryMethod"
@@ -626,7 +631,7 @@ class DeliveryCity(models.Model):
     update_date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
-        return self.service_id
+        return self.name
 
     class Meta:
         verbose_name = "DeliveryCity"
@@ -646,7 +651,7 @@ class DeliveryPoint(models.Model):
     max_weight = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.service_id
+        return self.name
 
     class Meta:
         verbose_name = "DeliveryPoint"
@@ -678,7 +683,7 @@ class CacheApi(models.Model):
     response_date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
-        return self.partner_code
+        return self.search_number
 
     class Meta:
         verbose_name = "CacheApi"
@@ -693,7 +698,7 @@ class PartnerApiCache(models.Model):
     product_json = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.partner_code
+        return self.search_number
 
     class Meta:
         verbose_name = "PartnerApiCache"
@@ -708,7 +713,7 @@ class PartnerCategory(models.Model):
     response_date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
-        return self.partner_code
+        return self.name
 
     class Meta:
         verbose_name = "PartnerCategory"
@@ -723,7 +728,7 @@ class CategoryMapping(models.Model):
         PartnerCategory, on_delete=models.CASCADE, related_name="mapping_category", null=True, blank=True)
 
     def __str__(self):
-        return self.partner_code
+        return self.name
 
     class Meta:
         verbose_name = "CategoryMapping"
@@ -739,7 +744,7 @@ class PartnerCategoryCache(models.Model):
     product_json = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return self.partner_code
+        return self.response_date
 
     class Meta:
         verbose_name = "PartnerCategoryCache"
@@ -757,7 +762,7 @@ class PartnerStock(models.Model):
     price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.product_id
+        return self.qty
 
     class Meta:
         verbose_name = "PartnerStock"
@@ -772,7 +777,7 @@ class ProductApiMap(models.Model):
     api_key = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
-        return self.product_id
+        return self.partner_code
 
     class Meta:
         verbose_name = "ProductApiMap"
@@ -783,21 +788,21 @@ class Order(models.Model):
     user_id = models.ForeignKey(
         Account, on_delete=models.SET_NULL, related_name="order_user", null=True, blank=True)
     agreement_id = models.ForeignKey(
-        CustomerAgreement, on_delete=models.CASCADE, related_name="order_agreement", null=True, blank=True)
-    status = models.SmallIntegerField(default=0)
+        CustomerAgreement, on_delete=models.SET_NULL, related_name="order_agreement", null=True, blank=True)
+    status = models.SmallIntegerField(default=0, null=True)
     delivery_method = models.ForeignKey(
-        DeliveryMethod, on_delete=models.CASCADE, related_name="order_delivery", null=True, blank=True)
+        DeliveryMethod, on_delete=models.SET_NULL, related_name="order_delivery", null=True, blank=True)
     create_date = models.DateTimeField(default=datetime.today)
     update_date = models.DateTimeField(default=datetime.today)
     comment = models.TextField(null=True, blank=True)
     point_id = models.ForeignKey(
-        CustomerPoint, on_delete=models.CASCADE, related_name="order_customer_point", null=True, blank=True)
+        CustomerPoint, on_delete=models.SET_NULL, related_name="order_customer_point", null=True, blank=True)
     delivery_service_id = models.ForeignKey(
-        DeliveryService, on_delete=models.CASCADE, related_name="order_del_point", null=True, blank=True)
+        DeliveryService, on_delete=models.SET_NULL, related_name="order_del_point", null=True, blank=True)
     delivery_city_id = models.ForeignKey(
-        DeliveryCity, on_delete=models.CASCADE, related_name="order_del_city", null=True, blank=True)
+        DeliveryCity, on_delete=models.SET_NULL, related_name="order_del_city", null=True, blank=True)
     delivery_point_id = models.ForeignKey(
-        DeliveryPoint, on_delete=models.CASCADE, related_name="order_del_point", null=True, blank=True)
+        DeliveryPoint, on_delete=models.SET_NULL, related_name="order_del_point", null=True, blank=True)
     delivery_contact = models.CharField(max_length=250, null=True)
     delivery_contact_phone = models.CharField(max_length=250, null=True)
     order_number = models.CharField(max_length=250, null=True, blank=True)
@@ -818,7 +823,7 @@ class Order(models.Model):
     delivery_is_invoice_off = models.BooleanField(default=1)
 
     def __str__(self):
-        return self.user_id
+        return str(self.id)
 
     class Meta:
         verbose_name = "Order"
@@ -832,8 +837,8 @@ class OrderItem(models.Model):
         Product, on_delete=models.CASCADE, related_name="order_item_product", null=True, blank=True)
     currency_id = models.ForeignKey(
         Currency, on_delete=models.CASCADE, related_name="order_item_currency", null=True, blank=True)
-    qty = models.IntegerField(null=True, blank=True)
-    price = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    qty = models.IntegerField(default=0, null=True, blank=True)
+    price = models.DecimalField(max_digits=15, decimal_places=2, default=0, null=True, blank=True)
     source = models.CharField(max_length=250, null=True, blank=True)
     reserved = models.IntegerField(null=True, blank=True)
     executed = models.IntegerField(null=True, blank=True)
@@ -850,6 +855,11 @@ class OrderItem(models.Model):
     def __str__(self):
         return self.order_id
 
+    @property
+    def get_total_order_item(self):
+        total_order_item = self.product_id.sort_price * self.qty
+        return total_order_item
+
     class Meta:
         verbose_name = "OrderItem"
         verbose_name_plural = "OrderItems"
@@ -858,7 +868,7 @@ class OrderItem(models.Model):
 class OrderPayment(models.Model):
     order_id = models.ForeignKey(
         Order, on_delete=models.CASCADE, related_name="order_payment_order", null=True, blank=True)
-    sum = models.DecimalField(max_digits=15, decimal_places=2)
+    sum = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     date_payment = models.DateTimeField(default=datetime.today)
     currency_id = models.ForeignKey(
         Currency, on_delete=models.CASCADE, related_name="order_payment_currency", null=True, blank=True)
@@ -868,7 +878,7 @@ class OrderPayment(models.Model):
     sender_commission = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.order_id
+        return self.sum
 
     class Meta:
         verbose_name = "OrderPayment"
@@ -903,7 +913,7 @@ class DropshippingWallet(models.Model):
     balance = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return self.order_id
+        return self.balance
 
     class Meta:
         verbose_name = "DropshippingWallet"
@@ -922,7 +932,7 @@ class DropshippingWalletTransfer(models.Model):
     card = CardNumberField(null=True, blank=True)
 
     def __str__(self):
-        return self.order_id
+        return self.sum
 
     class Meta:
         verbose_name = "DropshippingWalletTransfer"
@@ -939,7 +949,7 @@ class PromoSale(models.Model):
     comment = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.customer_id
+        return self.product_id
 
     class Meta:
         verbose_name = "PromoSale"
@@ -954,7 +964,7 @@ class RunString(models.Model):
     published = models.BooleanField(default=0)
 
     def __str__(self):
-        return self.created_date
+        return self.full_text
 
     class Meta:
         verbose_name = "RunString"
@@ -1048,7 +1058,7 @@ class SearchRequest(models.Model):
     date = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
-        return self.user_id
+        return self.search_keyword
 
     class Meta:
         verbose_name = "ScenarioPolicy"
@@ -1089,7 +1099,7 @@ class Token(models.Model):
     type = models.SmallIntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.user_id
+        return self.code
 
     class Meta:
         verbose_name = "Token"
@@ -1149,7 +1159,7 @@ class UserRequest(models.Model):
     date_request = models.DateTimeField(default=datetime.today)
 
     def __str__(self):
-        return self.user_id
+        return self.subject
 
     class Meta:
         verbose_name = "UserRequest"
@@ -1163,7 +1173,7 @@ class UserRequestType(models.Model):
     comment = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.manager_id
+        return self.name
 
     class Meta:
         verbose_name = "UserRequestType"

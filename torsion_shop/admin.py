@@ -4,7 +4,7 @@ from django import forms
 from modeltranslation.admin import TranslationAdmin
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from .models import Brand, Product, Category, Content, PriceCategory, ReviewContent, ReviewProduct, Account
+from .models import *
 from .forms import UserCreationForm, UserChangeForm
 
 
