@@ -174,9 +174,7 @@
                                                          src="assets/images/product/large-size/2.jpg"
                                                          alt="torsion's Product Image">
                                                 </a>
-                                                <div class="sticker">
-                                                    <span class="sticker">New</span>
-                                                </div>
+
                                                 <div class="add-actions">
                                                     <ul>
                                                         <li><a class="torsion-add_cart" href="cart.html"
@@ -220,6 +218,12 @@
                                                     <h6><a class="product-name"
                                                            href="{% url 'single-product' shop.id %}">{{ shop.name }}</a>
                                                     </h6>
+                                                    <div class="product-name">
+                                                        <span class="new-price">{{ shop.brand_id }}</span>
+                                                    </div>
+                                                    <div class="product-name">
+                                                        <span class="new-price">{{ shop.specification }}</span>
+                                                    </div>
                                                     <div class="price-box">
                                                         <span class="new-price">{{ shop.sort_price }}</span>
                                                     </div>
@@ -254,6 +258,12 @@
                                                 <h6><a class="product-name"
                                                        href="{% url 'single-product' shop.id %}">{{ shop.name }}</a>
                                                 </h6>
+                                                <div class="product-name">
+                                                        <span class="new-price">{{ shop.brand_id }}</span>
+                                                    </div>
+                                                    <div class="product-name">
+                                                        <span class="new-price">{{ shop.specification }}</span>
+                                                    </div>
                                                 <div class="price-box">
                                                     <span class="new-price">{{ shop.sort_price }}</span>
                                                 </div>

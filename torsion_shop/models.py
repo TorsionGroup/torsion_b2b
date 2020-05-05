@@ -16,11 +16,11 @@ class Brand(models.Model):
     sort_index = models.IntegerField(default=999)
     source_type = models.CharField(max_length=250, default='1C')
     gallery_attribute = models.CharField(max_length=250, default='article')
-    gallery_name = models.CharField(max_length=250, default='Brand')
+    gallery_name = models.CharField(max_length=250, null=True, blank=True)
     kind = models.CharField(max_length=250, default='secondary')
 
     def __str__(self):
-        return str(self.id)
+        return self.name
 
     class Meta:
         verbose_name = "Brand"
@@ -32,7 +32,7 @@ class PriceCategory(models.Model):
     source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return str(self.id)
+        return self.inner_name
 
     class Meta:
         verbose_name = "PriceCategory"
@@ -49,7 +49,7 @@ class CatalogCategory(models.Model):
     comment = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return str(self.id)
+        return self.name
 
     class Meta:
         verbose_name = "CatalogCategory"
@@ -63,7 +63,7 @@ class Offer(models.Model):
     source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return str(self.id)
+        return self.name
 
     class Meta:
         verbose_name = "Offer"
@@ -87,7 +87,7 @@ class Product(models.Model):
     ABC = models.CharField(max_length=1, null=True, blank=True)
     is_exists = models.BooleanField(default=0)
     code = models.CharField(max_length=250, null=True, blank=True)
-    source_type = models.CharField(max_length=250, null=True, blank=True)
+    source_type = models.CharField(max_length=250, default='1C', null=True, blank=True)
     price_category = models.ForeignKey(PriceCategory, on_delete=models.SET_NULL, blank=True, null=True)
     product_type = models.IntegerField(null=True, blank=True)
     delete_flag = models.BooleanField(default=0)
