@@ -108,7 +108,7 @@ class ProductImage(models.Model):
     name = models.CharField(max_length=250, default='ProductImage')
     description = models.TextField(null=True, blank=True)
     product_id = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
-    image = models.ImageField(upload_to="product/product_image/", blank=True)
+    image = models.ImageField(upload_to="product/product_image/", null=True, blank=True)
 
     def __str__(self):
         return str(self.id)
@@ -137,12 +137,12 @@ class Currency(models.Model):
 
 class Manager(models.Model):
     inner_name = models.CharField(max_length=250)
-    name = models.CharField(max_length=250, null=True, blank=True)
-    email = models.EmailField(null=True, blank=True)
-    phone = models.CharField(max_length=250, null=True, blank=True)
-    skype = models.CharField(max_length=250, default='skype')
-    comment = models.CharField(max_length=500, null=True, blank=True)
-    source_id = models.CharField(max_length=300, null=True, blank=True)
+    name = models.CharField(max_length=250, blank=True)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=250, blank=True)
+    skype = models.CharField(max_length=250, blank=True)
+    comment = models.CharField(max_length=500, blank=True)
+    source_id = models.CharField(max_length=300, blank=True)
 
     def __str__(self):
         return self.inner_name
@@ -165,11 +165,6 @@ class Customer(models.Model):
     no_show_balance = models.BooleanField(default=0)
     deficit_available = models.BooleanField(default=0)
     online_reserve = models.BooleanField(default=0)
-    online_order = models.BooleanField(default=0)
-    send_price = models.BooleanField(default=0)
-    price_language = models.CharField(max_length=2, default='ru', null=True)
-    price_email = models.TextField(null=True, blank=True)
-    price_schedule = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -273,18 +268,14 @@ class CustomerAgreement(models.Model):
         Currency, on_delete=models.CASCADE, related_name="agreement_currency", null=True, blank=True)
     price_type_id = models.ForeignKey(
         PriceType, on_delete=models.CASCADE, related_name="agreement_price_type", null=True, blank=True)
-    discount = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
     is_status = models.BooleanField()
+    discount = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    is_active = models.BooleanField(default=1)
     source_id = models.CharField(max_length=300, null=True, blank=True)
-    price_available = models.BooleanField(default=0)
     api_available = models.BooleanField(default=0)
     api_token = models.CharField(max_length=250, null=True, blank=True)
     api_user_id = models.ForeignKey(
         Account, on_delete=models.SET_NULL, null=True, blank=True)
-    price_language = models.CharField(max_length=2, default='ru', null=True)
-    is_active = models.BooleanField(default=1)
-    price_schedule = models.CharField(max_length=500, null=True, blank=True)
-    price_email = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -489,7 +480,7 @@ class ContentImage(models.Model):
     name = models.CharField(max_length=250, default='ContentImage')
     description = models.TextField(null=True, blank=True)
     content_id = models.ForeignKey(Content, on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ImageField(upload_to="content/content_image/", blank=True)
+    image = models.ImageField(upload_to="content/content_image/", null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -867,7 +858,7 @@ class OrderItem(models.Model):
     partner_branch = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
-        return self.order_id
+        return str(self.id)
 
     @property
     def get_total_order_item(self):
