@@ -4,12 +4,11 @@ from django.core.mail import send_mail
 from creditcards.models import CardNumberField
 from treebeard.mp_tree import MP_Node
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 
 class Brand(models.Model):
-    name = models.CharField("Brand", max_length=300, null=True)
+    name = models.CharField(max_length=300, null=True)
     enabled = models.BooleanField(default=1)
     source_id = models.CharField(max_length=300, null=True, blank=True)
     wait_list = models.BooleanField(default=0)
@@ -21,7 +20,7 @@ class Brand(models.Model):
     kind = models.CharField(max_length=250, default='secondary')
 
     def __str__(self):
-        return self.name
+        return str(self.id)
 
     class Meta:
         verbose_name = "Brand"
@@ -33,7 +32,7 @@ class PriceCategory(models.Model):
     source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return self.inner_name
+        return str(self.id)
 
     class Meta:
         verbose_name = "PriceCategory"
@@ -41,7 +40,7 @@ class PriceCategory(models.Model):
 
 
 class CatalogCategory(models.Model):
-    parent_id = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    parent_id = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
     source_id = models.CharField(max_length=300, null=True, blank=True)
     enabled = models.BooleanField(default=1)
     sort_index = models.IntegerField(default=999, null=True)
@@ -50,7 +49,7 @@ class CatalogCategory(models.Model):
     comment = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id)
 
     class Meta:
         verbose_name = "CatalogCategory"
@@ -64,7 +63,7 @@ class Offer(models.Model):
     source_id = models.CharField(max_length=300, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id)
 
     class Meta:
         verbose_name = "Offer"
@@ -74,13 +73,11 @@ class Offer(models.Model):
 class Product(models.Model):
     specification = models.CharField(max_length=250, null=True)
     article = models.CharField(max_length=250, null=True)
-    brand_id = models.ForeignKey(Brand, on_delete=models.SET_NULL, related_name="product_brand", blank=True, null=True)
+    brand_id = models.ForeignKey(Brand, on_delete=models.SET_NULL, blank=True, null=True)
     offer_id = models.ForeignKey(
-        Offer, on_delete=models.SET_NULL, related_name="product_offer", blank=True, null=True)
+        Offer, on_delete=models.SET_NULL, blank=True, null=True)
     category_id = models.ForeignKey(
-        CatalogCategory, on_delete=models.SET_NULL, related_name="product_catalog", blank=True, null=True)
-    create_date = models.DateTimeField(default=datetime.today, null=True)
-    income_date = models.DateTimeField(default=datetime.today, null=True)
+        CatalogCategory, on_delete=models.SET_NULL, blank=True, null=True)
     source_id = models.CharField(max_length=300, null=True, blank=True)
     search_key = models.CharField(max_length=250, null=True, blank=True)
     sort_price = models.DecimalField(max_digits=15, decimal_places=2, default=0, null=True, blank=True)
@@ -91,7 +88,7 @@ class Product(models.Model):
     is_exists = models.BooleanField(default=0, null=True)
     code = models.CharField(max_length=250, null=True)
     source_type = models.CharField(max_length=250, null=True)
-    price_category = models.ManyToManyField(PriceCategory, related_name="product_price_category", blank=True)
+    price_category = models.ForeignKey(PriceCategory, on_delete=models.SET_NULL, blank=True, null=True)
     product_type = models.IntegerField(null=True, blank=True)
     delete_flag = models.BooleanField(default=0, null=True)
     advanced_description = models.TextField("Advanced description", null=True, blank=True)
@@ -100,7 +97,7 @@ class Product(models.Model):
     keywords = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return str(self.id)
 
     class Meta:
         verbose_name = "Product"
@@ -454,13 +451,13 @@ class Content(models.Model):
     alias = models.SlugField(max_length=300, unique=True)
     created_date = models.DateTimeField(default=datetime.today)
     updated_date = models.DateTimeField(default=datetime.today)
-    published = models.BooleanField(default=0)
-    main_image = models.ImageField(upload_to="content/main_image/", blank=True)
+    published = models.BooleanField(default=0, null=True)
+    main_image = models.ImageField(upload_to="content/main_image/", blank=True, null=True)
     category_id = models.ForeignKey(
         Category, on_delete=models.SET_NULL, related_name="content_category", null=True, blank=True)
-    title = models.CharField(max_length=300)
-    intro_text = models.CharField(max_length=500)
-    full_text = models.TextField()
+    title = models.CharField(max_length=500, null=True)
+    intro_text = models.CharField(max_length=1000, null=True)
+    full_text = models.TextField(null=True)
     meta_tag_title = models.CharField(max_length=500, null=True, blank=True)
     meta_tag_description = models.CharField(max_length=500, null=True, blank=True)
     meta_tag_keyword = models.CharField(max_length=500, null=True, blank=True)

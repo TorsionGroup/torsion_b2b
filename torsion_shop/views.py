@@ -19,7 +19,8 @@ def index(request):
 class ShopView(View):
     def get(self, request):
         shop = Product.objects.all()
-        return render(request, 'torsion_shop/shop.html', {'shop_list': shop})
+        catalogcategory = CatalogCategory.objects.all()
+        return render(request, 'torsion_shop/shop.html', {'shop_list': shop, 'catalogcategory_list': catalogcategory})
 
 
 class SingleProductView(View):
@@ -108,4 +109,3 @@ class ProfileView(UpdateView):
 
     def get_object(self):
         return self.request.user
-

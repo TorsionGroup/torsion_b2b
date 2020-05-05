@@ -14,7 +14,7 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="overview-img text-center img-hover_effect">
                                 <a href="#">
-                                    <img class="img-full" src="{% static 'images/contacts/1.jpg' %}"
+                                    <img class="img-full" src="{{ contacts.main_image.url }}"
                                          alt="Torsion Group Contacts Image">
                                 </a>
                             </div>
@@ -23,7 +23,7 @@
 
                         <div class="col-lg-6 col-md-6">
                             <div class="contact-page-side-content">
-                                <h5 class="contact-page-title">Contact Us</h5>
+                                <h5 class="contact-page-title">{{ contacts.intro_text }}</h5>
                                 <div class="single-contact-block">
                                     <p>
                                         {{ contacts.full_text }}
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" value="submit" id="submit"
-                                                    class="uren-contact-form_btn"
+                                                    class="torsion-contact-form_btn"
                                                     name="submit">Send Message
                                             </button>
                                         </div>

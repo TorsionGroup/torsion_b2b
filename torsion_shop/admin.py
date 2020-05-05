@@ -40,11 +40,10 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'article', 'specification', 'sort_price', 'is_active')
-    list_display_links = ('name',)
+class ProductAdmin(TranslationAdmin):
+    list_display = ('id', 'name', 'article', 'specification', 'is_active')
+    list_display_links = ('name', 'article',)
     search_fields = ('name', 'article',)
-    save_on_top = True
 
 
 @admin.register(PriceCategory)
@@ -95,3 +94,16 @@ class AccountAdmin(BaseUserAdmin):
     search_fields = ('email', 'username', 'phone')
     ordering = ('email',)
     filter_horizontal = ()
+
+
+@admin.register(CatalogCategory)
+class CatalogCategoryAdmin(TranslationAdmin):
+    list_display = ('id', 'parent_id', 'name', 'comment', 'enabled', 'sort_index', 'content_id')
+    list_display_links = ('name',)
+    search_fields = ('name',)
+
+
+@admin.register(Offer)
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'group', 'title', 'source_id')
+    list_display_links = ('name',)

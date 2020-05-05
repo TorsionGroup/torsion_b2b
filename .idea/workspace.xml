@@ -3,11 +3,34 @@
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/content/main_image/13055387_1766757273610803_395983363226602804_n.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/content/main_image/13072823_1766757150277482_4628799100950632683_o.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/content/main_image/5a2fa721419fc.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/content/main_image/5a2fa75f02e39.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/about-us/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/about-us/team/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/about-us/team/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/about-us/team/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/about-us/team/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/contacts/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/contacts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/contacts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/shop.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/single-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/single-product.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/migrations/0001_initial.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/AUTHORS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/INSTALLER" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/LICENSE.python" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/METADATA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/RECORD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/WHEEL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/entry_points.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/Django-3.0.5.dist-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/django/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django/db/models/sql/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/django/db/models/sql/query.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Scripts/django-admin.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/django-admin.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +159,7 @@
       <workItem from="1588322296707" duration="2552000" />
       <workItem from="1588391086691" duration="36166000" />
       <workItem from="1588515166340" duration="7286000" />
-      <workItem from="1588565986422" duration="17620000" />
+      <workItem from="1588565986422" duration="49189000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -306,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588604373479</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="++ fix migrate User Account">
+      <created>1588607268568</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1588607268568</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -333,7 +363,8 @@
     <MESSAGE value="++ add Models fix" />
     <MESSAGE value="save User Account" />
     <MESSAGE value="migrate User Account" />
-    <option name="LAST_COMMIT_MESSAGE" value="migrate User Account" />
+    <MESSAGE value="++ fix migrate User Account" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ fix migrate User Account" />
   </component>
   <component name="WindowStateProjectService">
     <state x="651" y="235" key="#Inspections" timestamp="1588180783361">
@@ -348,10 +379,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1588604372643">
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1588607267704">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588604372643" />
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588607267704" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1588235269074">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -362,35 +393,35 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="847" y="472" width="657" height="167" key="Github.CreateGistDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1585303154827" />
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1588606495710">
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1588695601812">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588606495710" />
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588695601812" />
     <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1588606495710">
+    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1588695601812">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588606495710" />
+    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588695601812" />
     <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1588606495710">
+    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1588695601811">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588606495710" />
+    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588695601811" />
     <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1588606495710">
+    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1588695601812">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588606495710" />
+    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588695601812" />
     <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state x="438" y="128" width="1384" height="804" key="SettingsEditor" timestamp="1588429232252">
+    <state x="438" y="128" width="1384" height="804" key="SettingsEditor" timestamp="1588693120812">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588429232252" />
+    <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588693120812" />
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1588604375007">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1588607270664">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588604375007" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588607270664" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
   </component>
 </project>
