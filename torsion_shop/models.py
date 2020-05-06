@@ -2,9 +2,75 @@ from django.db import models
 from datetime import datetime
 from django.core.mail import send_mail
 from creditcards.models import CardNumberField
-from treebeard.mp_tree import MP_Node
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
+
+
+class AccountManager(BaseUserManager):
+    use_in_migrations = True
+
+    def _create_user(self, email, username, phone, password, **extra_fields):
+        values = [email, username, phone]
+        field_value_map = dict(zip(self.model.REQUIRED_FIELDS, values))
+        for field_username, value in field_value_map.items():
+            if not value:
+                raise ValueError('The {} value must be set'.format(field_username))
+
+        email = self.normalize_email(email)
+        user = self.model(
+            email=email,
+            username=username,
+            phone=phone,
+            **extra_fields
+        )
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_user(self, email, username, phone, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, username, phone, password, **extra_fields)
+
+    def create_superuser(self, email, username, phone, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self._create_user(email, username, phone, password, **extra_fields)
+
+
+class Account(AbstractBaseUser, PermissionsMixin):
+    email = models.EmailField(unique=True)
+    username = models.CharField(max_length=250)
+    phone = models.CharField(max_length=50)
+    date_of_birth = models.DateField(blank=True, null=True)
+    picture = models.ImageField(upload_to="content/account_image/", blank=True, null=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    date_joined = models.DateTimeField(default=timezone.now)
+    last_login = models.DateTimeField(null=True)
+
+    objects = AccountManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username', 'phone']
+
+    def __str__(self):
+        return self.username
+
+    def get_full_name(self):
+        return self.username
+
+    def get_short_name(self):
+        return self.username.split()[0]
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
 class Brand(models.Model):
@@ -165,6 +231,8 @@ class Customer(models.Model):
     no_show_balance = models.BooleanField(default=0)
     deficit_available = models.BooleanField(default=0)
     online_reserve = models.BooleanField(default=0)
+    account_id = models.ForeignKey(
+        Account, on_delete=models.SET_NULL, related_name="customer_account", null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -172,75 +240,6 @@ class Customer(models.Model):
     class Meta:
         verbose_name = "Customer"
         verbose_name_plural = "Customers"
-
-
-class AccountManager(BaseUserManager):
-    use_in_migrations = True
-
-    def _create_user(self, email, username, phone, password, **extra_fields):
-        values = [email, username, phone]
-        field_value_map = dict(zip(self.model.REQUIRED_FIELDS, values))
-        for field_username, value in field_value_map.items():
-            if not value:
-                raise ValueError('The {} value must be set'.format(field_username))
-
-        email = self.normalize_email(email)
-        user = self.model(
-            email=email,
-            username=username,
-            phone=phone,
-            **extra_fields
-        )
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_user(self, email, username, phone, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', False)
-        extra_fields.setdefault('is_superuser', False)
-        return self._create_user(email, username, phone, password, **extra_fields)
-
-    def create_superuser(self, email, username, phone, password=None, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have is_staff=True.')
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have is_superuser=True.')
-
-        return self._create_user(email, username, phone, password, **extra_fields)
-
-
-class Account(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(unique=True)
-    username = models.CharField(max_length=250)
-    phone = models.CharField(max_length=50)
-    date_of_birth = models.DateField(blank=True, null=True)
-    picture = models.ImageField(upload_to="content/account_image/", blank=True, null=True)
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
-    last_login = models.DateTimeField(null=True)
-    customer_id = models.ForeignKey(
-        Customer, on_delete=models.SET_NULL, related_name="account_customer", null=True, blank=True)
-
-    objects = AccountManager()
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'phone']
-
-    def __str__(self):
-        return self.username
-
-    def get_full_name(self):
-        return self.username
-
-    def get_short_name(self):
-        return self.username.split()[0]
-
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        send_mail(subject, message, from_email, [self.email], **kwargs)
 
 
 class PriceType(models.Model):
