@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/news-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/news-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_b2b/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_b2b/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_b2b/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_b2b/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/media/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +136,7 @@
       <workItem from="1588847053804" duration="599000" />
       <workItem from="1588919992586" duration="665000" />
       <workItem from="1588923251082" duration="4888000" />
-      <workItem from="1589005424074" duration="19833000" />
+      <workItem from="1589005424074" duration="20213000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -366,7 +355,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589050113459</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="++ fix Account">
+      <created>1589050383247</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1589050383247</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,10 +409,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1589050110096">
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1589050359563">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589050110096" />
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589050359563" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1588235269074">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -452,10 +448,14 @@
     </state>
     <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589049401277" />
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1589050118951">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1589050431938">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589050118951" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589050431938" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
+    <state x="885" y="271" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1589050150453">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="885" y="271" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589050150453" />
   </component>
 </project>
