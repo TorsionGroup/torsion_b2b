@@ -147,7 +147,7 @@
       <workItem from="1588847053804" duration="599000" />
       <workItem from="1588919992586" duration="665000" />
       <workItem from="1588923251082" duration="4888000" />
-      <workItem from="1589005424074" duration="19503000" />
+      <workItem from="1589005424074" duration="19833000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -359,14 +359,20 @@
       <option name="project" value="LOCAL" />
       <updated>1588775897893</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="++ fix Account">
+      <created>1589050113459</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1589050113459</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add first index" />
     <MESSAGE value="add first index1" />
     <MESSAGE value="add Models Brand" />
     <MESSAGE value="add Models Brand Migrate" />
@@ -391,7 +397,8 @@
     <MESSAGE value="fix Model ++" />
     <MESSAGE value="add SMTHs" />
     <MESSAGE value="fix Account" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix Account" />
+    <MESSAGE value="++ fix Account" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ fix Account" />
   </component>
   <component name="WindowStateProjectService">
     <state x="651" y="235" key="#Inspections" timestamp="1589016272730">
@@ -406,10 +413,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1588775896898">
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1589050110096">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588775896898" />
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589050110096" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1588235269074">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -445,10 +452,10 @@
     </state>
     <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589049401277" />
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1588775899327">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1589050118951">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588775899327" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589050118951" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
   </component>
 </project>
