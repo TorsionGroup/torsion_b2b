@@ -3677,7 +3677,7 @@ button, .global-overlay, .quantity .cart-plus-minus > .qtybutton, .price-filter 
 /*  16 - Components - Shipping
 /*----------------------------------------*/
 .torsion-shipping_area {
-  padding-top: 10px;
+  padding-top: 30px;
 }
 
 .torsion-shipping_area .shipping-nav {

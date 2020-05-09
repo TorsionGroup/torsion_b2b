@@ -4,6 +4,46 @@ from django.core.mail import send_mail
 from creditcards.models import CardNumberField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
+from django.urls import reverse
+
+
+class Manager(models.Model):
+    inner_name = models.CharField(max_length=250)
+    name = models.CharField(max_length=250, blank=True)
+    email = models.EmailField(blank=True)
+    phone = models.CharField(max_length=250, blank=True)
+    skype = models.CharField(max_length=250, blank=True)
+    comment = models.CharField(max_length=500, blank=True)
+    source_id = models.CharField(max_length=300, blank=True)
+
+    def __str__(self):
+        return self.inner_name
+
+    class Meta:
+        verbose_name = "Manager"
+        verbose_name_plural = "Managers"
+
+
+class Customer(models.Model):
+    code = models.CharField(max_length=250, null=True)
+    name = models.CharField(max_length=300)
+    main_customer_id = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    manager_id = models.ForeignKey(
+        Manager, on_delete=models.SET_NULL, related_name="customer_manager", null=True, blank=True)
+    sale_policy = models.CharField(max_length=250, null=True, blank=True)
+    city = models.CharField(max_length=250, null=True, blank=True)
+    region_id = models.IntegerField(null=True, blank=True)
+    source_id = models.CharField(max_length=300, null=True, blank=True)
+    no_show_balance = models.BooleanField(default=0)
+    deficit_available = models.BooleanField(default=0)
+    online_reserve = models.BooleanField(default=0)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Customer"
+        verbose_name_plural = "Customers"
 
 
 class AccountManager(BaseUserManager):
@@ -54,6 +94,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
     last_login = models.DateTimeField(null=True)
+    customer_id = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)
 
     objects = AccountManager()
 
@@ -165,6 +206,12 @@ class Product(models.Model):
     def __str__(self):
         return str(self.id)
 
+    def get_absolute_url(self):
+        return reverse('shop-detail', kwargs={'int': self.id})
+
+    def get_review(self):
+        return self.reviews_set.filter(parent__isnull=True)
+
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
@@ -199,47 +246,6 @@ class Currency(models.Model):
     class Meta:
         verbose_name = "Currency"
         verbose_name_plural = "Currencies"
-
-
-class Manager(models.Model):
-    inner_name = models.CharField(max_length=250)
-    name = models.CharField(max_length=250, blank=True)
-    email = models.EmailField(blank=True)
-    phone = models.CharField(max_length=250, blank=True)
-    skype = models.CharField(max_length=250, blank=True)
-    comment = models.CharField(max_length=500, blank=True)
-    source_id = models.CharField(max_length=300, blank=True)
-
-    def __str__(self):
-        return self.inner_name
-
-    class Meta:
-        verbose_name = "Manager"
-        verbose_name_plural = "Managers"
-
-
-class Customer(models.Model):
-    code = models.CharField(max_length=250, null=True)
-    name = models.CharField(max_length=300)
-    main_customer_id = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
-    manager_id = models.ForeignKey(
-        Manager, on_delete=models.SET_NULL, related_name="customer_manager", null=True, blank=True)
-    sale_policy = models.CharField(max_length=250, null=True, blank=True)
-    city = models.CharField(max_length=250, null=True, blank=True)
-    region_id = models.IntegerField(null=True, blank=True)
-    source_id = models.CharField(max_length=300, null=True, blank=True)
-    no_show_balance = models.BooleanField(default=0)
-    deficit_available = models.BooleanField(default=0)
-    online_reserve = models.BooleanField(default=0)
-    account_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, related_name="customer_account", null=True, blank=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "Customer"
-        verbose_name_plural = "Customers"
 
 
 class PriceType(models.Model):
@@ -469,6 +475,9 @@ class Content(models.Model):
 
     def __str__(self):
         return self.alias
+
+    def get_absolute_url(self):
+        return reverse('news-detail', kwargs={"slug": self.alias})
 
     class Meta:
         verbose_name = "Content"
@@ -1250,11 +1259,12 @@ class RatingStar(models.Model):
     value = models.PositiveSmallIntegerField(default=0)
 
     def __str__(self):
-        return self.value
+        return f'{self.value}'
 
     class Meta:
         verbose_name = "RatingStar"
         verbose_name_plural = "RatingStars"
+        ordering = ["-value"]
 
 
 class RatingProduct(models.Model):

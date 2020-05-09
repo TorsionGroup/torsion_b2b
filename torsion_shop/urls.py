@@ -14,6 +14,11 @@ urlpatterns = [
     path('wishlist/', views.wishlist, name='wishlist'),
     path('faq/', views.faq, name='faq'),
     path('compare/', views.compare, name='compare'),
-    path('cart/', views.cart, name='cart'),
-    path('checkout/', views.checkout, name='checkout'),
+    path('cart/', views.CartView.as_view(), name='cart'),
+    path('checkout/', views.CheckoutView.as_view(), name='checkout'),
+    path('add-rating-product/', views.AddStarRatingProduct.as_view(), name='add_rating_product'),
+    path('add-rating-content/', views.AddStarRatingContent.as_view(), name='add_rating_content'),
+    path('review-product/<int:pk>/', views.AddReviewProduct.as_view(), name='add_review_product'),
+    path('review-content/<int:pk>/', views.AddReviewContent.as_view(), name='add_review_content'),
+    path('filter/', views.FilterProductView.as_view(), name='filter'),
 ]

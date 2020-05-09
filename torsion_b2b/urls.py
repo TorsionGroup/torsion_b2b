@@ -25,6 +25,9 @@ urlpatterns = [
     path('', include('torsion_shop.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('api-auth/', include('rest_framework.urls')),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
 ]
 
 urlpatterns += i18n_patterns(

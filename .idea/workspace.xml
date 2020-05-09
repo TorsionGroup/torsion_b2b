@@ -2,63 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/news-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/news-detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_b2b/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_b2b/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_b2b/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_b2b/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/translation.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/translation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_treebeard-4.3.1.dist-info/INSTALLER" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_treebeard-4.3.1.dist-info/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_treebeard-4.3.1.dist-info/METADATA" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_treebeard-4.3.1.dist-info/RECORD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_treebeard-4.3.1.dist-info/WHEEL" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_treebeard-4.3.1.dist-info/top_level.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/al_tree.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/exceptions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/de/LC_MESSAGES/django.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/de/LC_MESSAGES/django.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/de/LC_MESSAGES/djangojs.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/de/LC_MESSAGES/djangojs.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/es/LC_MESSAGES/django.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/es/LC_MESSAGES/django.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/es/LC_MESSAGES/djangojs.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/es/LC_MESSAGES/djangojs.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/nl/LC_MESSAGES/django.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/nl/LC_MESSAGES/django.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/nl/LC_MESSAGES/djangojs.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/nl/LC_MESSAGES/djangojs.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/pl/LC_MESSAGES/django.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/pl/LC_MESSAGES/django.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/ru/LC_MESSAGES/django.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/ru/LC_MESSAGES/django.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/ru/LC_MESSAGES/djangojs.mo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/locale/ru/LC_MESSAGES/djangojs.po" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/mp_tree.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/ns_tree.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/numconv.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/static/treebeard/expand-collapse.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/static/treebeard/jquery-ui-1.8.5.custom.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/static/treebeard/treebeard-admin.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/static/treebeard/treebeard-admin.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/templates/admin/tree_change_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/templates/admin/tree_change_list_results.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/templates/admin/tree_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/templates/admin/tree_list_results.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/templatetags/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/templatetags/admin_tree.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/templatetags/admin_tree_list.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/conftest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/jenkins/rm_workspace_coverage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/jenkins/toxhelper.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/test_treebeard.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/treebeard/tests/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/torsion_shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,7 +142,12 @@
       <workItem from="1588322296707" duration="2552000" />
       <workItem from="1588391086691" duration="36166000" />
       <workItem from="1588515166340" duration="7286000" />
-      <workItem from="1588565986422" duration="68945000" />
+      <workItem from="1588565986422" duration="70865000" />
+      <workItem from="1588825008525" duration="1219000" />
+      <workItem from="1588847053804" duration="599000" />
+      <workItem from="1588919992586" duration="665000" />
+      <workItem from="1588923251082" duration="4888000" />
+      <workItem from="1589005424074" duration="19503000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -392,14 +352,20 @@
       <option name="project" value="LOCAL" />
       <updated>1588709812454</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix Account">
+      <created>1588775897893</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1588775897893</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add app" />
     <MESSAGE value="add first index" />
     <MESSAGE value="add first index1" />
     <MESSAGE value="add Models Brand" />
@@ -424,13 +390,14 @@
     <MESSAGE value="fix Model" />
     <MESSAGE value="fix Model ++" />
     <MESSAGE value="add SMTHs" />
-    <option name="LAST_COMMIT_MESSAGE" value="add SMTHs" />
+    <MESSAGE value="fix Account" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix Account" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="651" y="235" key="#Inspections" timestamp="1588180783361">
+    <state x="651" y="235" key="#Inspections" timestamp="1589016272730">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="651" y="235" key="#Inspections/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588180783361" />
+    <state x="651" y="235" key="#Inspections/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589016272730" />
     <state x="617" y="215" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585283017641">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -439,10 +406,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1588709811429">
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1588775896898">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588709811429" />
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588775896898" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1588235269074">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -453,35 +420,35 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="847" y="472" width="657" height="167" key="Github.CreateGistDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1585303154827" />
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1588706648420">
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1589049520063">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588706648420" />
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589049520063" />
     <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1588706648420">
+    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1589049520062">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588706648420" />
+    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589049520062" />
     <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1588706648420">
+    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1589049520062">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588706648420" />
+    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589049520062" />
     <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1588706648420">
+    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1589049520062">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588706648420" />
+    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589049520062" />
     <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state x="438" y="128" width="1384" height="804" key="SettingsEditor" timestamp="1588753107666">
+    <state x="438" y="128" width="1384" height="804" key="SettingsEditor" timestamp="1589049401277">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588753107666" />
+    <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589049401277" />
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1588709813669">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1588775899327">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588709813669" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1588775899327" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
   </component>
 </project>

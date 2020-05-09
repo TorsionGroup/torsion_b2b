@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
-from .models import Account
+from .models import *
 
 
 class RegistrationForm(forms.ModelForm):
@@ -58,3 +59,49 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class ReviewContentForm(forms.ModelForm):
+    captcha = ReCaptchaField()
+
+    class Meta:
+        model = ReviewContent
+        fields = ("name", "email", "text", "captcha")
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control border"}),
+            "email": forms.EmailInput(attrs={"class": "form-control border"}),
+            "text": forms.Textarea(attrs={"class": "form-control border"})
+        }
+
+
+class RatingContentForm(forms.ModelForm):
+    star = forms.ModelChoiceField(
+        queryset=RatingStar.objects.all(), widget=forms.RadioSelect(), empty_label=None
+    )
+
+    class Meta:
+        model = RatingContent
+        fields = ("star",)
+
+
+class ReviewProductForm(forms.ModelForm):
+    captcha = ReCaptchaField()
+
+    class Meta:
+        model = ReviewProduct
+        fields = ("name", "email", "text", "captcha")
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control border"}),
+            "email": forms.EmailInput(attrs={"class": "form-control border"}),
+            "text": forms.Textarea(attrs={"class": "form-control border"})
+        }
+
+
+class RatingProductForm(forms.ModelForm):
+    star = forms.ModelChoiceField(
+        queryset=RatingStar.objects.all(), widget=forms.RadioSelect(), empty_label=None
+    )
+
+    class Meta:
+        model = RatingProduct
+        fields = ("star",)

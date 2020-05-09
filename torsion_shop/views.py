@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
-from django.http import JsonResponse
+from django.conf import settings
+from django.db.models import Q
+from django.http import JsonResponse, HttpResponse
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 import json
 import datetime
 from django.views.generic import ListView, DetailView
@@ -12,7 +17,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse
 from .utils import cookieCart, cartData, guestOrder
 from .models import *
-from .forms import RegistrationForm
+from .forms import RegistrationForm, ReviewContentForm, RatingContentForm, ReviewProductForm, RatingProductForm
 
 
 def index(request):
@@ -46,6 +51,82 @@ class NewsDetailView(View):
     def get(self, request, slug):
         newsdetail = Content.objects.get(alias=slug)
         return render(request, 'torsion_shop/news-detail.html', {'news_detail': newsdetail})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["star_form"] = RatingContentForm()
+        context["form"] = ReviewContentForm()
+        return context
+
+
+class AddReviewContent(View):
+    def post(self, request, pk):
+        form = ReviewContentForm(request.POST)
+        content = Content.objects.get(id=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            if request.POST.get("parent", None):
+                form.parent_id = int(request.POST.get("parent"))
+            form.content = content
+            form.save()
+        return redirect(content.get_absolute_url())
+
+
+class AddStarRatingContent(View):
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+
+    def post(self, request):
+        form = RatingContentForm(request.POST)
+        if form.is_valid():
+            RatingProduct.objects.update_or_create(
+                ip=self.get_client_ip(request),
+                shop_id=int(request.POST.get('singleproduct')),
+                defaults={'star_id': int(request.POST.get('star'))}
+            )
+            return HttpResponse(status=201)
+        else:
+            return HttpResponse(status=400)
+
+
+class AddReviewProduct(View):
+    def post(self, request, pk):
+        form = ReviewProductForm(request.POST)
+        singleproduct = Product.objects.get(id=pk)
+        if form.is_valid():
+            form = form.save(commit=False)
+            if request.POST.get("parent", None):
+                form.parent_id = int(request.POST.get("parent"))
+            form.singleproduct = singleproduct
+            form.save()
+        return redirect(singleproduct.get_absolute_url())
+
+
+class AddStarRatingProduct(View):
+    def get_client_ip(self, request):
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
+
+    def post(self, request):
+        form = RatingContentForm(request.POST)
+        if form.is_valid():
+            RatingProduct.objects.update_or_create(
+                ip=self.get_client_ip(request),
+                news_id=int(request.POST.get("news")),
+                defaults={'star_id': int(request.POST.get("star"))}
+            )
+            return HttpResponse(status=201)
+        else:
+            return HttpResponse(status=400)
 
 
 class AboutUsView(View):
@@ -183,3 +264,41 @@ class ProfileView(UpdateView):
     def get_object(self):
         return self.request.user
 
+
+class ExampleView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, format=None):
+        content = {
+            'status': 'request was permitted'
+        }
+        return Response(content)
+
+
+class FilterProductView(ListView):
+    paginate_by = 5
+
+    def get_queryset(self):
+        queryset = Product.objects.filter(
+            Q(year__in=self.request.GET.getlist("year")) |
+            Q(genres__in=self.request.GET.getlist("genre"))
+        ).distinct()
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["year"] = ''.join([f"year={x}&" for x in self.request.GET.getlist("year")])
+        context["genre"] = ''.join([f"genre={x}&" for x in self.request.GET.getlist("genre")])
+        return context
+
+
+class Search(ListView):
+    paginate_by = 3
+
+    def get_queryset(self):
+        return Product.objects.filter(title__icontains=self.request.GET.get("q"))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context["q"] = f'q={self.request.GET.get("q")}&'
+        return context
