@@ -27,10 +27,62 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
+    <script type="text/javascript">
+        var user = '{{request.user}}'
+
+        function getToken(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getToken('csrftoken')
+
+        function getCookie(name) {
+            // Split cookie string and get all individual name=value pairs in an array
+            var cookieArr = document.cookie.split(";");
+
+            // Loop through the array elements
+            for (var i = 0; i < cookieArr.length; i++) {
+                var cookiePair = cookieArr[i].split("=");
+
+                /* Removing whitespace at the beginning of the cookie name
+                and compare it with the given string */
+                if (name == cookiePair[0].trim()) {
+                    // Decode the cookie value and return
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+
+            // Return null if not found
+            return null;
+        }
+
+        var cart = JSON.parse(getCookie('cart'))
+
+        if (cart == undefined) {
+            cart = {}
+            console.log('Cart Created!', cart)
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+        }
+        console.log('Cart:', cart)
+
+    </script>
+
 </head>
 <body class="template-color-1">
 
-    <div class="main-wrapper">
+<div class="main-wrapper">
 
     <header class="header-main_area bg--sapphire">
         <div class="header-top_area d-lg-block d-none">
@@ -446,7 +498,8 @@
                             <a class="product-item_remove" href="javascript:void(0)"><i
                                     class="ion-android-close"></i></a>
                             <div class="product-item_img">
-                                <img src="{% static 'img/torsion/product/small-size/1.jpg' %}" alt="torsion's Product Image">
+                                <img src="{% static 'img/torsion/product/small-size/1.jpg' %}"
+                                     alt="torsion's Product Image">
                             </div>
                             <div class="product-item_content">
                                 <a class="product-item_title" href="shop-left-sidebar.html">Autem ipsa ad</a>
@@ -457,7 +510,8 @@
                             <a class="product-item_remove" href="javascript:void(0)"><i
                                     class="ion-android-close"></i></a>
                             <div class="product-item_img">
-                                <img src="{% static 'img/torsion/product/small-size/2.jpg' %}" alt="torsion's Product Image">
+                                <img src="{% static 'img/torsion/product/small-size/2.jpg' %}"
+                                     alt="torsion's Product Image">
                             </div>
                             <div class="product-item_content">
                                 <a class="product-item_title" href="shop-left-sidebar.html">Tenetur illum amet</a>
@@ -468,7 +522,8 @@
                             <a class="product-item_remove" href="javascript:void(0)"><i
                                     class="ion-android-close"></i></a>
                             <div class="product-item_img">
-                                <img src="{% static 'img/torsion/product/small-size/3.jpg' %}" alt="torsion's Product Image">
+                                <img src="{% static 'img/torsion/product/small-size/3.jpg' %}"
+                                     alt="torsion's Product Image">
                             </div>
                             <div class="product-item_content">
                                 <a class="product-item_title" href="shop-left-sidebar.html">Non doloremque placeat</a>
@@ -895,7 +950,8 @@
                             <div class="torsion-social_link">
                                 <ul>
                                     <li class="facebook">
-                                        <a href="https://www.facebook.com/torsiongroup/" data-toggle="tooltip" target="_blank"
+                                        <a href="https://www.facebook.com/torsiongroup/" data-toggle="tooltip"
+                                           target="_blank"
                                            title="Facebook">
                                             <i class="fab fa-facebook"></i>
                                         </a>

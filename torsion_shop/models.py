@@ -799,10 +799,10 @@ class ProductApiMap(models.Model):
 
 class Order(models.Model):
     user_id = models.ForeignKey(
-        Account, on_delete=models.SET_NULL, null=True, blank=True)
+        Customer, on_delete=models.SET_NULL, null=True, blank=True)
     agreement_id = models.ForeignKey(
         CustomerAgreement, on_delete=models.SET_NULL, related_name="order_agreement", null=True, blank=True)
-    status = models.SmallIntegerField(default=0)
+    complete = models.BooleanField(default=0)
     delivery_method = models.ForeignKey(
         DeliveryMethod, on_delete=models.SET_NULL, related_name="order_delivery", null=True, blank=True)
     create_date = models.DateTimeField(default=datetime.today)
@@ -838,6 +838,27 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+    @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        for i in orderitems:
+            if i.product.digital == False:
+                shipping = True
+        return shipping
+
+    @property
+    def get_cart_total(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.get_total for item in orderitems])
+        return total
+
+    @property
+    def get_cart_items(self):
+        orderitems = self.orderitem_set.all()
+        total = sum([item.quantity for item in orderitems])
+        return total
+
     class Meta:
         verbose_name = "Order"
         verbose_name_plural = "Orders"
@@ -869,9 +890,9 @@ class OrderItem(models.Model):
         return str(self.id)
 
     @property
-    def get_total_order_item(self):
-        total_order_item = self.product_id.sort_price * self.qty
-        return total_order_item
+    def get_total(self):
+        total = self.product_id.sort_price * self.qty
+        return total
 
     class Meta:
         verbose_name = "OrderItem"
