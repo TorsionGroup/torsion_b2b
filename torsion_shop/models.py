@@ -207,7 +207,7 @@ class Product(models.Model):
         return str(self.id)
 
     def get_absolute_url(self):
-        return reverse('shop-detail', kwargs={'int': self.id})
+        return reverse('product_detail', kwargs={'int': self.id})
 
     def get_review(self):
         return self.reviews_set.filter(parent__isnull=True)
@@ -477,7 +477,7 @@ class Content(models.Model):
         return self.alias
 
     def get_absolute_url(self):
-        return reverse('news-detail', kwargs={"slug": self.alias})
+        return reverse('news_detail', kwargs={"slug": self.alias})
 
     class Meta:
         verbose_name = "Content"

@@ -26,7 +26,8 @@
                 <div class="row">
                     <div class="col-lg-5">
                         <div class="sp-img_area">
-                            <div class="sp-img_slider slick-img-slider torsion-slick-slider" data-slick-options='{
+
+                                <div class="sp-img_slider slick-img-slider torsion-slick-slider" data-slick-options='{
                                                                     "slidesToShow": 1,
                                                                     "arrows": false,
                                                                     "fade": true,
@@ -34,58 +35,52 @@
                                                                     "swipe": false,
                                                                     "asNavFor": ".sp-img_slider-nav"
                                                                     }'>
-                                <div class="single-slide red zoom">
-                                    <img src="assets/images/product/large-size/1.jpg" alt="torsion's Product Image">
+                                    <div class="single-slide red zoom">
+                                        <img src=" "
+                                             alt="Torsion's Product Image">
+                                    </div>
+
                                 </div>
-                                <div class="single-slide orange zoom">
-                                    <img src="assets/images/product/large-size/2.jpg" alt="torsion's Product Image">
-                                </div>
-                                <div class="single-slide brown zoom">
-                                    <img src="assets/images/product/large-size/3.jpg" alt="torsion's Product Image">
-                                </div>
-                                <div class="single-slide umber zoom">
-                                    <img src="assets/images/product/large-size/4.jpg" alt="torsion's Product Image">
-                                </div>
-                                <div class="single-slide black zoom">
-                                    <img src="assets/images/product/large-size/5.jpg" alt="torsion's Product Image">
-                                </div>
-                                <div class="single-slide green zoom">
-                                    <img src="assets/images/product/large-size/6.jpg" alt="torsion's Product Image">
-                                </div>
-                            </div>
-                            <div class="sp-img_slider-nav slick-slider-nav torsion-slick-slider slider-navigation_style-4"
-                                 data-slick-options='{
+                                <div class="sp-img_slider-nav slick-slider-nav torsion-slick-slider slider-navigation_style-4"
+                                     data-slick-options='{
                                                                     "slidesToShow": 3,
                                                                     "asNavFor": ".sp-img_slider",
                                                                     "focusOnSelect": true,
                                                                     "arrows" : true,
                                                                     "vertical" : true
                                                                     }'>
-                                <div class="single-slide red">
-                                    <img src="assets/images/product/small-size/1.jpg" alt="torsion's Product Thumnail">
+                                    <div class="single-slide red">
+                                        <img src="assets/images/product/small-size/1.jpg"
+                                             alt="torsion's Product Thumnail">
+                                    </div>
+                                    <div class="single-slide orange">
+                                        <img src="assets/images/product/small-size/2.jpg"
+                                             alt="torsion's Product Thumnail">
+                                    </div>
+                                    <div class="single-slide brown">
+                                        <img src="assets/images/product/small-size/3.jpg"
+                                             alt="torsion's Product Thumnail">
+                                    </div>
+                                    <div class="single-slide umber">
+                                        <img src="assets/images/product/small-size/4.jpg"
+                                             alt="torsion's Product Thumnail">
+                                    </div>
+                                    <div class="single-slide red">
+                                        <img src="assets/images/product/small-size/5.jpg"
+                                             alt="torsion's Product Thumnail">
+                                    </div>
+                                    <div class="single-slide orange">
+                                        <img src="assets/images/product/small-size/6.jpg"
+                                             alt="torsion's Product Thumnail">
+                                    </div>
                                 </div>
-                                <div class="single-slide orange">
-                                    <img src="assets/images/product/small-size/2.jpg" alt="torsion's Product Thumnail">
-                                </div>
-                                <div class="single-slide brown">
-                                    <img src="assets/images/product/small-size/3.jpg" alt="torsion's Product Thumnail">
-                                </div>
-                                <div class="single-slide umber">
-                                    <img src="assets/images/product/small-size/4.jpg" alt="torsion's Product Thumnail">
-                                </div>
-                                <div class="single-slide red">
-                                    <img src="assets/images/product/small-size/5.jpg" alt="torsion's Product Thumnail">
-                                </div>
-                                <div class="single-slide orange">
-                                    <img src="assets/images/product/small-size/6.jpg" alt="torsion's Product Thumnail">
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="col-lg-7">
                         <div class="sp-content">
                             <div class="sp-heading">
-                                <h5><a href="#">{{ shop_detail.name }}</a></h5>
+                                <h5><a href="#">{{ product_detail.name }}</a></h5>
                             </div>
                             <span class="reference">Reference: demo_1</span>
                             <div class="rating-box">
@@ -99,11 +94,12 @@
                             </div>
                             <div class="sp-essential_stuff">
                                 <ul>
-                                    <li>Brands <a href="javascript:void(0)">{{ shop_detail.brand_id.name }}</a></li>
-                                    <li>Product Code: <a href="javascript:void(0)">{{ shop_detail.article }}</a></li>
+                                    <li>Brands: {{ product_detail.brand_id.name }}</li>
+                                    <li>Product Code: {{ product_detail.article }}</li>
                                     <li>Reward Points: <a href="javascript:void(0)">100</a></li>
-                                    <li>Availability: <a href="javascript:void(0)">{{ shop_detail.article }}</a></li>
-                                    <li>EX Tax: <a href="javascript:void(0)"><span>{{ shop_detail.pack_qty }}</span></a></li>
+                                    <li>Availability: <a href="javascript:void(0)">{{ product_detail.article }}</a></li>
+                                    <li>EX Tax: <a href="javascript:void(0)"><span>{{ product_detail.pack_qty }}</span></a>
+                                    </li>
                                     <li>Price in reward points: <a href="javascript:void(0)">400</a></li>
                                 </ul>
                             </div>
@@ -197,7 +193,7 @@
 
                                 <div class="product-description">
                                     <ul>
-                                      {{ shop_detail.advanced_description }}
+                                        {{ product_detail.advanced_description }}
                                     </ul>
                                 </div>
                             </div>
@@ -206,7 +202,7 @@
 
                                 <div class="product-description">
                                     <ul>
-                                      {{ shop_detail.advanced_description }}
+                                        {{ product_detail.advanced_description }}
                                     </ul>
                                 </div>
                             </div>
@@ -243,7 +239,9 @@
 
                                 <div class="tab-pane active" id="tab-review">
                                     <form class="form-horizontal" id="form-review">
+
                                         <div id="review">
+
                                             <table class="table table-striped table-bordered">
                                                 <tbody>
                                                 <tr>
@@ -265,9 +263,12 @@
                                                     </td>
                                                 </tr>
                                                 </tbody>
+
                                             </table>
                                         </div>
+
                                         <h2>Write a review</h2>
+
                                         <div class="form-group required">
                                             <div class="col-sm-12 p-0">
                                                 <label>Your Email <span class="required">*</span></label>
@@ -275,17 +276,15 @@
                                                        required>
                                             </div>
                                         </div>
+
                                         <div class="form-group required second-child">
                                             <div class="col-sm-12 p-0">
                                                 <label class="control-label">Share your opinion</label>
                                                 <textarea class="review-textarea" name="con_message"
                                                           id="con_message"></textarea>
-                                                <div class="help-block"><span class="text-danger">Note:</span> HTML is
-                                                    not
-                                                    translated!
-                                                </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group last-child required">
                                             <div class="col-sm-12 p-0">
                                                 <div class="your-opinion">
@@ -305,6 +304,7 @@
                                                 <button class="torsion-btn-2">Continue</button>
                                             </div>
                                         </div>
+
                                     </form>
                                 </div>
                             </div>

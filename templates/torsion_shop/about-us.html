@@ -24,11 +24,11 @@
                                     <h2>Welcome To <span>Torsion Group</span> Store!</h2>
                                     <p class="short_desc">
 
-                                        {{ aboutus.full_text }}
+                                        {{ aboutus.full_text|safe }}
 
                                     </p>
                                     <div class="torsion-about-us_btn-area">
-                                        <a class="about-us_btn" href="{% url 'shop' %}">Shop Now</a>
+                                        <a class="about-us_btn" href="{% url 'product' %}">Shop Now</a>
                                     </div>
                                 </div>
                             </div>

@@ -18,16 +18,16 @@
                                 <div class="col-xl-4 col-lg-6">
                                     <div class="blog-item">
                                         <div class="blog-img img-hover_effect">
-                                            <a href="{% url 'news-detail' news.alias %}">
+                                            <a href="{% url 'news_detail' news.alias %}">
                                                 <img src="{{ news.main_image.url }}" alt="Torsion News Image">
                                             </a>
                                             <span class="post-date">{{ news.created_date }}</span>
                                         </div>
                                         <div class="blog-content">
-                                            <h3><a href="{% url 'news-detail' news.alias %}">{{ news.title }}</a></h3>
+                                            <h3><a href="{% url 'news_detail' news.alias %}">{{ news.title }}</a></h3>
                                             <p>{{ news.intro_text }}</p>
                                             <div class="torsion-btn-ps_left">
-                                                <a class="torsion-btn-2" href="{% url 'news-detail' news.alias %}">Read
+                                                <a class="torsion-btn-2" href="{% url 'news_detail' news.alias %}">Read
                                                     More</a>
                                             </div>
                                         </div>

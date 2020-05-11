@@ -24,30 +24,29 @@ def index(request):
     return render(request, 'torsion_shop/index.html')
 
 
-class ShopView(View):
-    def get(self, request):
-        shop = Product.objects.all()
-        catalogcategory = CatalogCategory.objects.all()
-        context = {'shop_list': shop, 'catalogcategory_list': catalogcategory}
-        return render(request, 'torsion_shop/shop.html', context)
+class ProductView(ListView):
+    model = Product
+    queryset = Product.objects.all()
+    paginate_by = 30
 
 
-class SingleProductView(View):
-    def get(self, request, pk):
-        singleproduct = Product.objects.get(id=pk)
-        return render(request, 'torsion_shop/single-product.html', {'shop_detail': singleproduct})
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product_detail'
 
 
-class NewsView(View):
-    def get(self, request):
-        news = Content.objects.filter(category_id=2)
-        return render(request, 'torsion_shop/news.html', {'news_list': news})
+class NewsView(ListView):
+    model = Content
+    queryset = Content.objects.filter(category_id=2)
+    context_object_name = 'news_list'
+    template_name = 'torsion_shop/news_list.html'
 
 
-class NewsDetailView(View):
-    def get(self, request, slug):
-        newsdetail = Content.objects.get(alias=slug)
-        return render(request, 'torsion_shop/news-detail.html', {'news_detail': newsdetail})
+class NewsDetailView(DetailView):
+    model = Content
+    slug_field = 'alias'
+    context_object_name = 'news_detail'
+    template_name = 'torsion_shop/news_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -83,7 +82,7 @@ class AddStarRatingContent(View):
         if form.is_valid():
             RatingProduct.objects.update_or_create(
                 ip=self.get_client_ip(request),
-                shop_id=int(request.POST.get('singleproduct')),
+                shop_id=int(request.POST.get('news')),
                 defaults={'star_id': int(request.POST.get('star'))}
             )
             return HttpResponse(status=201)
@@ -94,14 +93,14 @@ class AddStarRatingContent(View):
 class AddReviewProduct(View):
     def post(self, request, pk):
         form = ReviewProductForm(request.POST)
-        singleproduct = Product.objects.get(id=pk)
+        product = Product.objects.get(id=pk)
         if form.is_valid():
             form = form.save(commit=False)
             if request.POST.get("parent", None):
                 form.parent_id = int(request.POST.get("parent"))
-            form.singleproduct = singleproduct
+            form.product = product
             form.save()
-        return redirect(singleproduct.get_absolute_url())
+        return redirect(product.get_absolute_url())
 
 
 class AddStarRatingProduct(View):
@@ -118,7 +117,7 @@ class AddStarRatingProduct(View):
         if form.is_valid():
             RatingProduct.objects.update_or_create(
                 ip=self.get_client_ip(request),
-                news_id=int(request.POST.get("news")),
+                news_id=int(request.POST.get('product')),
                 defaults={'star_id': int(request.POST.get("star"))}
             )
             return HttpResponse(status=201)
