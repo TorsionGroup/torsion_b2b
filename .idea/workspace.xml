@@ -3,40 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/about-us.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/about-us.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/compare.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/compare.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/contacts.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/contacts.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/footer.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/header.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/torsion_shop/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/torsion_shop/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/news-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/news_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/news.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/news_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/shop.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/product_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/single-product.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/product_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/product_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/pkg_resources/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/pkg_resources/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/INSTALLER" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/METADATA" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/RECORD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/WHEEL" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/dependency_links.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/entry_points.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/top_level.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools-46.1.3.dist-info/zip-safe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools/command/bdist_wininst.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools/command/bdist_wininst.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools/command/easy_install.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools/command/easy_install.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools/lib2to3_ex.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools/lib2to3_ex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools/package_index.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/setuptools/package_index.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/easy_install-3.8.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/easy_install-3.8.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Scripts/easy_install.exe" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Scripts/easy_install.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +21,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -172,7 +145,7 @@
       <workItem from="1588923251082" duration="4888000" />
       <workItem from="1589005424074" duration="24261000" />
       <workItem from="1589085428499" duration="2062000" />
-      <workItem from="1589174185351" duration="21829000" />
+      <workItem from="1589174185351" duration="36142000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -412,14 +385,20 @@
       <option name="project" value="LOCAL" />
       <updated>1589054410917</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="++ fix ckeditor">
+      <created>1589209009161</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1589209009161</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add Models Brand" />
     <MESSAGE value="add Models Brand Migrate" />
     <MESSAGE value="add Models add DB (not full)" />
     <MESSAGE value="add Models add DB" />
@@ -444,7 +423,8 @@
     <MESSAGE value="fix Account" />
     <MESSAGE value="++ fix Account" />
     <MESSAGE value="++ fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="++ fix" />
+    <MESSAGE value="++ fix ckeditor" />
+    <option name="LAST_COMMIT_MESSAGE" value="++ fix ckeditor" />
   </component>
   <component name="WindowStateProjectService">
     <state x="651" y="235" key="#Inspections" timestamp="1589016272730">
@@ -459,10 +439,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1589054409823">
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1589209007721">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589054409823" />
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589209007721" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1588235269074">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -473,35 +453,35 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="847" y="472" width="657" height="167" key="Github.CreateGistDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1585303154827" />
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1589208178506">
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1589224697396">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589208178506" />
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589224697396" />
     <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1589208178506">
+    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1589224697396">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589208178506" />
+    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589224697396" />
     <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1589208178506">
+    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1589224697395">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589208178506" />
+    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589224697395" />
     <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1589208178506">
+    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1589224697396">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589208178506" />
+    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589224697396" />
     <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
     <state x="438" y="128" width="1384" height="804" key="SettingsEditor" timestamp="1589207001482">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589207001482" />
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1589054413558">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1589209016942">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589054413558" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589209016942" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
     <state x="885" y="271" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1589050150453">
       <screen x="0" y="0" width="2048" height="1112" />

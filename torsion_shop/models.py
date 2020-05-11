@@ -125,6 +125,7 @@ class Brand(models.Model):
     gallery_attribute = models.CharField(max_length=250, default='article')
     gallery_name = models.CharField(max_length=250, null=True, blank=True)
     kind = models.CharField(max_length=250, default='secondary')
+    brand_image = models.ImageField(upload_to="content/brand_image/", blank=True, null=True)
 
     def __str__(self):
         return self.name

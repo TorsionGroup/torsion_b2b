@@ -165,84 +165,15 @@
                         <div class="slide-item">
                             <div class="inner-slide">
                                 <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/1.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
+                                    {% for brand in views.get_brands %} {{ brand.name }}
+                                        <a href="javascript:void(0)">
+                                            <img src="{% static 'images/brand/1.jpg' %}" alt="Torsion Brand Image">
+                                        </a>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/2.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/3.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/4.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/5.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/6.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/1.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/7.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="single-product">
-                                    <a href="javascript:void(0)">
-                                        <img src="{% static 'img/torsion/brand/2.jpg' %}" alt="torsion's Brand Image">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -303,74 +234,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="blog-img img-hover_effect">
-                                    <a href="blog-details-left-sidebar.html">
-                                        <img src="{% static 'img/torsion/blog/large-size/3.jpg' %}"
-                                             alt="torsion's Blog Image">
-                                    </a>
-                                    <span class="post-date">19-09-19</span>
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog-details-left-sidebar.html">Laudantium minus excepturi expedita
-                                        dolore</a></h3>
-                                    <p>Maiores accusamus unde nulla quaerat deserunt, beatae molestias blanditiis aut
-                                        recusandae saepe, quis, culpa voluptatum?</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="blog-img img-hover_effect">
-                                    <a href="blog-details-left-sidebar.html">
-                                        <img src="{% static 'img/torsion/blog/large-size/4.jpg' %}"
-                                             alt="torsion's Blog Image">
-                                    </a>
-                                    <span class="post-date">16-09-19</span>
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog-details-left-sidebar.html">Aliquam nihil dolorem beatae totam
-                                        tempora</a></h3>
-                                    <p>Maiores accusamus unde nulla quaerat deserunt, beatae molestias blanditiis aut
-                                        recusandae saepe, quis, culpa voluptatum?</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="blog-img img-hover_effect">
-                                    <a href="blog-details-left-sidebar.html">
-                                        <img src="{% static 'img/torsion/blog/large-size/5.jpg' %}"
-                                             alt="torsion's Blog Image">
-                                    </a>
-                                    <span class="post-date">20-09-19</span>
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog-details-left-sidebar.html">Reprehenderit illum iusto sit
-                                        asperiores</a></h3>
-                                    <p>Maiores accusamus unde nulla quaerat deserunt, beatae molestias blanditiis aut
-                                        recusandae saepe, quis, culpa voluptatum?</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="slide-item">
-                            <div class="inner-slide">
-                                <div class="blog-img img-hover_effect">
-                                    <a href="blog-details-left-sidebar.html">
-                                        <img src="{% static 'img/torsion/blog/large-size/6.jpg' %}"
-                                             alt="torsion's Blog Image">
-                                    </a>
-                                    <span class="post-date">25-09-19</span>
-                                </div>
-                                <div class="blog-content">
-                                    <h3><a href="blog-details-left-sidebar.html">Corrupti, dolore tempore totam
-                                        voluptate</a></h3>
-                                    <p>Maiores accusamus unde nulla quaerat deserunt, beatae molestias blanditiis aut
-                                        recusandae saepe, quis, culpa voluptatum?</p>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

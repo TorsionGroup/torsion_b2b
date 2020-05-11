@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
+from django.db import models
 from django.conf import settings
-from django.db.models import Q
+from django.db.models import Q, OuterRef, Subquery, Case, When
 from django.http import JsonResponse, HttpResponse
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -20,17 +21,27 @@ from .models import *
 from .forms import RegistrationForm, ReviewContentForm, RatingContentForm, ReviewProductForm, RatingProductForm
 
 
-def index(request):
-    return render(request, 'torsion_shop/index.html')
+class BrandOffer:
+    def get_brands(self):
+        return Brand.objects.filter(is_recommended=1)
+
+    def get_offers(self):
+        return Offer.objects.all()
 
 
-class ProductView(ListView):
+class IndexView(BrandOffer, ListView):
+    model = Manager
+    queryset = Manager.objects.all()
+    template_name = 'torsion_shop/index.html'
+
+
+class ProductView(BrandOffer, ListView):
     model = Product
     queryset = Product.objects.all()
     paginate_by = 30
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(BrandOffer, DetailView):
     model = Product
     context_object_name = 'product_detail'
 
@@ -47,12 +58,6 @@ class NewsDetailView(DetailView):
     slug_field = 'alias'
     context_object_name = 'news_detail'
     template_name = 'torsion_shop/news_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["star_form"] = RatingContentForm()
-        context["form"] = ReviewContentForm()
-        return context
 
 
 class AddReviewContent(View):
@@ -125,16 +130,18 @@ class AddStarRatingProduct(View):
             return HttpResponse(status=400)
 
 
-class AboutUsView(View):
-    def get(self, request):
-        aboutus = Content.objects.filter(category_id=4)
-        return render(request, 'torsion_shop/about-us.html', {'aboutus_list': aboutus})
+class AboutUsView(ListView):
+    model = Content
+    queryset = Content.objects.filter(category_id=4)
+    context_object_name = 'aboutus_list'
+    template_name = 'torsion_shop/about-us.html'
 
 
-class ContactsView(View):
-    def get(self, request):
-        contacts = Content.objects.filter(category_id=5)
-        return render(request, 'torsion_shop/contacts.html', {'contacts_list': contacts})
+class ContactsView(ListView):
+    model = Content
+    queryset = Content.objects.filter(category_id=5)
+    context_object_name = 'contacts_list'
+    template_name = 'torsion_shop/contacts.html'
 
 
 def login(request):
@@ -212,15 +219,15 @@ class FilterProductView(ListView):
 
     def get_queryset(self):
         queryset = Product.objects.filter(
-            Q(year__in=self.request.GET.getlist("year")) |
-            Q(genres__in=self.request.GET.getlist("genre"))
+            Q(brands__in=self.request.GET.getlist('brand')) |
+            Q(offers__in=self.request.GET.getlist('offer'))
         ).distinct()
         return queryset
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context["year"] = ''.join([f"year={x}&" for x in self.request.GET.getlist("year")])
-        context["genre"] = ''.join([f"genre={x}&" for x in self.request.GET.getlist("genre")])
+        context['brand'] = ''.join([f'brand={x}&' for x in self.request.GET.getlist('brand')])
+        context['offer'] = ''.join([f'offer={x}&' for x in self.request.GET.getlist('offer')])
         return context
 
 
@@ -234,3 +241,13 @@ class Search(ListView):
         context = super().get_context_data(*args, **kwargs)
         context["q"] = f'q={self.request.GET.get("q")}&'
         return context
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+

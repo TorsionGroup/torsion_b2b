@@ -17,7 +17,7 @@
                             <h5>Categories</h5>
                         </div>
                         <div class="module-body">
-                            {% for catalogcategory in catalogcategory_list %}
+                            {% for catalogcategory in catalogcategories %}
                                 {% if catalogcategory.enabled %}
                                     <ul class="module-list_item">
 
@@ -42,6 +42,24 @@
 
                     </div>
 
+                    <form action="{% url 'filter' %} " method="get">
+                        <div class="torsion-sidebar_categories">
+                            <div class="torsion-categories_title">
+                                <h5>Brands</h5>
+                            </div>
+                            <ul class="sidebar-checkbox_list">
+                                <li>
+                                    <a href="#">brand.name</a>
+                                </li>
+                                {% for brand in views.get_brands %}
+                                    <li>
+                                        <a href="#">{{ brand.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </form>
+
                     <div class="torsion-sidebar_categories">
                         <div class="torsion-categories_title">
                             <h5>Price</h5>
@@ -57,47 +75,20 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="torsion-sidebar_categories">
                         <div class="torsion-categories_title">
-                            <h5>Color</h5>
+                            <h5>Offer</h5>
                         </div>
                         <ul class="sidebar-checkbox_list">
-                            <li>
-                                <a href="javascript:void(0)">Black <span>(6)</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Blue <span>(2)</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Red <span>(3)</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Yellow <span>(0)</span></a>
-                            </li>
+                            {% for offer in views.get_offers %}
+                                <li>
+                                    <a href=" ">Offer <span>1</span></a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
-                    <div class="torsion-sidebar_categories">
-                        <div class="torsion-categories_title">
-                            <h5>Manufacturers</h5>
-                        </div>
-                        <ul class="sidebar-checkbox_list">
-                            <li>
-                                <a href="javascript:void(0)">Sanai <span>(10)</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Xail <span>(2)</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Chamcham <span>(1)</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Meito <span>(3)</span></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)">Walton <span>(0)</span></a>
-                            </li>
-                        </ul>
-                    </div>
+
                 </div>
 
                 <div class="sidebar-banner_area">
@@ -146,11 +137,9 @@
                         <div class="product-showing">
                             <label class="select-label">Show:</label>
                             <select class="myniceselect short-select nice-select">
-                                <option value="1">15</option>
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+
                             </select>
                         </div>
                     </div>
