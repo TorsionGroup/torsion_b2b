@@ -39,25 +39,27 @@ class ProductView(BrandOffer, ListView):
     model = Product
     queryset = Product.objects.all()
     paginate_by = 30
+    template_name = 'torsion_shop/product/product_list.html'
 
 
 class ProductDetailView(BrandOffer, DetailView):
     model = Product
     context_object_name = 'product_detail'
+    template_name = 'torsion_shop/product/product_detail.html'
 
 
 class NewsView(ListView):
     model = Content
     queryset = Content.objects.filter(category_id=2)
     context_object_name = 'news_list'
-    template_name = 'torsion_shop/news_list.html'
+    template_name = 'torsion_shop/news/news_list.html'
 
 
 class NewsDetailView(DetailView):
     model = Content
     slug_field = 'alias'
     context_object_name = 'news_detail'
-    template_name = 'torsion_shop/news_detail.html'
+    template_name = 'torsion_shop/news/news_detail.html'
 
 
 class AddReviewContent(View):

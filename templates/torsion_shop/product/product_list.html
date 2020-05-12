@@ -1,10 +1,11 @@
-{% extends 'torsion_shop/main.html' %}
+{% extends 'torsion_shop/product/main.html' %}
 {% load static %}
+{% load torsion_shop_tag %}
 {% block  title_page %}
     <title>Shop - Torsion Group</title>
 {% endblock title_page %}
 
-{% block content_page %}
+{% block product_page %}
     <div class="shop-content_wrapper">
     <div class="container-fluid">
         <div class="row">
@@ -316,5 +317,4 @@
             </div>
         </div>
     </div>
-{% endblock content_page %}
-
+{% endblock product_page %}

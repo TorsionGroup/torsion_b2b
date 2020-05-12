@@ -1,0 +1,11 @@
+{% extends 'torsion_shop/main.html' %}
+{% load static %}
+{% load torsion_shop_tag %}
+{% block content_page %}
+
+    {% include 'torsion_shop/product/product_sidebar.html' %}
+
+    {% block product_page %}
+    {% endblock product_page %}
+
+{% endblock content_page %}
