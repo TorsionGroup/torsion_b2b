@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/include/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/include/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/include/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/include/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/news_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/news_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/product_detail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/product_list.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/tags/last_news.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/news/news_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/news/news_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/torsion_shop/product/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/torsion_shop/product/product_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/torsion_shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +143,7 @@
       <workItem from="1589005424074" duration="24261000" />
       <workItem from="1589085428499" duration="2062000" />
       <workItem from="1589174185351" duration="36447000" />
-      <workItem from="1589255572758" duration="10751000" />
+      <workItem from="1589255572758" duration="14393000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -403,7 +397,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589225272221</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="++ add smth">
+      <created>1589295356494</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1589295356494</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -450,10 +451,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1589225271273">
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1589295355093">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589225271273" />
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589295355093" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1588235269074">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -464,35 +465,35 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="847" y="472" width="657" height="167" key="Github.CreateGistDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1585303154827" />
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1589295326219">
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom" timestamp="1589299095210">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589295326219" />
+    <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589299095210" />
     <state width="2005" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1589295326219">
+    <state width="2005" height="305" key="GridCell.Tab.0.center" timestamp="1589299095209">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589295326219" />
+    <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589299095209" />
     <state width="2005" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1589295326218">
+    <state width="2005" height="305" key="GridCell.Tab.0.left" timestamp="1589299095209">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589295326218" />
+    <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589299095209" />
     <state width="2005" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
-    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1589295326219">
+    <state width="2005" height="305" key="GridCell.Tab.0.right" timestamp="1589299095209">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589295326219" />
+    <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589299095209" />
     <state width="2005" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1586189733350" />
     <state x="438" y="128" width="1384" height="804" key="SettingsEditor" timestamp="1589207001482">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589207001482" />
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1589225284007">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1589295362175">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589225284007" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1589295362175" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
     <state x="885" y="271" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1589050150453">
       <screen x="0" y="0" width="2048" height="1112" />

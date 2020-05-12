@@ -38,7 +38,7 @@ class IndexView(BrandOffer, ListView):
 class ProductView(BrandOffer, ListView):
     model = Product
     queryset = Product.objects.all()
-    paginate_by = 30
+    paginate_by = 20
     template_name = 'torsion_shop/product/product_list.html'
 
 
@@ -52,6 +52,7 @@ class NewsView(ListView):
     model = Content
     queryset = Content.objects.filter(category_id=2)
     context_object_name = 'news_list'
+    paginate_by = 10
     template_name = 'torsion_shop/news/news_list.html'
 
 
