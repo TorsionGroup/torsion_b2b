@@ -28,6 +28,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
+    path('.well-known/', include('letsencrypt.urls')),
 ]
 
 urlpatterns += i18n_patterns(

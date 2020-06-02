@@ -18,13 +18,12 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="torsion_oscar" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../torsion_b2b\templates" />
+        <option value="$MODULE_DIR$/../city_252/templates" />
       </list>
     </option>
   </component>

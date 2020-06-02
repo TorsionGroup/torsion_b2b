@@ -27,11 +27,13 @@ SECRET_KEY = 'p3k%*3bm5&vo&nf9_f_4$&&j59za73pag+)vaa=dvky13z5!q1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'decort.com.ua', 'torsion.kiev.ua']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'decort.com.ua', 'www.decort.com.ua', 'torsion.kiev.ua',
+                 'www.torsion.kiev.ua']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'letsencrypt',
     'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
