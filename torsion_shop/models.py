@@ -5,6 +5,7 @@ from creditcards.models import CardNumberField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
 from django.urls import reverse
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Manager(models.Model):
@@ -147,8 +148,8 @@ class PriceCategory(models.Model):
         verbose_name_plural = "PriceCategories"
 
 
-class CatalogCategory(models.Model):
-    parent_id = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True)
+class CatalogCategory(MPTTModel):
+    parent_id = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
     source_id = models.CharField(max_length=300, null=True, blank=True)
     enabled = models.BooleanField(default=1)
     sort_index = models.IntegerField(default=999)
@@ -162,6 +163,9 @@ class CatalogCategory(models.Model):
     class Meta:
         verbose_name = "CatalogCategory"
         verbose_name_plural = "CatalogCategories"
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
 
 
 class Offer(models.Model):
