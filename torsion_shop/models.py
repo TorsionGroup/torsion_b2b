@@ -6,13 +6,14 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.utils import timezone
 from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Manager(models.Model):
     inner_name = models.CharField(max_length=250)
     name = models.CharField(max_length=250, blank=True)
     email = models.EmailField(blank=True)
-    phone = models.CharField(max_length=250, blank=True)
+    phone = PhoneNumberField(blank=True)
     skype = models.CharField(max_length=250, blank=True)
     comment = models.CharField(max_length=500, blank=True)
     source_id = models.CharField(max_length=300, blank=True)
@@ -88,7 +89,7 @@ class AccountManager(BaseUserManager):
 class Account(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=250)
-    phone = models.CharField(max_length=50)
+    phone = PhoneNumberField(blank=True)
     date_of_birth = models.DateField(blank=True, null=True)
     picture = models.ImageField(upload_to="content/account_image/", blank=True, null=True)
     is_staff = models.BooleanField(default=False)
@@ -822,7 +823,7 @@ class Order(models.Model):
     delivery_point_id = models.ForeignKey(
         DeliveryPoint, on_delete=models.SET_NULL, related_name="order_del_point", null=True, blank=True)
     delivery_contact = models.CharField(max_length=250, null=True, blank=True)
-    delivery_contact_phone = models.CharField(max_length=250, null=True, blank=True)
+    delivery_contact_phone = PhoneNumberField(blank=True)
     order_number = models.CharField(max_length=250, null=True, blank=True)
     waybill_number = models.CharField(max_length=250, null=True, blank=True)
     invoice_number = models.CharField(max_length=250, null=True, blank=True)

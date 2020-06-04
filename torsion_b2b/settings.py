@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'creditcards',
     'drf_yasg',
     'snowpenguin.django.recaptcha3',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
