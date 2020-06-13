@@ -1,69 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="">
+    <list default="true" id="6c1e0b1d-6b11-4ebb-95c2-2bdf2e420c8d" name="Default Changelist" comment="add gitignore .idea">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_b2b/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_b2b/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/torsion_shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/torsion_shop/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/annotations_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/annotations_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/auth_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/auth_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/backend_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/backend_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/billing_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/billing_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/client_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/client_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/config_change_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/config_change_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/consumer_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/consumer_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/context_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/context_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/control_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/control_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/distribution_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/distribution_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/documentation_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/documentation_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/endpoint_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/endpoint_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/field_behavior_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/field_behavior_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/http_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/http_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/httpbody_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/httpbody_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/label_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/label_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/launch_stage_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/launch_stage_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/log_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/log_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/logging_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/logging_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/metric_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/metric_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/monitored_resource_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/monitored_resource_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/monitoring_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/monitoring_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/quota_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/quota_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/resource_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/resource_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/service_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/service_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/source_info_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/source_info_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/system_parameter_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/system_parameter_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/usage_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/api/usage_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/logging/type/http_request_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/logging/type/http_request_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/logging/type/log_severity_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/logging/type/log_severity_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_grpc.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_grpc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_grpc_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_grpc_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_proto_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/longrunning/operations_proto_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/code_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/code_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/error_details_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/error_details_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/status_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/rpc/status_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/calendar_period_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/calendar_period_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/color_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/color_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/date_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/date_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/dayofweek_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/dayofweek_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/expr_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/expr_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/fraction_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/fraction_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/latlng_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/latlng_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/money_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/money_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/postal_address_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/postal_address_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/quaternion_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/quaternion_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/timeofday_pb2.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/google/type/timeofday_pb2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/googleapis_common_protos-1.51.0-py3.8-nspkg.pth" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/googleapis_common_protos-1.51.0-py3.8.egg-info/PKG-INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/googleapis_common_protos-1.51.0-py3.8.egg-info/SOURCES.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/googleapis_common_protos-1.51.0-py3.8.egg-info/dependency_links.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/googleapis_common_protos-1.51.0-py3.8.egg-info/installed-files.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/googleapis_common_protos-1.51.0-py3.8.egg-info/namespace_packages.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/googleapis_common_protos-1.51.0-py3.8.egg-info/requires.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/googleapis_common_protos-1.51.0-py3.8.egg-info/top_level.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +164,12 @@
       <workItem from="1591073766597" duration="1555000" />
       <workItem from="1591115212011" duration="1318000" />
       <workItem from="1591292623808" duration="287000" />
-      <workItem from="1591292943266" duration="2940000" />
+      <workItem from="1591292943266" duration="3104000" />
+      <workItem from="1591417741616" duration="74000" />
+      <workItem from="1591421616295" duration="67000" />
+      <workItem from="1591454907488" duration="603000" />
+      <workItem from="1591628326841" duration="1198000" />
+      <workItem from="1591848906097" duration="996000" />
     </task>
     <task id="LOCAL-00001" summary="add app">
       <created>1585404829300</created>
@@ -514,15 +458,27 @@
       <option name="project" value="LOCAL" />
       <updated>1591294260716</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="add phone numbers field">
+      <created>1591298949177</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1591298949177</updated>
+    </task>
+    <task id="LOCAL-00043" summary="add gitignore .idea">
+      <created>1591421653021</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1591421653021</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="+ header footer" />
-    <MESSAGE value="+ add pages" />
     <MESSAGE value="fix slider ++" />
     <MESSAGE value="fix db ++" />
     <MESSAGE value="db i18n" />
@@ -546,7 +502,9 @@
     <MESSAGE value="pagination" />
     <MESSAGE value="news sidebar" />
     <MESSAGE value="news sidebar22" />
-    <option name="LAST_COMMIT_MESSAGE" value="news sidebar22" />
+    <MESSAGE value="add phone numbers field" />
+    <MESSAGE value="add gitignore .idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="add gitignore .idea" />
   </component>
   <component name="WindowStateProjectService">
     <state x="651" y="235" key="#Inspections" timestamp="1589016272730">
@@ -561,10 +519,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1586766121649" />
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1591294259458">
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2" timestamp="1591421682326">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1591294259458" />
+    <state x="328" y="58" width="1381" height="957" key="CommitChangelistDialog2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1591421682326" />
     <state x="649" y="151" width="1154" height="810" key="CommitChangelistDialog2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433120314" />
     <state x="804" y="311" key="FileChooserDialogImpl" timestamp="1589784818387">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -604,10 +562,10 @@
     </state>
     <state x="438" y="128" width="1384" height="804" key="SettingsEditor/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1591295313648" />
     <state x="533" y="199" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1586242486772" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1591294262295">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1591421654895">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1591294262295" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1591421654895" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1586433125389" />
     <state x="885" y="271" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1589050150453">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -617,9 +575,9 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="834" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1591294208502" />
-    <state x="737" y="345" key="git4idea.merge.GitPullDialog" timestamp="1591294275203">
+    <state x="737" y="345" key="git4idea.merge.GitPullDialog" timestamp="1591417753408">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="737" y="345" key="git4idea.merge.GitPullDialog/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1591294275203" />
+    <state x="737" y="345" key="git4idea.merge.GitPullDialog/0.0.2048.1112/2560.0.1152.2008@0.0.2048.1112" timestamp="1591417753408" />
   </component>
 </project>
